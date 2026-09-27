@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Macro Dashboard — Li Yu</title>
+<meta name="description" content="Domestic & global macro indicators relevant to equity markets — Li Yu, Economic Research & Strategy">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f1f3d; --navy-2:#16294d; --ivory:#f7f4ec; --card:#ffffff;
+  --gold:#b8904f; --gold-dark:#8f6d38; --text:#1c2333; --sub:#6a7286;
+  --pos:#2f7d4f; --neg:#b3413a; --line:#e7e2d5; --radius:10px;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--ivory);color:var(--text);
+  font-family:'Inter',-apple-system,'Pretendard',sans-serif;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+.mono{font-family:'JetBrains Mono',monospace;}
+a{color:inherit;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 60px;}
+
+.topnav{background:var(--navy);color:#e9e3d3;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.topnav .brand{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;letter-spacing:.3px;}
+.topnav a.back{font-size:12px;color:#c9c2ac;text-decoration:none;border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:20px;}
+.topnav a.back:hover{border-color:var(--gold);color:#fff;}
+
+header.hero{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;padding:44px 24px 34px;margin-bottom:28px;}
+header.hero .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
+header.hero h1{font-family:'Playfair Display',serif;font-size:30px;margin:0 0 10px;line-height:1.25;}
+header.hero p{margin:0;max-width:660px;color:#c9d0e0;font-size:14px;line-height:1.6;}
+header.hero .updated{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#93a0bf;}
+
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--gold-dark);text-transform:uppercase;margin:36px 0 4px;}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;margin:0 0 16px;}
+
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;}
+.kpi-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;}
+.kpi-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;}
+.kpi-value{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;}
+.kpi-change{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;margin-top:6px;}
+.kpi-date{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--sub);margin-top:3px;}
+.pos{color:var(--pos);} .neg{color:var(--neg);} .neu{color:var(--sub);}
+
+.chart-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px;}
+.chart-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;}
+.chart-card h3{margin:0 0 4px;font-family:'Playfair Display',serif;font-size:15px;font-weight:600;}
+.chart-card .note{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--sub);margin-bottom:14px;}
+canvas{max-height:270px;}
+
+.table-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:6px 22px 18px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+th{text-align:left;padding:12px 10px 10px;border-bottom:2px solid var(--navy);color:var(--navy);
+  font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;white-space:nowrap;}
+th:hover{color:var(--gold-dark);}
+td{padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap;}
+tr:hover td{background:#faf8f2;}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;letter-spacing:.3px;}
+.tag.dom{background:#eaf0e9;color:var(--pos);}
+.tag.intl{background:#f2e7d6;color:var(--gold-dark);}
+.impact-up{color:var(--pos);font-weight:600;}
+.impact-down{color:var(--neg);font-weight:600;}
+.impact-mix{color:var(--sub);font-weight:600;}
+.src{color:var(--sub);font-size:11px;}
+
+.footnote{margin-top:24px;padding:16px 18px;background:#f2ede0;border:1px dashed var(--gold);border-radius:var(--radius);
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:#5d5137;line-height:1.7;}
+.footnote b{color:#4a4025;}
+
+footer.page{margin-top:36px;padding:18px 0 4px;border-top:1px solid var(--line);text-align:center;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);}
+footer.page a{color:var(--gold-dark);text-decoration:none;}
+
+@media(max-width:768px){.kpi-row{grid-template-columns:repeat(2,1fr);}.chart-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="brand">Li Yu — Research &amp; Strategy</span>
+  <a class="back" href="index.html">&larr; Back to portfolio</a>
+</nav>
+
+<header class="hero">
+  <div class="wrap" style="padding:0;">
+    <div class="kicker">Exh. 06 · Dashboarding &amp; Visualization</div>
+    <h1>Macro Indicators Driving Equity Markets</h1>
+    <p>A single-page monitor of the domestic and global macro variables most relevant to equity-market direction — policy rates, bond yields, FX, and energy prices — compiled from public market reports (KRX, KB Securities, Mirae Asset, SBS Biz bond desk, FOMC statements) as of late September 2026.</p>
+    <div class="updated" id="asOfLine">LATEST CONFIRMED DATA POINT — 2026.09.23 (KST) · SEE METHODOLOGY NOTE BELOW</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="section-label">Snapshot</div>
+  <div class="section-title">Key Indicators</div>
+  <div class="kpi-row" id="kpiRow"></div>
+
+  <div class="section-label">Trends</div>
+  <div class="section-title">April – September 2026</div>
+  <div class="chart-row">
+    <div class="chart-card">
+      <h3>KOSPI vs. S&amp;P 500</h3><div class="note">Normalized, 100 = 4월 21–22일 · confirmed closes on each labeled date</div>
+      <canvas id="idxChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Policy Rates — BOK vs. Fed</h3><div class="note">%, midpoint of Fed's target range shown</div>
+      <canvas id="rateChart"></canvas>
+    </div>
+  </div>
+  <div class="chart-row" style="margin-top:16px;">
+    <div class="chart-card">
+      <h3>KRW / USD</h3><div class="note">Won per dollar — 원화 강세 흐름 지속</div>
+      <canvas id="fxChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Korea 3Y vs. 10Y KTB Yield</h3><div class="note">국고채 금리, 확인된 거래일 기준 (연속 월 아님)</div>
+      <canvas id="ktbChart"></canvas>
+    </div>
+  </div>
+
+  <div class="section-label">Detail</div>
+  <div class="section-title">Indicator Summary</div>
+  <div class="table-card">
+    <table id="dataTable">
+      <thead><tr>
+        <th data-k="region">Region</th><th data-k="name">Indicator</th><th data-k="value">Value</th>
+        <th data-k="change">As of / Change</th><th data-k="impact">Market Read</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="footnote">
+    <b>METHODOLOGY —</b> 위 수치는 한국은행 ECOS·美 FRED의 실시간 API가 아니라, 공개된 시장 보도와 기관 리서치를 교차 확인해 수기로 채운 것입니다 (검색 도구만 사용 가능, API 키 연동 없음).
+    출처: 한국거래소(KRX)·KB증권·미래에셋증권 마켓 리포트, SBS Biz 채권시장 시황, 연합뉴스·뉴시스, kbthink(KB금융지주 리서치)의 FOMC/금통위 요약, KORI Insight 주간 분석.
+    KOSPI·코스닥·원/달러·국고채는 2026.9.23(또는 8.27, 표기된 날짜) 확인된 실제 종가/고시 기준이며, <b>5월 S&amp;P500과 7월 원/달러, 4~8월 Fed 금리는 인접 시점 자료를 근거로 한 추정치</b>입니다.
+    실제 서비스로 운영하려면 ECOS Open API(fx, 기준금리), FRED API(DFF, DGS10, VIXCLS), 코스콤/KRX 시세 피드를 서버에서 정기적으로 호출해 이 배열을 자동 갱신하는 방식을 권장합니다.
+  </div>
+
+  <footer class="page">
+    © 2026 Li Yu · <a href="index.html">Portfolio</a> · <a href="https://github.com/ly186481">github.com/ly186481</a>
+  </footer>
+</div>
+
+<script>
+const COLORS = ['#0f1f3d','#b8904f','#2f7d4f','#b3413a','#6a7286'];
+
+// ---- Confirmed / best-available data — see methodology note ----
+const KPIS = [
+  {label:'KOSPI', value:'7,080.92', change:'+0.90% · 9/23', pos:true},
+  {label:'KOSDAQ', value:'844.48', change:'+1.21% · 9/23', pos:true},
+  {label:'KRW / USD', value:'1,358.4', change:'원화 강세 · 9/23', pos:null},
+  {label:'BOK Base Rate', value:'3.00%', change:'2연속 인상 · 8/27', pos:false},
+  {label:'Fed Funds Rate', value:'3.75–4.00%', change:'25bp 인상 · 9/16', pos:false},
+  {label:'Brent Crude', value:'$104.32', change:'전쟁 리스크 · 9/25', pos:false},
+];
+
+const DATES = ['4/22','5/6','6/24','7/14','8/27','9/23'];
+// KOSPI actual closes → normalized (100 = 4/22)
+const KOSPI_RAW = [6417.93, 7384.56, 8203.84, 7284.41, 6912.37, 7080.92];
+const KOSPI_NORM = KOSPI_RAW.map(v => +(v/KOSPI_RAW[0]*100).toFixed(1));
+// S&P500 closes (5/6 값은 인접일 보간 추정치) → normalized (100 = 4/21)
+const SNP_RAW = [6850.00, 7100.00, 7358.22, 7538.44, 7674.37, 7706.03];
+const SNP_NORM = SNP_RAW.map(v => +(v/SNP_RAW[0]*100).toFixed(1));
+
+// BOK 기준금리(확정) vs Fed 목표금리 중간값(4~8월 3.50~3.75% 구간은 추정)
+const KR_RATE = [2.50, 2.50, 2.50, 2.75, 3.00, 3.00];
+const US_RATE = [3.625, 3.625, 3.625, 3.625, 3.625, 3.875];
+
+// 원/달러 (7/14는 6월→8월 사이 보간 추정치)
+const FX = [1479.5, 1455.1, 1541.9, 1450.0, 1386.1, 1358.4];
+
+// 국고채 3년/10년 — 확인된 거래일만 표기 (등간격 아님)
+const KTB_DATES = ['1/26','6/2','7/28','8/27'];
+const KTB_3Y = [3.096, 3.773, 3.829, 3.755];
+const KTB_10Y = [3.544, 4.135, 4.289, 4.238];
+
+const TABLE = [
+  {region:'Domestic',name:'KOSPI Index',value:'7,080.92',change:'+0.90% (9/23)',impact:'up'},
+  {region:'Domestic',name:'KOSDAQ Index',value:'844.48',change:'+1.21% (9/23)',impact:'up'},
+  {region:'Domestic',name:'KRW / USD',value:'1,358.4',change:'원화 강세 지속 (9/23)',impact:'mix'},
+  {region:'Domestic',name:'BOK Base Rate',value:'3.00%',change:'2연속 인상 (8/27)',impact:'mix'},
+  {region:'Domestic',name:'3Y KTB Yield',value:'3.755%',change:'-6.1bp (8/27)',impact:'mix'},
+  {region:'Domestic',name:'10Y KTB Yield',value:'4.238%',change:'-5.0bp (8/27)',impact:'mix'},
+  {region:'Domestic',name:'Exports (Sep 1–20)',value:'$71.4B',change:'역대 최대',impact:'up'},
+  {region:'Domestic',name:'Semiconductor Exports (Sep 1–20)',value:'$34.1B',change:'역대 최대',impact:'up'},
+  {region:'Domestic',name:'Consumer Sentiment Index',value:'106.6',change:'+2.1pt (전월비)',impact:'up'},
+  {region:'Global',name:'S&amp;P 500',value:'7,706.03',change:'-0.75% (9/22)',impact:'down'},
+  {region:'Global',name:'Fed Funds Rate',value:'3.75–4.00%',change:'+25bp (9/16 FOMC)',impact:'down'},
+  {region:'Global',name:'Brent Crude',value:'$104.32',change:'美-이란 전쟁 장기화 (9/25)',impact:'down'},
+  {region:'Global',name:'Japan Base Rate',value:'1.25%',change:'엔화 변수',impact:'mix'},
+  {region:'Global',name:'Geopolitical Risk',value:'美-이란 전쟁 지속',change:'9월 FOMC 인상 배경',impact:'down'},
+];
+
+function renderKPIs(){
+  document.getElementById('kpiRow').innerHTML = KPIS.map(k=>`
+    <div class="kpi-card">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.value}</div>
+      <div class="kpi-change ${k.pos===true?'pos':k.pos===false?'neg':'neu'}">${k.change}</div>
+    </div>`).join('');
+}
+
+function renderTable(rows){
+  const impactMap = {up:['Bullish','impact-up'], down:['Bearish','impact-down'], mix:['Mixed','impact-mix']};
+  document.querySelector('#dataTable tbody').innerHTML = rows.map(r=>{
+    const [label,cls] = impactMap[r.impact];
+    const tagCls = r.region==='Domestic'?'dom':'intl';
+    return `<tr>
+      <td><span class="tag ${tagCls}">${r.region}</span></td>
+      <td>${r.name}</td><td class="mono">${r.value}</td><td class="mono">${r.change}</td>
+      <td class="${cls}">${label}</td>
+    </tr>`;
+  }).join('');
+}
+
+let sortState = {key:null, dir:1};
+document.querySelectorAll('#dataTable th').forEach(th=>{
+  th.addEventListener('click', ()=>{
+    const k = th.dataset.k;
+    sortState.dir = (sortState.key===k) ? -sortState.dir : 1;
+    sortState.key = k;
+    renderTable([...TABLE].sort((a,b)=>(a[k]>b[k]?1:-1)*sortState.dir));
+  });
+});
+
+function baseOpts(extra={}){
+  return Object.assign({responsive:true, animation:false,
+    plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}}}, extra);
+}
+
+new Chart(document.getElementById('idxChart'), {
+  type:'line',
+  data:{labels:DATES, datasets:[
+    {label:'KOSPI', data:KOSPI_NORM, borderColor:COLORS[0], backgroundColor:COLORS[0]+'18', tension:.25},
+    {label:'S&P 500', data:SNP_NORM, borderColor:COLORS[1], backgroundColor:COLORS[1]+'18', tension:.25}
+  ]},
+  options: baseOpts({scales:{y:{title:{display:true,text:'index (100 = late Apr)'}}}})
+});
+
+new Chart(document.getElementById('rateChart'), {
+  type:'line',
+  data:{labels:DATES, datasets:[
+    {label:'BOK', data:KR_RATE, borderColor:COLORS[0], stepped:true},
+    {label:'Fed (mid)', data:US_RATE, borderColor:COLORS[1], stepped:true}
+  ]},
+  options: baseOpts({scales:{y:{title:{display:true,text:'%'}}}})
+});
+
+new Chart(document.getElementById('fxChart'), {
+  type:'line',
+  data:{labels:DATES, datasets:[{label:'KRW/USD', data:FX, borderColor:COLORS[2], backgroundColor:COLORS[2]+'22', fill:true, tension:.25}]},
+  options: baseOpts({scales:{y:{title:{display:true,text:'KRW per USD'}}}})
+});
+
+new Chart(document.getElementById('ktbChart'), {
+  type:'line',
+  data:{labels:KTB_DATES, datasets:[
+    {label:'3Y KTB', data:KTB_3Y, borderColor:COLORS[0], tension:.25},
+    {label:'10Y KTB', data:KTB_10Y, borderColor:COLORS[3], tension:.25}
+  ]},
+  options: baseOpts({scales:{y:{title:{display:true,text:'%'}}}})
+});
+
+renderKPIs();
+renderTable(TABLE);
+</script>
+</body>
+</html>
