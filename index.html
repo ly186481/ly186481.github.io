@@ -82,6 +82,13 @@
   .navlinks a:hover{color:var(--navy); background:var(--card);}
   .navtoggle{display:none; background:none; border:1px solid var(--rule); border-radius:var(--radius); width:40px; height:40px; cursor:pointer;}
   .navtoggle span{display:block; width:18px; height:2px; background:var(--ink); margin:4px auto;}
+  #langToggle{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; letter-spacing:.04em;
+    color:var(--navy); background:#c9a45c; border:none; border-radius:20px; padding:8px 16px;
+    cursor:pointer; margin-left:6px; transition:background .2s;
+  }
+  #langToggle:hover{background:#dab876;}
+  @media (max-width:860px){ #langToggle{margin:10px 0 0;} }
 
   @media (max-width:860px){
     .navlinks{
@@ -223,41 +230,43 @@
   <nav class="wrap">
     <div class="brand">
       <span class="name">Li Yu</span>
-      <span class="tag">Research &amp; Strategy</span>
+      <span class="tag" id="t-brandtag">Research &amp; Strategy</span>
     </div>
+    <button id="langToggle" onclick="toggleLang()">한국어</button>
     <button class="navtoggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <ul class="navlinks" id="navLinks">
-      <li><a href="#profile"><span class="num">01</span>Profile</a></li>
-      <li><a href="#experience"><span class="num">02</span>Experience</a></li>
-      <li><a href="#research"><span class="num">03</span>Research</a></li>
-      <li><a href="#casestudies"><span class="num">04</span>Case Studies</a></li>
-      <li><a href="#skills"><span class="num">05</span>Skills</a></li>
-      <li><a href="#contact"><span class="num">06</span>Contact</a></li>
+      <li><a href="#profile"><span class="num">01</span><span id="t-nav-profile">Profile</span></a></li>
+      <li><a href="#experience"><span class="num">02</span><span id="t-nav-experience">Experience</span></a></li>
+      <li><a href="#research"><span class="num">03</span><span id="t-nav-research">Research</span></a></li>
+      <li><a href="#casestudies"><span class="num">04</span><span id="t-nav-casestudies">Case Studies</span></a></li>
+      <li><a href="#skills"><span class="num">05</span><span id="t-nav-skills">Skills</span></a></li>
+      <li><a href="#contact"><span class="num">06</span><span id="t-nav-contact">Contact</span></a></li>
+      <li><a href="dashboard.html"><span class="num">07</span><span id="t-nav-dashboard">Dashboard</span></a></li>
     </ul>
   </nav>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <div class="hero-eyebrow">Economics · Data Governance · Strategy</div>
-    <h1>Reading the data behind a decision — <em>before</em> it's made.</h1>
-    <p class="lede">I'm Li Yu, an economics researcher and business strategy analyst. My work spans labor economics and duration modeling, national data-governance policy, and market-entry strategy for retail and finance clients — always starting from the stakeholder's actual question, not the dataset.</p>
+    <div class="hero-eyebrow" id="t-eyebrow">Economics · Data Governance · Strategy</div>
+    <h1 id="t-h1">Reading the data behind a decision — <em>before</em> it's made.</h1>
+    <p class="lede" id="t-lede">I'm Li Yu, an economics researcher and business strategy analyst. My work spans labor economics and duration modeling, national data-governance policy, and market-entry strategy for retail and finance clients — always starting from the stakeholder's actual question, not the dataset.</p>
     <div class="hero-ctas">
-      <a class="btn primary" href="#casestudies">View case studies</a>
-      <a class="btn ghost" href="#research">Read the research</a>
+      <a class="btn primary" href="#casestudies" id="t-cta1">View case studies</a>
+      <a class="btn ghost" href="#research" id="t-cta2">Read the research</a>
     </div>
     <div class="creds">
       <div class="cred">
-        <div class="k">Education</div>
-        <div class="v">M.A., Economics</div>
+        <div class="k" id="t-cred1-k">Education</div>
+        <div class="v" id="t-cred1-v">M.A., Economics</div>
       </div>
       <div class="cred">
-        <div class="k">Current role</div>
-        <div class="v">Researcher, Korea Institute of Finance</div>
+        <div class="k" id="t-cred2-k">Current role</div>
+        <div class="v" id="t-cred2-v">Researcher, Korea Institute of Finance</div>
       </div>
       <div class="cred">
-        <div class="k">Focus</div>
-        <div class="v">Duration analysis · Market strategy</div>
+        <div class="k" id="t-cred3-k">Focus</div>
+        <div class="v" id="t-cred3-v">Duration analysis · Market strategy</div>
       </div>
     </div>
   </div>
@@ -266,28 +275,28 @@
 <section id="profile">
   <div class="wrap">
     <div class="section-head">
-      <div class="ledger"><span class="code">EXH. 01</span><span class="leader"></span><span class="mark">Profile</span></div>
-      <h2>About</h2>
+      <div class="ledger"><span class="code">EXH. 01</span><span class="leader"></span><span class="mark" id="t-mark01">Profile</span></div>
+      <h2 id="t-about-h2">About</h2>
     </div>
     <div class="profile-grid">
       <div class="profile-body">
-        <p>I hold an M.A. in Economics and work at the intersection of applied econometrics, digital finance, and business strategy. My research background is in labor economics — using duration and survival analysis to study how unemployment length relates to mental health outcomes — and I bring the same evidence-driven approach to commercial strategy work: frame the stakeholder's question precisely, choose the right analytical method, and translate results into a decision.</p>
-        <p>On the strategy side, I've worked on national-level policy positioning (data governance in the G20 context), e-commerce and retail expansion analysis, and customer-segmentation dashboards built for non-technical stakeholders.</p>
+        <p id="t-profile-p1">I hold an M.A. in Economics and work at the intersection of applied econometrics, digital finance, and business strategy. My research background is in labor economics — using duration and survival analysis to study how unemployment length relates to mental health outcomes — and I bring the same evidence-driven approach to commercial strategy work: frame the stakeholder's question precisely, choose the right analytical method, and translate results into a decision.</p>
+        <p id="t-profile-p2">On the strategy side, I've worked on national-level policy positioning (data governance in the G20 context), e-commerce and retail expansion analysis, and customer-segmentation dashboards built for non-technical stakeholders.</p>
         <div class="tag-row">
-          <span class="tag">Econometrics</span>
-          <span class="tag">Duration / Survival Analysis</span>
-          <span class="tag">Data Governance Policy</span>
-          <span class="tag">Market &amp; Business Strategy</span>
-          <span class="tag">Dashboarding &amp; Visualization</span>
+          <span class="tag" id="t-tag1">Econometrics</span>
+          <span class="tag" id="t-tag2">Duration / Survival Analysis</span>
+          <span class="tag" id="t-tag3">Data Governance Policy</span>
+          <span class="tag" id="t-tag4">Market &amp; Business Strategy</span>
+          <span class="tag" id="t-tag5">Dashboarding &amp; Visualization</span>
         </div>
       </div>
       <div class="method-card">
-        <h4>How I work</h4>
+        <h4 id="t-howiwork">How I work</h4>
         <ol class="method-steps">
-          <li><strong>Frame the ask.</strong> Pin down the actual decision a stakeholder needs to make.</li>
-          <li><strong>Choose the method.</strong> Match the analytical tool to the question — survival models, association rules, segmentation.</li>
-          <li><strong>Analyze the data.</strong> Work from raw, often messy data to a defensible result.</li>
-          <li><strong>Deliver the decision.</strong> Translate findings into a brief, dashboard, or recommendation a non-technical stakeholder can act on.</li>
+          <li id="t-step1"><strong>Frame the ask.</strong> Pin down the actual decision a stakeholder needs to make.</li>
+          <li id="t-step2"><strong>Choose the method.</strong> Match the analytical tool to the question — survival models, association rules, segmentation.</li>
+          <li id="t-step3"><strong>Analyze the data.</strong> Work from raw, often messy data to a defensible result.</li>
+          <li id="t-step4"><strong>Deliver the decision.</strong> Translate findings into a brief, dashboard, or recommendation a non-technical stakeholder can act on.</li>
         </ol>
       </div>
     </div>
@@ -297,30 +306,30 @@
 <section class="alt" id="experience">
   <div class="wrap">
     <div class="section-head">
-      <div class="ledger"><span class="code">EXH. 02</span><span class="leader"></span><span class="mark">Track record</span></div>
-      <h2>Experience</h2>
+      <div class="ledger"><span class="code">EXH. 02</span><span class="leader"></span><span class="mark" id="t-mark02">Track record</span></div>
+      <h2 id="t-exp-h2">Experience</h2>
     </div>
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-top">
-          <div class="tl-role">Researcher, Digital Finance</div>
+          <div class="tl-role" id="t-exp1-role">Researcher, Digital Finance</div>
         </div>
-        <div class="tl-org">Korea Institute of Finance</div>
-        <p class="tl-desc">Research on digital-finance policy questions, supporting analysis that informs national-level financial policy discussion.</p>
+        <div class="tl-org" id="t-exp1-org">Korea Institute of Finance</div>
+        <p class="tl-desc" id="t-exp1-desc">Research on digital-finance policy questions, supporting analysis that informs national-level financial policy discussion.</p>
       </div>
       <div class="tl-item">
         <div class="tl-top">
-          <div class="tl-role">Research Assistant, Economics</div>
+          <div class="tl-role" id="t-exp2-role">Research Assistant, Economics</div>
         </div>
-        <div class="tl-org">SK Research Institute</div>
-        <p class="tl-desc">Supported applied economics research, including data preparation and quantitative analysis for institute publications and briefings.</p>
+        <div class="tl-org" id="t-exp2-org">SK Research Institute</div>
+        <p class="tl-desc" id="t-exp2-desc">Supported applied economics research, including data preparation and quantitative analysis for institute publications and briefings.</p>
       </div>
       <div class="tl-item">
         <div class="tl-top">
-          <div class="tl-role">Data Analyst, Analytics Service</div>
+          <div class="tl-role" id="t-exp3-role">Data Analyst, Analytics Service</div>
         </div>
-        <div class="tl-org">Linewalks</div>
-        <p class="tl-desc">Built and maintained analytics for a data-service product, working from raw data to stakeholder-facing metrics.</p>
+        <div class="tl-org" id="t-exp3-org">Linewalks</div>
+        <p class="tl-desc" id="t-exp3-desc">Built and maintained analytics for a data-service product, working from raw data to stakeholder-facing metrics.</p>
       </div>
     </div>
   </div>
@@ -329,21 +338,21 @@
 <section id="research">
   <div class="wrap">
     <div class="section-head">
-      <div class="ledger"><span class="code">EXH. 03</span><span class="leader"></span><span class="mark">Thesis</span></div>
-      <h2>Research</h2>
+      <div class="ledger"><span class="code">EXH. 03</span><span class="leader"></span><span class="mark" id="t-mark03">Thesis</span></div>
+      <h2 id="t-research-h2">Research</h2>
     </div>
     <div class="paper-card">
       <div>
-        <div class="paper-meta">M.A. THESIS · ECONOMICS</div>
-        <h3>Mental Health and Unemployment Duration: Evidence Using Duration Analysis</h3>
-        <p class="paper-abstract">This thesis applies duration (survival) analysis to examine how the length of unemployment relates to mental health outcomes, modeling the hazard of exiting unemployment over time rather than relying on a single cross-sectional snapshot. The approach follows the logic used across labor economics and biostatistics: track a cohort over time, estimate the probability of an event occurring in each period, and test how covariates shift that risk.</p>
+        <div class="paper-meta" id="t-paper-meta">M.A. THESIS · ECONOMICS</div>
+        <h3 id="t-thesis-title">Mental Health and Unemployment Duration: Evidence Using Duration Analysis</h3>
+        <p class="paper-abstract" id="t-abstract">This thesis applies duration (survival) analysis to examine how the length of unemployment relates to mental health outcomes, modeling the hazard of exiting unemployment over time rather than relying on a single cross-sectional snapshot. The approach follows the logic used across labor economics and biostatistics: track a cohort over time, estimate the probability of an event occurring in each period, and test how covariates shift that risk.</p>
         <div class="method-row">
-          <span class="tag">Kaplan–Meier estimation</span>
-          <span class="tag">Cox proportional hazards</span>
-          <span class="tag">Labor economics</span>
+          <span class="tag" id="t-ptag1">Kaplan–Meier estimation</span>
+          <span class="tag" id="t-ptag2">Cox proportional hazards</span>
+          <span class="tag" id="t-ptag3">Labor economics</span>
         </div>
       </div>
-      <div class="paper-id">Li Yu<br>M.A., Economics</div>
+      <div class="paper-id">Li Yu<br><span id="t-paperid">M.A., Economics</span></div>
     </div>
   </div>
 </section>
@@ -351,53 +360,53 @@
 <section class="alt" id="casestudies">
   <div class="wrap">
     <div class="section-head">
-      <div class="ledger"><span class="code">EXH. 04</span><span class="leader"></span><span class="mark">Applied work</span></div>
-      <h2>Case Studies</h2>
-      <p class="section-intro">Four projects spanning policy strategy, retail analytics, and machine learning — each framed by the stakeholder's original question rather than the technique used to answer it.</p>
+      <div class="ledger"><span class="code">EXH. 04</span><span class="leader"></span><span class="mark" id="t-mark04">Applied work</span></div>
+      <h2 id="t-cs-h2">Case Studies</h2>
+      <p class="section-intro" id="t-cs-intro">Four projects spanning policy strategy, retail analytics, and machine learning — each framed by the stakeholder's original question rather than the technique used to answer it.</p>
     </div>
     <div class="case-grid">
 
       <div class="case-card">
         <div class="case-media"><span class="ph">Add exhibit image<br>e.g. images/rok-strategy.png</span></div>
-        <div class="case-top"><span class="case-tag">Policy Strategy</span><span class="case-exh">01/04</span></div>
-        <h3>R.O.K. Strategy Toward US–China Competition</h3>
+        <div class="case-top"><span class="case-tag" id="t-cs1-tag">Policy Strategy</span><span class="case-exh">01/04</span></div>
+        <h3 id="t-cs1-title">R.O.K. Strategy Toward US–China Competition</h3>
         <dl class="apc">
-          <dt>Ask</dt><dd>How should the Republic of Korea position itself amid an unpredictable US–China relationship, in the context of the G20 data-governance and finance agenda?</dd>
-          <dt>Approach</dt><dd>Focused on the 2023 G20 Summit's Sherpa and Finance tracks, analyzing the data-governance proposals under discussion and where Korea holds a structural advantage.</dd>
-          <dt>Outcome</dt><dd>A positioning brief identifying where Korea can act as a bridge on data-governance rules rather than being forced to choose a side.</dd>
+          <dt class="i18n-ask">Ask</dt><dd id="t-cs1-ask">How should the Republic of Korea position itself amid an unpredictable US–China relationship, in the context of the G20 data-governance and finance agenda?</dd>
+          <dt class="i18n-approach">Approach</dt><dd id="t-cs1-app">Focused on the 2023 G20 Summit's Sherpa and Finance tracks, analyzing the data-governance proposals under discussion and where Korea holds a structural advantage.</dd>
+          <dt class="i18n-outcome">Outcome</dt><dd id="t-cs1-out">A positioning brief identifying where Korea can act as a bridge on data-governance rules rather than being forced to choose a side.</dd>
         </dl>
       </div>
 
       <div class="case-card">
         <div class="case-media"><span class="ph">Add exhibit image<br>e.g. images/fashion-brand.png</span></div>
-        <div class="case-top"><span class="case-tag">Business Analysis</span><span class="case-exh">02/04</span></div>
-        <h3>Fashion Brand Business Analysis</h3>
+        <div class="case-top"><span class="case-tag" id="t-cs2-tag">Business Analysis</span><span class="case-exh">02/04</span></div>
+        <h3 id="t-cs2-title">Fashion Brand Business Analysis</h3>
         <dl class="apc">
-          <dt>Ask</dt><dd>Stakeholders wanted to understand fashion e-commerce market trends and how cloud infrastructure could support the shift from offline to online retail.</dd>
-          <dt>Approach</dt><dd>Analyzed e-commerce and market-targeting data, and how cloud services integrate with retail operations at scale.</dd>
-          <dt>Outcome</dt><dd>A recommendation on where cloud-enabled retail infrastructure creates the most leverage for the brand's online transition.</dd>
+          <dt class="i18n-ask">Ask</dt><dd id="t-cs2-ask">Stakeholders wanted to understand fashion e-commerce market trends and how cloud infrastructure could support the shift from offline to online retail.</dd>
+          <dt class="i18n-approach">Approach</dt><dd id="t-cs2-app">Analyzed e-commerce and market-targeting data, and how cloud services integrate with retail operations at scale.</dd>
+          <dt class="i18n-outcome">Outcome</dt><dd id="t-cs2-out">A recommendation on where cloud-enabled retail infrastructure creates the most leverage for the brand's online transition.</dd>
         </dl>
       </div>
 
       <div class="case-card">
         <div class="case-media"><span class="ph">Add exhibit image<br>e.g. images/bike-dashboard.png</span></div>
-        <div class="case-top"><span class="case-tag">Customer Analytics</span><span class="case-exh">03/04</span></div>
-        <h3>Bike-Share Membership Dashboard</h3>
+        <div class="case-top"><span class="case-tag" id="t-cs3-tag">Customer Analytics</span><span class="case-exh">03/04</span></div>
+        <h3 id="t-cs3-title">Bike-Share Membership Dashboard</h3>
         <dl class="apc">
-          <dt>Ask</dt><dd>Increase adoption among riders who use the service but are not regular members.</dd>
-          <dt>Approach</dt><dd>Used internal ridership data to analyze commute distance and marital status against membership status, comparing habits of members versus non-members.</dd>
-          <dt>Outcome</dt><dd>A dashboard surfacing the rider segments most likely to convert to membership, shared with stakeholders for targeting decisions.</dd>
+          <dt class="i18n-ask">Ask</dt><dd id="t-cs3-ask">Increase adoption among riders who use the service but are not regular members.</dd>
+          <dt class="i18n-approach">Approach</dt><dd id="t-cs3-app">Used internal ridership data to analyze commute distance and marital status against membership status, comparing habits of members versus non-members.</dd>
+          <dt class="i18n-outcome">Outcome</dt><dd id="t-cs3-out">A dashboard surfacing the rider segments most likely to convert to membership, shared with stakeholders for targeting decisions.</dd>
         </dl>
       </div>
 
       <div class="case-card">
         <div class="case-media"><span class="ph">Add exhibit image<br>e.g. images/superstore-tableau.png</span></div>
-        <div class="case-top"><span class="case-tag">Dashboard · Tableau</span><span class="case-exh">04/04</span></div>
-        <h3>Superstore Expansion Dashboard</h3>
+        <div class="case-top"><span class="case-tag" id="t-cs4-tag">Dashboard · Tableau</span><span class="case-exh">04/04</span></div>
+        <h3 id="t-cs4-title">Superstore Expansion Dashboard</h3>
         <dl class="apc">
-          <dt>Ask</dt><dd>Evaluate where the store network should expand next.</dd>
-          <dt>Approach</dt><dd>Used internal sales data to analyze the current store footprint and performance patterns across regions.</dd>
-          <dt>Outcome</dt><dd>A strategic view of expansion candidates prioritized by expected revisit and revenue impact.</dd>
+          <dt class="i18n-ask">Ask</dt><dd id="t-cs4-ask">Evaluate where the store network should expand next.</dd>
+          <dt class="i18n-approach">Approach</dt><dd id="t-cs4-app">Used internal sales data to analyze the current store footprint and performance patterns across regions.</dd>
+          <dt class="i18n-outcome">Outcome</dt><dd id="t-cs4-out">A strategic view of expansion candidates prioritized by expected revisit and revenue impact.</dd>
         </dl>
       </div>
 
@@ -408,44 +417,44 @@
 <section id="skills">
   <div class="wrap">
     <div class="section-head">
-      <div class="ledger"><span class="code">EXH. 05</span><span class="leader"></span><span class="mark">Toolkit</span></div>
-      <h2>Skills &amp; Tools</h2>
+      <div class="ledger"><span class="code">EXH. 05</span><span class="leader"></span><span class="mark" id="t-mark05">Toolkit</span></div>
+      <h2 id="t-skills-h2">Skills &amp; Tools</h2>
     </div>
     <div class="skills-grid">
       <div class="skill-col">
-        <h4>Analysis</h4>
+        <h4 id="t-sk1-h">Analysis</h4>
         <ul>
-          <li>Duration / survival analysis</li>
-          <li>Regression &amp; hypothesis testing</li>
-          <li>Association-rule mining</li>
-          <li>Customer segmentation</li>
+          <li id="t-sk1-li0">Duration / survival analysis</li>
+          <li id="t-sk1-li1">Regression &amp; hypothesis testing</li>
+          <li id="t-sk1-li2">Association-rule mining</li>
+          <li id="t-sk1-li3">Customer segmentation</li>
         </ul>
       </div>
       <div class="skill-col">
-        <h4>Tools</h4>
+        <h4 id="t-sk2-h">Tools</h4>
         <ul>
-          <li>R (arules, arulesViz)</li>
-          <li>Tableau</li>
-          <li>SQL</li>
-          <li>Excel / financial modeling</li>
+          <li id="t-sk2-li0">R (arules, arulesViz)</li>
+          <li id="t-sk2-li1">Tableau</li>
+          <li id="t-sk2-li2">SQL</li>
+          <li id="t-sk2-li3">Excel / financial modeling</li>
         </ul>
       </div>
       <div class="skill-col">
-        <h4>Domains</h4>
+        <h4 id="t-sk3-h">Domains</h4>
         <ul>
-          <li>Digital finance policy</li>
-          <li>Labor economics</li>
-          <li>Retail &amp; e-commerce strategy</li>
-          <li>Data governance</li>
+          <li id="t-sk3-li0">Digital finance policy</li>
+          <li id="t-sk3-li1">Labor economics</li>
+          <li id="t-sk3-li2">Retail &amp; e-commerce strategy</li>
+          <li id="t-sk3-li3">Data governance</li>
         </ul>
       </div>
       <div class="skill-col">
-        <h4>Delivery</h4>
+        <h4 id="t-sk4-h">Delivery</h4>
         <ul>
-          <li>Stakeholder briefings</li>
-          <li>Dashboard design</li>
-          <li>Policy memos</li>
-          <li>Research writing</li>
+          <li id="t-sk4-li0">Stakeholder briefings</li>
+          <li id="t-sk4-li1">Dashboard design</li>
+          <li id="t-sk4-li2">Policy memos</li>
+          <li id="t-sk4-li3">Research writing</li>
         </ul>
       </div>
     </div>
@@ -456,11 +465,11 @@
   <div class="wrap">
     <div class="contact-box">
       <div>
-        <h2>Let's talk</h2>
-        <p>Open to research, data-strategy, and analytics roles. The fastest way to reach me is by email, or through GitHub below.</p>
+        <h2 id="t-contact-h2">Let's talk</h2>
+        <p id="t-contact-p">Open to research, data-strategy, and analytics roles. The fastest way to reach me is by email, or through GitHub below.</p>
       </div>
       <div class="contact-links">
-        <a class="btn primary" href="mailto:your-email@example.com">Email me</a>
+        <a class="btn primary" href="mailto:your-email@example.com" id="t-emailbtn">Email me</a>
         <a class="btn ghost" href="https://github.com/ly186481" target="_blank" rel="noopener">GitHub — @ly186481</a>
       </div>
     </div>
@@ -468,7 +477,7 @@
 </section>
 
 <footer class="wrap">
-  <span>© 2026 Li Yu. All rights reserved.</span>
+  <span id="t-footer">© 2026 Li Yu. All rights reserved.</span>
   <span><a href="https://github.com/ly186481" target="_blank" rel="noopener">github.com/ly186481</a></span>
 </footer>
 
@@ -483,6 +492,146 @@
     links.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
   }));
+</script>
+
+<script>
+const I18N = {
+  't-brandtag': { en: `Research &amp; Strategy`, ko: `리서치 &amp; 전략`, html: false },
+  't-nav-profile': { en: `Profile`, ko: `프로필`, html: false },
+  't-nav-experience': { en: `Experience`, ko: `경력`, html: false },
+  't-nav-research': { en: `Research`, ko: `연구`, html: false },
+  't-nav-casestudies': { en: `Case Studies`, ko: `케이스 스터디`, html: false },
+  't-nav-skills': { en: `Skills`, ko: `역량`, html: false },
+  't-nav-contact': { en: `Contact`, ko: `연락처`, html: false },
+  't-nav-dashboard': { en: `Dashboard`, ko: `대시보드`, html: false },
+  't-eyebrow': { en: `Economics · Data Governance · Strategy`, ko: `경제학 · 데이터 거버넌스 · 전략`, html: false },
+  't-h1': { en: `Reading the data behind a decision — <em>before</em> it's made.`, ko: `결정이 내려지기 <em>전에</em>, 그 이면의 데이터를 먼저 읽습니다.`, html: true },
+  't-lede': { en: `I'm Li Yu, an economics researcher and business strategy analyst. My work spans labor economics and duration modeling, national data-governance policy, and market-entry strategy for retail and finance clients — always starting from the stakeholder's actual question, not the dataset.`, ko: `저는 경제학 리서처이자 비즈니스 전략 분석가 Li Yu입니다. 노동경제학과 생존분석 모델링, 국가 차원의 데이터 거버넌스 정책, 유통·금융 클라이언트를 위한 시장진입 전략까지 폭넓게 다루며, 언제나 데이터셋이 아니라 이해관계자의 실제 질문에서 출발합니다.`, html: false },
+  't-cta1': { en: `View case studies`, ko: `케이스 스터디 보기`, html: false },
+  't-cta2': { en: `Read the research`, ko: `연구 자료 보기`, html: false },
+  't-cred1-k': { en: `Education`, ko: `학력`, html: false },
+  't-cred1-v': { en: `M.A., Economics`, ko: `경제학 석사`, html: false },
+  't-cred2-k': { en: `Current role`, ko: `현재 직책`, html: false },
+  't-cred2-v': { en: `Researcher, Korea Institute of Finance`, ko: `한국금융연구원 연구원`, html: false },
+  't-cred3-k': { en: `Focus`, ko: `주력 분야`, html: false },
+  't-cred3-v': { en: `Duration analysis · Market strategy`, ko: `생존분석 · 시장전략`, html: false },
+  't-mark01': { en: `Profile`, ko: `프로필`, html: false },
+  't-about-h2': { en: `About`, ko: `소개`, html: false },
+  't-profile-p1': { en: `I hold an M.A. in Economics and work at the intersection of applied econometrics, digital finance, and business strategy. My research background is in labor economics — using duration and survival analysis to study how unemployment length relates to mental health outcomes — and I bring the same evidence-driven approach to commercial strategy work: frame the stakeholder's question precisely, choose the right analytical method, and translate results into a decision.`, ko: `저는 경제학 석사 학위를 보유하고 있으며, 응용계량경제학·디지털 금융·비즈니스 전략이 교차하는 영역에서 일합니다. 연구 배경은 노동경제학입니다 — 생존분석을 활용해 실업 기간과 정신건강 결과 사이의 관계를 연구했고, 상업 전략 업무에도 동일하게 증거 기반 접근을 적용합니다: 이해관계자의 질문을 정확히 규정하고, 적절한 분석 방법을 선택하며, 결과를 의사결정으로 옮기는 것입니다.`, html: false },
+  't-profile-p2': { en: `On the strategy side, I've worked on national-level policy positioning (data governance in the G20 context), e-commerce and retail expansion analysis, and customer-segmentation dashboards built for non-technical stakeholders.`, ko: `전략 측면에서는 국가 차원의 정책 포지셔닝(G20 맥락의 데이터 거버넌스), 이커머스·유통 확장 분석, 비전문가 이해관계자를 위한 고객 세분화 대시보드 구축 등을 수행했습니다.`, html: false },
+  't-tag1': { en: `Econometrics`, ko: `계량경제학`, html: false },
+  't-tag2': { en: `Duration / Survival Analysis`, ko: `생존분석`, html: false },
+  't-tag3': { en: `Data Governance Policy`, ko: `데이터 거버넌스 정책`, html: false },
+  't-tag4': { en: `Market &amp; Business Strategy`, ko: `시장 &amp; 경영 전략`, html: false },
+  't-tag5': { en: `Dashboarding &amp; Visualization`, ko: `대시보드 &amp; 시각화`, html: false },
+  't-howiwork': { en: `How I work`, ko: `일하는 방식`, html: false },
+  't-step1': { en: `<strong>Frame the ask.</strong> Pin down the actual decision a stakeholder needs to make.`, ko: `<strong>질문을 규정합니다.</strong> 이해관계자가 실제로 내려야 하는 결정을 명확히 합니다.`, html: true },
+  't-step2': { en: `<strong>Choose the method.</strong> Match the analytical tool to the question — survival models, association rules, segmentation.`, ko: `<strong>방법론을 선택합니다.</strong> 질문에 맞는 분석 도구를 매칭합니다 — 생존모형, 연관규칙, 세분화.`, html: true },
+  't-step3': { en: `<strong>Analyze the data.</strong> Work from raw, often messy data to a defensible result.`, ko: `<strong>데이터를 분석합니다.</strong> 정제되지 않은 원자료에서 출발해 방어 가능한 결과를 도출합니다.`, html: true },
+  't-step4': { en: `<strong>Deliver the decision.</strong> Translate findings into a brief, dashboard, or recommendation a non-technical stakeholder can act on.`, ko: `<strong>의사결정을 전달합니다.</strong> 분석 결과를 비전문가 이해관계자도 실행할 수 있는 브리프·대시보드·제안으로 옮깁니다.`, html: true },
+  't-mark02': { en: `Track record`, ko: `경력 이력`, html: false },
+  't-exp-h2': { en: `Experience`, ko: `경력`, html: false },
+  't-exp1-role': { en: `Researcher, Digital Finance`, ko: `연구원, 디지털 금융`, html: false },
+  't-exp1-org': { en: `Korea Institute of Finance`, ko: `한국금융연구원`, html: false },
+  't-exp1-desc': { en: `Research on digital-finance policy questions, supporting analysis that informs national-level financial policy discussion.`, ko: `디지털 금융 정책 이슈를 연구하며, 국가 차원의 금융 정책 논의에 활용되는 분석을 지원합니다.`, html: false },
+  't-exp2-role': { en: `Research Assistant, Economics`, ko: `연구조교, 경제학`, html: false },
+  't-exp2-org': { en: `SK Research Institute`, ko: `SK경영경제연구소`, html: false },
+  't-exp2-desc': { en: `Supported applied economics research, including data preparation and quantitative analysis for institute publications and briefings.`, ko: `응용경제학 연구를 지원하며, 연구소 발간물 및 브리핑을 위한 데이터 준비와 정량 분석을 수행했습니다.`, html: false },
+  't-exp3-role': { en: `Data Analyst, Analytics Service`, ko: `데이터 분석가, 애널리틱스 서비스`, html: false },
+  't-exp3-org': { en: `Linewalks`, ko: `Linewalks`, html: false },
+  't-exp3-desc': { en: `Built and maintained analytics for a data-service product, working from raw data to stakeholder-facing metrics.`, ko: `데이터 서비스 제품의 분석 체계를 구축·운영하며, 원자료에서 이해관계자용 지표까지 전 과정을 다뤘습니다.`, html: false },
+  't-mark03': { en: `Thesis`, ko: `학위논문`, html: false },
+  't-research-h2': { en: `Research`, ko: `연구`, html: false },
+  't-paper-meta': { en: `M.A. THESIS · ECONOMICS`, ko: `경제학 석사 학위논문`, html: false },
+  't-thesis-title': { en: `Mental Health and Unemployment Duration: Evidence Using Duration Analysis`, ko: `정신건강과 실업 기간: 생존분석을 통한 실증 연구`, html: false },
+  't-abstract': { en: `This thesis applies duration (survival) analysis to examine how the length of unemployment relates to mental health outcomes, modeling the hazard of exiting unemployment over time rather than relying on a single cross-sectional snapshot. The approach follows the logic used across labor economics and biostatistics: track a cohort over time, estimate the probability of an event occurring in each period, and test how covariates shift that risk.`, ko: `본 논문은 생존분석(duration analysis)을 적용해 실업 기간과 정신건강 결과 사이의 관계를 분석합니다. 단일 시점의 횡단면 스냅샷에 의존하는 대신, 시간에 따른 실업 탈출 위험(hazard)을 모형화합니다. 이는 노동경제학과 생물통계학에서 공통적으로 사용하는 논리를 따릅니다: 코호트를 시간에 걸쳐 추적하고, 각 기간에 사건이 발생할 확률을 추정하며, 공변량이 그 위험을 어떻게 변화시키는지 검증합니다.`, html: false },
+  't-ptag1': { en: `Kaplan–Meier estimation`, ko: `카플란-마이어 추정법`, html: false },
+  't-ptag2': { en: `Cox proportional hazards`, ko: `콕스 비례위험모형`, html: false },
+  't-ptag3': { en: `Labor economics`, ko: `노동경제학`, html: false },
+  't-paperid': { en: `M.A., Economics`, ko: `경제학 석사`, html: false },
+  't-mark04': { en: `Applied work`, ko: `적용 사례`, html: false },
+  't-cs-h2': { en: `Case Studies`, ko: `케이스 스터디`, html: false },
+  't-cs-intro': { en: `Four projects spanning policy strategy, retail analytics, and machine learning — each framed by the stakeholder's original question rather than the technique used to answer it.`, ko: `정책 전략, 유통 분석, 머신러닝을 아우르는 네 개의 프로젝트입니다 — 각 사례는 사용한 기법이 아니라 이해관계자의 원래 질문을 중심으로 정리했습니다.`, html: false },
+  't-cs1-tag': { en: `Policy Strategy`, ko: `정책 전략`, html: false },
+  't-cs1-title': { en: `R.O.K. Strategy Toward US–China Competition`, ko: `미·중 경쟁 속 대한민국의 전략적 포지셔닝`, html: false },
+  't-cs1-ask': { en: `How should the Republic of Korea position itself amid an unpredictable US–China relationship, in the context of the G20 data-governance and finance agenda?`, ko: `예측하기 어려운 미·중 관계 속에서, G20 데이터 거버넌스·금융 의제라는 맥락에서 대한민국은 어떻게 자국을 포지셔닝해야 하는가?`, html: false },
+  't-cs1-app': { en: `Focused on the 2023 G20 Summit's Sherpa and Finance tracks, analyzing the data-governance proposals under discussion and where Korea holds a structural advantage.`, ko: `2023 G20 정상회의의 셰르파 트랙과 재무 트랙에 초점을 맞춰, 논의 중인 데이터 거버넌스 제안들과 한국이 구조적 우위를 가진 지점을 분석했습니다.`, html: false },
+  't-cs1-out': { en: `A positioning brief identifying where Korea can act as a bridge on data-governance rules rather than being forced to choose a side.`, ko: `한국이 한쪽을 선택하도록 강요받기보다, 데이터 거버넌스 규범에서 가교 역할을 할 수 있는 지점을 짚어낸 포지셔닝 브리프입니다.`, html: false },
+  't-cs2-tag': { en: `Business Analysis`, ko: `비즈니스 분석`, html: false },
+  't-cs2-title': { en: `Fashion Brand Business Analysis`, ko: `패션 브랜드 비즈니스 분석`, html: false },
+  't-cs2-ask': { en: `Stakeholders wanted to understand fashion e-commerce market trends and how cloud infrastructure could support the shift from offline to online retail.`, ko: `이해관계자들은 패션 이커머스 시장 동향과, 클라우드 인프라가 오프라인에서 온라인 유통으로의 전환을 어떻게 뒷받침할 수 있는지 파악하고자 했습니다.`, html: false },
+  't-cs2-app': { en: `Analyzed e-commerce and market-targeting data, and how cloud services integrate with retail operations at scale.`, ko: `이커머스 및 시장 타겟팅 데이터를 분석하고, 클라우드 서비스가 대규모 유통 운영과 어떻게 통합되는지 살펴봤습니다.`, html: false },
+  't-cs2-out': { en: `A recommendation on where cloud-enabled retail infrastructure creates the most leverage for the brand's online transition.`, ko: `클라우드 기반 유통 인프라가 브랜드의 온라인 전환에 가장 큰 레버리지를 만드는 지점에 대한 제안입니다.`, html: false },
+  't-cs3-tag': { en: `Customer Analytics`, ko: `고객 분석`, html: false },
+  't-cs3-title': { en: `Bike-Share Membership Dashboard`, ko: `자전거 공유 멤버십 대시보드`, html: false },
+  't-cs3-ask': { en: `Increase adoption among riders who use the service but are not regular members.`, ko: `서비스는 이용하지만 정기 멤버는 아닌 라이더층의 가입 전환율을 높이는 것.`, html: false },
+  't-cs3-app': { en: `Used internal ridership data to analyze commute distance and marital status against membership status, comparing habits of members versus non-members.`, ko: `내부 이용 데이터를 활용해 통근 거리와 결혼 여부를 멤버십 상태와 교차 분석하고, 멤버와 비멤버의 이용 패턴을 비교했습니다.`, html: false },
+  't-cs3-out': { en: `A dashboard surfacing the rider segments most likely to convert to membership, shared with stakeholders for targeting decisions.`, ko: `멤버십 전환 가능성이 높은 라이더 세그먼트를 드러내는 대시보드로, 타겟팅 의사결정을 위해 이해관계자와 공유했습니다.`, html: false },
+  't-cs4-tag': { en: `Dashboard · Tableau`, ko: `대시보드 · Tableau`, html: false },
+  't-cs4-title': { en: `Superstore Expansion Dashboard`, ko: `슈퍼스토어 확장 대시보드`, html: false },
+  't-cs4-ask': { en: `Evaluate where the store network should expand next.`, ko: `매장 네트워크가 다음으로 어디에 확장해야 하는지 평가하는 것.`, html: false },
+  't-cs4-app': { en: `Used internal sales data to analyze the current store footprint and performance patterns across regions.`, ko: `내부 매출 데이터를 활용해 현재 매장 분포와 지역별 성과 패턴을 분석했습니다.`, html: false },
+  't-cs4-out': { en: `A strategic view of expansion candidates prioritized by expected revisit and revenue impact.`, ko: `예상 재방문율과 매출 영향을 기준으로 우선순위를 매긴 확장 후보지에 대한 전략적 시각입니다.`, html: false },
+  't-mark05': { en: `Toolkit`, ko: `도구`, html: false },
+  't-skills-h2': { en: `Skills &amp; Tools`, ko: `역량 및 도구`, html: false },
+  't-sk1-h': { en: `Analysis`, ko: `분석`, html: false },
+  't-sk1-li0': { en: `Duration / survival analysis`, ko: `생존분석`, html: false },
+  't-sk1-li1': { en: `Regression &amp; hypothesis testing`, ko: `회귀분석 &amp; 가설검정`, html: false },
+  't-sk1-li2': { en: `Association-rule mining`, ko: `연관규칙 마이닝`, html: false },
+  't-sk1-li3': { en: `Customer segmentation`, ko: `고객 세분화`, html: false },
+  't-sk2-h': { en: `Tools`, ko: `도구`, html: false },
+  't-sk2-li0': { en: `R (arules, arulesViz)`, ko: `R (arules, arulesViz)`, html: false },
+  't-sk2-li1': { en: `Tableau`, ko: `Tableau`, html: false },
+  't-sk2-li2': { en: `SQL`, ko: `SQL`, html: false },
+  't-sk2-li3': { en: `Excel / financial modeling`, ko: `Excel / 재무 모델링`, html: false },
+  't-sk3-h': { en: `Domains`, ko: `분야`, html: false },
+  't-sk3-li0': { en: `Digital finance policy`, ko: `디지털 금융 정책`, html: false },
+  't-sk3-li1': { en: `Labor economics`, ko: `노동경제학`, html: false },
+  't-sk3-li2': { en: `Retail &amp; e-commerce strategy`, ko: `유통 &amp; 이커머스 전략`, html: false },
+  't-sk3-li3': { en: `Data governance`, ko: `데이터 거버넌스`, html: false },
+  't-sk4-h': { en: `Delivery`, ko: `산출물`, html: false },
+  't-sk4-li0': { en: `Stakeholder briefings`, ko: `이해관계자 브리핑`, html: false },
+  't-sk4-li1': { en: `Dashboard design`, ko: `대시보드 설계`, html: false },
+  't-sk4-li2': { en: `Policy memos`, ko: `정책 메모`, html: false },
+  't-sk4-li3': { en: `Research writing`, ko: `연구 문서 작성`, html: false },
+  't-contact-h2': { en: `Let's talk`, ko: `함께 이야기해요`, html: false },
+  't-contact-p': { en: `Open to research, data-strategy, and analytics roles. The fastest way to reach me is by email, or through GitHub below.`, ko: `리서치, 데이터 전략, 애널리틱스 관련 포지션에 열려 있습니다. 가장 빠른 연락 방법은 이메일이며, 아래 GitHub을 통해서도 연락할 수 있습니다.`, html: false },
+  't-emailbtn': { en: `Email me`, ko: `이메일 보내기`, html: false },
+  't-footer': { en: `© 2026 Li Yu. All rights reserved.`, ko: `© 2026 Li Yu. All rights reserved.`, html: false },
+};
+
+const DT_LABELS = {
+  ask: { en: 'Ask', ko: '질문' },
+  approach: { en: 'Approach', ko: '접근' },
+  outcome: { en: 'Outcome', ko: '결과' }
+};
+
+let SITE_LANG = localStorage.getItem('dashLang') || 'en';
+
+function applyLang(lang){
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').textContent = (lang === 'en') ? '한국어' : 'EN';
+  for (const id in I18N) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const entry = I18N[id];
+    const val = (lang === 'en') ? entry.en : entry.ko;
+    if (entry.html) el.innerHTML = val; else el.textContent = val;
+  }
+  for (const key in DT_LABELS) {
+    document.querySelectorAll('.i18n-' + key).forEach(el => {
+      el.textContent = (lang === 'en') ? DT_LABELS[key].en : DT_LABELS[key].ko;
+    });
+  }
+}
+
+function toggleLang(){
+  SITE_LANG = (SITE_LANG === 'en') ? 'ko' : 'en';
+  localStorage.setItem('dashLang', SITE_LANG);
+  applyLang(SITE_LANG);
+}
+
+applyLang(SITE_LANG);
 </script>
 </body>
 </html>
