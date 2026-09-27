@@ -172,7 +172,7 @@
   section.alt .tl-item::before{background:var(--paper-deep);}
   .tl-top{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
   .tl-role{font-family:'Fraunces',serif; font-size:20px; color:var(--ink); font-weight:600;}
-  .tl-date{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);}
+  .tl-date{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft); margin-left:auto;}
   .tl-org{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--brass-dim); margin:4px 0 10px;}
   .tl-desc{color:var(--ink-soft); max-width:64ch; font-size:15px;}
 
@@ -200,9 +200,6 @@
   .case-card h3{font-size:20px; margin:0;}
   .apc dt{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em; color:var(--brass-dim); text-transform:uppercase; margin-top:14px;}
   .apc dd{margin:5px 0 0; color:var(--ink-soft); font-size:14px;}
-  .case-media{margin:-34px -34px 6px; border-bottom:1px solid var(--rule); background:var(--navy); aspect-ratio:16/9; overflow:hidden; display:flex; align-items:center; justify-content:center;}
-  .case-media img{width:100%; height:100%; object-fit:cover;}
-  .case-media .ph{color:#8fa0b8; font-family:'IBM Plex Mono',monospace; font-size:11px; text-align:center; padding:20px;}
   @media (max-width:760px){ .case-grid{grid-template-columns:1fr;} }
 
   .skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule);}
@@ -249,8 +246,8 @@
 <section class="hero">
   <div class="wrap">
     <div class="hero-eyebrow" id="t-eyebrow">Economics · Data Governance · Strategy</div>
-    <h1 id="t-h1">Reading the data behind a decision — <em>before</em> it's made.</h1>
-    <p class="lede" id="t-lede">I'm Li Yu, an economics researcher and business strategy analyst. My work spans labor economics and duration modeling, national data-governance policy, and market-entry strategy for retail and finance clients — always starting from the stakeholder's actual question, not the dataset.</p>
+    <h1 id="t-h1">Not just the numbers — reading data from <em>every angle</em>.</h1>
+    <p class="lede" id="t-lede">Li Yu is an economist and financial researcher with 5+ years of experience in macroeconomic research, financial stability, and digital finance. Drawing on panel-data analysis and econometric modeling, I've produced banking-sector research, CBDC and policy analysis for executive audiences — using Bloomberg, CEIC, IMF, OECD, World Bank, and Yonhap Infomax data — always starting from the decision-maker's actual question, not the dataset.</p>
     <div class="hero-ctas">
       <a class="btn primary" href="#casestudies" id="t-cta1">View case studies</a>
       <a class="btn ghost" href="#research" id="t-cta2">Read the research</a>
@@ -261,7 +258,7 @@
         <div class="v" id="t-cred1-v">M.A., Economics</div>
       </div>
       <div class="cred">
-        <div class="k" id="t-cred2-k">Current role</div>
+        <div class="k" id="t-cred2-k">Most recent role</div>
         <div class="v" id="t-cred2-v">Researcher, Korea Institute of Finance</div>
       </div>
       <div class="cred">
@@ -312,24 +309,35 @@
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-top">
-          <div class="tl-role" id="t-exp1-role">Researcher, Digital Finance</div>
+          <div class="tl-role" id="t-exp1-role">Researcher, Digital Finance Research Division</div>
+          <div class="tl-date" id="t-exp1-date">Feb 2024 – Feb 2026</div>
         </div>
         <div class="tl-org" id="t-exp1-org">Korea Institute of Finance</div>
-        <p class="tl-desc" id="t-exp1-desc">Research on digital-finance policy questions, supporting analysis that informs national-level financial policy discussion.</p>
+        <p class="tl-desc" id="t-exp1-desc">Led an institutional research project on digital bank-run risk and policy responses among Korean banks, building panel datasets covering 18 domestic commercial, regional, and specialized banks and integrating 10+ years of banking and bond-market time-series data. Produced 30+ executive presentations and policy briefs on CBDC, banking regulation, and financial resilience, and contributed to comparative banking research across 10+ Southeast Asian economies.</p>
       </div>
       <div class="tl-item">
         <div class="tl-top">
-          <div class="tl-role" id="t-exp2-role">Research Assistant, Economics</div>
+          <div class="tl-role" id="t-exp2-role">Researcher, Economics Division</div>
+          <div class="tl-date" id="t-exp2-date">Sep 2021 – Sep 2023</div>
         </div>
         <div class="tl-org" id="t-exp2-org">SK Research Institute</div>
-        <p class="tl-desc" id="t-exp2-desc">Supported applied economics research, including data preparation and quantitative analysis for institute publications and briefings.</p>
+        <p class="tl-desc" id="t-exp2-desc">Contributed to four semiannual macroeconomic outlook reports, monitoring 100+ indicators across 30+ economies using Bloomberg, CEIC, IMF, OECD, and World Bank data. Applied econometric techniques including VAR and association analysis, and supported executive decision-making through strategic research on China, geopolitics, semiconductors, and the digital economy.</p>
       </div>
       <div class="tl-item">
         <div class="tl-top">
-          <div class="tl-role" id="t-exp3-role">Data Analyst, Analytics Service</div>
+          <div class="tl-role" id="t-exp3-role">Data Analyst, Assistant Manager</div>
+          <div class="tl-date" id="t-exp3-date">Apr 2019 – Nov 2019</div>
         </div>
         <div class="tl-org" id="t-exp3-org">Linewalks</div>
-        <p class="tl-desc" id="t-exp3-desc">Built and maintained analytics for a data-service product, working from raw data to stakeholder-facing metrics.</p>
+        <p class="tl-desc" id="t-exp3-desc">Analyzed large-scale healthcare datasets — including HIRA and National Health Insurance data — and produced analytical reports and visualizations supporting healthcare and pharmaceutical consulting projects.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-top">
+          <div class="tl-role" id="t-exp4-role">Graduate Assistant, Community Budget &amp; Business Management</div>
+          <div class="tl-date" id="t-exp4-date">Sep 2017 – May 2018</div>
+        </div>
+        <div class="tl-org" id="t-exp4-org">Office of Mental Health, State of New York — Albany, NY</div>
+        <p class="tl-desc" id="t-exp4-desc">Supported the Community Budget team at a U.S. state government agency, preparing expense reports for government-funded projects and digitizing paper records into Excel. Presented budget reports to other departments — early hands-on experience working and communicating entirely in English within a U.S. professional environment.</p>
       </div>
     </div>
   </div>
@@ -362,13 +370,12 @@
     <div class="section-head">
       <div class="ledger"><span class="code">EXH. 04</span><span class="leader"></span><span class="mark" id="t-mark04">Applied work</span></div>
       <h2 id="t-cs-h2">Case Studies</h2>
-      <p class="section-intro" id="t-cs-intro">Four projects spanning policy strategy, retail analytics, and machine learning — each framed by the stakeholder's original question rather than the technique used to answer it.</p>
+      <p class="section-intro" id="t-cs-intro">Six projects spanning policy strategy, retail analytics, banking research, and macro forecasting — each framed by the stakeholder's original question rather than the technique used to answer it.</p>
     </div>
     <div class="case-grid">
 
       <div class="case-card">
-        <div class="case-media"><span class="ph">Add exhibit image<br>e.g. images/rok-strategy.png</span></div>
-        <div class="case-top"><span class="case-tag" id="t-cs1-tag">Policy Strategy</span><span class="case-exh">01/04</span></div>
+        <div class="case-top"><span class="case-tag" id="t-cs1-tag">Policy Strategy</span><span class="case-exh">01/06</span></div>
         <h3 id="t-cs1-title">R.O.K. Strategy Toward US–China Competition</h3>
         <dl class="apc">
           <dt class="i18n-ask">Ask</dt><dd id="t-cs1-ask">How should the Republic of Korea position itself amid an unpredictable US–China relationship, in the context of the G20 data-governance and finance agenda?</dd>
@@ -378,8 +385,7 @@
       </div>
 
       <div class="case-card">
-        <div class="case-media"><span class="ph">Add exhibit image<br>e.g. images/fashion-brand.png</span></div>
-        <div class="case-top"><span class="case-tag" id="t-cs2-tag">Business Analysis</span><span class="case-exh">02/04</span></div>
+        <div class="case-top"><span class="case-tag" id="t-cs2-tag">Business Analysis</span><span class="case-exh">02/06</span></div>
         <h3 id="t-cs2-title">Fashion Brand Business Analysis</h3>
         <dl class="apc">
           <dt class="i18n-ask">Ask</dt><dd id="t-cs2-ask">Stakeholders wanted to understand fashion e-commerce market trends and how cloud infrastructure could support the shift from offline to online retail.</dd>
@@ -389,8 +395,7 @@
       </div>
 
       <div class="case-card">
-        <div class="case-media"><span class="ph">Add exhibit image<br>e.g. images/bike-dashboard.png</span></div>
-        <div class="case-top"><span class="case-tag" id="t-cs3-tag">Customer Analytics</span><span class="case-exh">03/04</span></div>
+        <div class="case-top"><span class="case-tag" id="t-cs3-tag">Customer Analytics</span><span class="case-exh">03/06</span></div>
         <h3 id="t-cs3-title">Bike-Share Membership Dashboard</h3>
         <dl class="apc">
           <dt class="i18n-ask">Ask</dt><dd id="t-cs3-ask">Increase adoption among riders who use the service but are not regular members.</dd>
@@ -400,13 +405,32 @@
       </div>
 
       <div class="case-card">
-        <div class="case-media"><span class="ph">Add exhibit image<br>e.g. images/superstore-tableau.png</span></div>
-        <div class="case-top"><span class="case-tag" id="t-cs4-tag">Dashboard · Tableau</span><span class="case-exh">04/04</span></div>
+        <div class="case-top"><span class="case-tag" id="t-cs4-tag">Dashboard · Tableau</span><span class="case-exh">04/06</span></div>
         <h3 id="t-cs4-title">Superstore Expansion Dashboard</h3>
         <dl class="apc">
           <dt class="i18n-ask">Ask</dt><dd id="t-cs4-ask">Evaluate where the store network should expand next.</dd>
           <dt class="i18n-approach">Approach</dt><dd id="t-cs4-app">Used internal sales data to analyze the current store footprint and performance patterns across regions.</dd>
           <dt class="i18n-outcome">Outcome</dt><dd id="t-cs4-out">A strategic view of expansion candidates prioritized by expected revisit and revenue impact.</dd>
+        </dl>
+      </div>
+
+      <div class="case-card">
+        <div class="case-top"><span class="case-tag" id="t-cs5-tag">Banking Research · CBDC</span><span class="case-exh">05/06</span></div>
+        <h3 id="t-cs5-title">Digital Bank-Run Risk &amp; Policy Response</h3>
+        <dl class="apc">
+          <dt class="i18n-ask">Ask</dt><dd id="t-cs5-ask">How should Korean banks and regulators respond to digital bank-run risk in an era of instant mobile withdrawals?</dd>
+          <dt class="i18n-approach">Approach</dt><dd id="t-cs5-app">Built panel datasets across 18 domestic commercial, regional, and specialized banks, integrating 10+ years of banking and bond-market time-series data, and benchmarked findings against 10+ Southeast Asian economies.</dd>
+          <dt class="i18n-outcome">Outcome</dt><dd id="t-cs5-out">30+ executive presentations and policy briefs on CBDC and banking regulation, at the Korea Institute of Finance.</dd>
+        </dl>
+      </div>
+
+      <div class="case-card">
+        <div class="case-top"><span class="case-tag" id="t-cs6-tag">Macro Research</span><span class="case-exh">06/06</span></div>
+        <h3 id="t-cs6-title">China, Geopolitics &amp; Semiconductor Outlook</h3>
+        <dl class="apc">
+          <dt class="i18n-ask">Ask</dt><dd id="t-cs6-ask">How do shifting China-related geopolitics and semiconductor-cycle dynamics feed into a macroeconomic outlook for Korean businesses?</dd>
+          <dt class="i18n-approach">Approach</dt><dd id="t-cs6-app">Monitored 100+ indicators across 30+ economies via Bloomberg, CEIC, IMF, OECD, and World Bank, applying VAR and association analysis for four semiannual outlook reports.</dd>
+          <dt class="i18n-outcome">Outcome</dt><dd id="t-cs6-out">Strategic research briefings on China exposure, semiconductors, and the digital economy that supported executive decision-making at SK Research Institute.</dd>
         </dl>
       </div>
 
@@ -466,12 +490,9 @@
     <div class="contact-box">
       <div>
         <h2 id="t-contact-h2">Let's talk</h2>
-        <p id="t-contact-p">Open to research, data-strategy, and analytics roles. The fastest way to reach me is by email, or through GitHub below.</p>
+        <p id="t-contact-p">Open to research, data-strategy, and analytics roles.</p>
       </div>
-      <div class="contact-links">
-        <a class="btn primary" href="mailto:your-email@example.com" id="t-emailbtn">Email me</a>
-        <a class="btn ghost" href="https://github.com/ly186481" target="_blank" rel="noopener">GitHub — @ly186481</a>
-      </div>
+
     </div>
   </div>
 </section>
@@ -496,7 +517,7 @@
 
 <script>
 const I18N = {
-  't-brandtag': { en: `Research &amp; Strategy`, ko: `리서치 &amp; 전략`, html: false },
+  't-brandtag': { en: `Research & Strategy`, ko: `리서치 & 전략`, html: false },
   't-nav-profile': { en: `Profile`, ko: `프로필`, html: false },
   't-nav-experience': { en: `Experience`, ko: `경력`, html: false },
   't-nav-research': { en: `Research`, ko: `연구`, html: false },
@@ -505,13 +526,13 @@ const I18N = {
   't-nav-contact': { en: `Contact`, ko: `연락처`, html: false },
   't-nav-dashboard': { en: `Dashboard`, ko: `대시보드`, html: false },
   't-eyebrow': { en: `Economics · Data Governance · Strategy`, ko: `경제학 · 데이터 거버넌스 · 전략`, html: false },
-  't-h1': { en: `Reading the data behind a decision — <em>before</em> it's made.`, ko: `결정이 내려지기 <em>전에</em>, 그 이면의 데이터를 먼저 읽습니다.`, html: true },
-  't-lede': { en: `I'm Li Yu, an economics researcher and business strategy analyst. My work spans labor economics and duration modeling, national data-governance policy, and market-entry strategy for retail and finance clients — always starting from the stakeholder's actual question, not the dataset.`, ko: `저는 경제학 리서처이자 비즈니스 전략 분석가 Li Yu입니다. 노동경제학과 생존분석 모델링, 국가 차원의 데이터 거버넌스 정책, 유통·금융 클라이언트를 위한 시장진입 전략까지 폭넓게 다루며, 언제나 데이터셋이 아니라 이해관계자의 실제 질문에서 출발합니다.`, html: false },
+  't-h1': { en: `Not just the numbers — reading data from <em>every angle</em>.`, ko: `숫자만이 아니라, <em>다각도</em>에서 데이터를 읽습니다.`, html: true },
+  't-lede': { en: `Li Yu is an economist and financial researcher with 5+ years of experience in macroeconomic research, financial stability, and digital finance. Drawing on panel-data analysis and econometric modeling, I've produced banking-sector research, CBDC and policy analysis for executive audiences — using Bloomberg, CEIC, IMF, OECD, World Bank, and Yonhap Infomax data — always starting from the decision-maker's actual question, not the dataset.`, ko: `Li Yu는 거시경제 연구, 금융안정, 디지털금융 분야에서 5년 이상의 실무 경력을 쌓은 경제·금융 리서처입니다. 패널데이터 분석과 계량경제 모델링을 바탕으로 은행산업 리서치와 CBDC·정책 분석을 수행해왔으며, Bloomberg·CEIC·IMF·OECD·World Bank·연합인포맥스 데이터를 활용해 경영진 대상 보고서를 작성해왔습니다. 언제나 데이터셋이 아니라 의사결정권자의 실제 질문에서 분석을 시작합니다.`, html: false },
   't-cta1': { en: `View case studies`, ko: `케이스 스터디 보기`, html: false },
   't-cta2': { en: `Read the research`, ko: `연구 자료 보기`, html: false },
   't-cred1-k': { en: `Education`, ko: `학력`, html: false },
   't-cred1-v': { en: `M.A., Economics`, ko: `경제학 석사`, html: false },
-  't-cred2-k': { en: `Current role`, ko: `현재 직책`, html: false },
+  't-cred2-k': { en: `Most recent role`, ko: `최근 경력`, html: false },
   't-cred2-v': { en: `Researcher, Korea Institute of Finance`, ko: `한국금융연구원 연구원`, html: false },
   't-cred3-k': { en: `Focus`, ko: `주력 분야`, html: false },
   't-cred3-v': { en: `Duration analysis · Market strategy`, ko: `생존분석 · 시장전략`, html: false },
@@ -522,8 +543,8 @@ const I18N = {
   't-tag1': { en: `Econometrics`, ko: `계량경제학`, html: false },
   't-tag2': { en: `Duration / Survival Analysis`, ko: `생존분석`, html: false },
   't-tag3': { en: `Data Governance Policy`, ko: `데이터 거버넌스 정책`, html: false },
-  't-tag4': { en: `Market &amp; Business Strategy`, ko: `시장 &amp; 경영 전략`, html: false },
-  't-tag5': { en: `Dashboarding &amp; Visualization`, ko: `대시보드 &amp; 시각화`, html: false },
+  't-tag4': { en: `Market & Business Strategy`, ko: `시장 & 경영 전략`, html: false },
+  't-tag5': { en: `Dashboarding & Visualization`, ko: `대시보드 & 시각화`, html: false },
   't-howiwork': { en: `How I work`, ko: `일하는 방식`, html: false },
   't-step1': { en: `<strong>Frame the ask.</strong> Pin down the actual decision a stakeholder needs to make.`, ko: `<strong>질문을 규정합니다.</strong> 이해관계자가 실제로 내려야 하는 결정을 명확히 합니다.`, html: true },
   't-step2': { en: `<strong>Choose the method.</strong> Match the analytical tool to the question — survival models, association rules, segmentation.`, ko: `<strong>방법론을 선택합니다.</strong> 질문에 맞는 분석 도구를 매칭합니다 — 생존모형, 연관규칙, 세분화.`, html: true },
@@ -531,15 +552,22 @@ const I18N = {
   't-step4': { en: `<strong>Deliver the decision.</strong> Translate findings into a brief, dashboard, or recommendation a non-technical stakeholder can act on.`, ko: `<strong>의사결정을 전달합니다.</strong> 분석 결과를 비전문가 이해관계자도 실행할 수 있는 브리프·대시보드·제안으로 옮깁니다.`, html: true },
   't-mark02': { en: `Track record`, ko: `경력 이력`, html: false },
   't-exp-h2': { en: `Experience`, ko: `경력`, html: false },
-  't-exp1-role': { en: `Researcher, Digital Finance`, ko: `연구원, 디지털 금융`, html: false },
+  't-exp1-role': { en: `Researcher, Digital Finance Research Division`, ko: `연구원, 디지털금융연구실`, html: false },
+  't-exp1-date': { en: `Feb 2024 – Feb 2026`, ko: `2024.02 – 2026.02`, html: false },
   't-exp1-org': { en: `Korea Institute of Finance`, ko: `한국금융연구원`, html: false },
-  't-exp1-desc': { en: `Research on digital-finance policy questions, supporting analysis that informs national-level financial policy discussion.`, ko: `디지털 금융 정책 이슈를 연구하며, 국가 차원의 금융 정책 논의에 활용되는 분석을 지원합니다.`, html: false },
-  't-exp2-role': { en: `Research Assistant, Economics`, ko: `연구조교, 경제학`, html: false },
+  't-exp1-desc': { en: `Led an institutional research project on digital bank-run risk and policy responses among Korean banks, building panel datasets covering 18 domestic commercial, regional, and specialized banks and integrating 10+ years of banking and bond-market time-series data. Produced 30+ executive presentations and policy briefs on CBDC, banking regulation, and financial resilience, and contributed to comparative banking research across 10+ Southeast Asian economies.`, ko: `'디지털 뱅크런 리스크와 국내 은행의 정책 대응' 기관 연구 프로젝트를 주도하며, 국내 시중·지방·특수은행 18곳을 아우르는 패널 데이터셋을 구축했습니다. 은행통계정보시스템과 연합인포맥스에서 10년 이상의 은행·채권시장 시계열 데이터를 통합했고, CBDC·은행 규제·금융 복원력을 주제로 30건 이상의 경영진 보고서와 정책 브리프를 작성했습니다. 동남아시아 10개국 이상을 대상으로 한 비교은행연구에도 참여했습니다.`, html: false },
+  't-exp2-role': { en: `Researcher, Economics Division`, ko: `연구원, 경제실`, html: false },
+  't-exp2-date': { en: `Sep 2021 – Sep 2023`, ko: `2021.09 – 2023.09`, html: false },
   't-exp2-org': { en: `SK Research Institute`, ko: `SK경영경제연구소`, html: false },
-  't-exp2-desc': { en: `Supported applied economics research, including data preparation and quantitative analysis for institute publications and briefings.`, ko: `응용경제학 연구를 지원하며, 연구소 발간물 및 브리핑을 위한 데이터 준비와 정량 분석을 수행했습니다.`, html: false },
-  't-exp3-role': { en: `Data Analyst, Analytics Service`, ko: `데이터 분석가, 애널리틱스 서비스`, html: false },
+  't-exp2-desc': { en: `Contributed to four semiannual macroeconomic outlook reports, monitoring 100+ indicators across 30+ economies using Bloomberg, CEIC, IMF, OECD, and World Bank data. Applied econometric techniques including VAR and association analysis, and supported executive decision-making through strategic research on China, geopolitics, semiconductors, and the digital economy.`, ko: `연 2회(상반기·하반기) 발간되는 거시경제 전망보고서 4건에 참여하며, Bloomberg·CEIC·IMF·OECD·World Bank 데이터를 활용해 30개국 이상의 거시·금융 지표 100여 개를 모니터링했습니다. VAR 모형과 연관성 분석 등 계량경제 기법을 적용했고, 중국·지정학·반도체·디지털경제를 주제로 한 전략 리서치를 통해 경영진의 의사결정을 지원했습니다.`, html: false },
+  't-exp3-role': { en: `Data Analyst, Assistant Manager`, ko: `데이터 분석가, 대리`, html: false },
+  't-exp3-date': { en: `Apr 2019 – Nov 2019`, ko: `2019.04 – 2019.11`, html: false },
   't-exp3-org': { en: `Linewalks`, ko: `Linewalks`, html: false },
-  't-exp3-desc': { en: `Built and maintained analytics for a data-service product, working from raw data to stakeholder-facing metrics.`, ko: `데이터 서비스 제품의 분석 체계를 구축·운영하며, 원자료에서 이해관계자용 지표까지 전 과정을 다뤘습니다.`, html: false },
+  't-exp3-desc': { en: `Analyzed large-scale healthcare datasets — including HIRA and National Health Insurance data — and produced analytical reports and visualizations supporting healthcare and pharmaceutical consulting projects.`, ko: `건강보험심사평가원(HIRA), 국민건강보험 등 대규모 헬스케어 데이터를 분석하고, 헬스케어·제약 컨설팅 프로젝트를 지원하는 분석 보고서와 시각화 자료를 제작했습니다.`, html: false },
+  't-exp4-role': { en: `Graduate Assistant, Community Budget & Business Management`, ko: `대학원 조교, 지역예산·경영관리부`, html: false },
+  't-exp4-date': { en: `Sep 2017 – May 2018`, ko: `2017.09 – 2018.05`, html: false },
+  't-exp4-org': { en: `Office of Mental Health, State of New York — Albany, NY`, ko: `뉴욕주 정신건강국(Office of Mental Health) — Albany, NY`, html: false },
+  't-exp4-desc': { en: `Supported the Community Budget team at a U.S. state government agency, preparing expense reports for government-funded projects and digitizing paper records into Excel. Presented budget reports to other departments — early hands-on experience working and communicating entirely in English within a U.S. professional environment.`, ko: `미국 주정부 기관에서 지역예산팀 업무를 지원하며, 정부 지원 프로젝트의 지출 보고서를 작성하고 종이 자료를 Excel로 디지털화했습니다. 타 부서를 대상으로 예산 보고서를 발표하며, 미국 현지 업무 환경에서 전적으로 영어로 소통하고 협업한 초기 실무 경험을 쌓았습니다.`, html: false },
   't-mark03': { en: `Thesis`, ko: `학위논문`, html: false },
   't-research-h2': { en: `Research`, ko: `연구`, html: false },
   't-paper-meta': { en: `M.A. THESIS · ECONOMICS`, ko: `경제학 석사 학위논문`, html: false },
@@ -551,7 +579,7 @@ const I18N = {
   't-paperid': { en: `M.A., Economics`, ko: `경제학 석사`, html: false },
   't-mark04': { en: `Applied work`, ko: `적용 사례`, html: false },
   't-cs-h2': { en: `Case Studies`, ko: `케이스 스터디`, html: false },
-  't-cs-intro': { en: `Four projects spanning policy strategy, retail analytics, and machine learning — each framed by the stakeholder's original question rather than the technique used to answer it.`, ko: `정책 전략, 유통 분석, 머신러닝을 아우르는 네 개의 프로젝트입니다 — 각 사례는 사용한 기법이 아니라 이해관계자의 원래 질문을 중심으로 정리했습니다.`, html: false },
+  't-cs-intro': { en: `Six projects spanning policy strategy, retail analytics, banking research, and macro forecasting — each framed by the stakeholder's original question rather than the technique used to answer it.`, ko: `정책 전략, 유통 분석, 은행 리서치, 거시경제 전망을 아우르는 여섯 개의 프로젝트입니다 — 각 사례는 사용한 기법이 아니라 이해관계자의 원래 질문을 중심으로 정리했습니다.`, html: false },
   't-cs1-tag': { en: `Policy Strategy`, ko: `정책 전략`, html: false },
   't-cs1-title': { en: `R.O.K. Strategy Toward US–China Competition`, ko: `미·중 경쟁 속 대한민국의 전략적 포지셔닝`, html: false },
   't-cs1-ask': { en: `How should the Republic of Korea position itself amid an unpredictable US–China relationship, in the context of the G20 data-governance and finance agenda?`, ko: `예측하기 어려운 미·중 관계 속에서, G20 데이터 거버넌스·금융 의제라는 맥락에서 대한민국은 어떻게 자국을 포지셔닝해야 하는가?`, html: false },
@@ -572,11 +600,21 @@ const I18N = {
   't-cs4-ask': { en: `Evaluate where the store network should expand next.`, ko: `매장 네트워크가 다음으로 어디에 확장해야 하는지 평가하는 것.`, html: false },
   't-cs4-app': { en: `Used internal sales data to analyze the current store footprint and performance patterns across regions.`, ko: `내부 매출 데이터를 활용해 현재 매장 분포와 지역별 성과 패턴을 분석했습니다.`, html: false },
   't-cs4-out': { en: `A strategic view of expansion candidates prioritized by expected revisit and revenue impact.`, ko: `예상 재방문율과 매출 영향을 기준으로 우선순위를 매긴 확장 후보지에 대한 전략적 시각입니다.`, html: false },
+  't-cs5-tag': { en: `Banking Research · CBDC`, ko: `은행 리서치 · CBDC`, html: false },
+  't-cs5-title': { en: `Digital Bank-Run Risk & Policy Response`, ko: `디지털 뱅크런 리스크와 정책 대응`, html: false },
+  't-cs5-ask': { en: `How should Korean banks and regulators respond to digital bank-run risk in an era of instant mobile withdrawals?`, ko: `모바일을 통한 즉시 인출이 가능한 시대에, 국내 은행과 금융당국은 디지털 뱅크런 리스크에 어떻게 대응해야 하는가?`, html: false },
+  't-cs5-app': { en: `Built panel datasets across 18 domestic commercial, regional, and specialized banks, integrating 10+ years of banking and bond-market time-series data, and benchmarked findings against 10+ Southeast Asian economies.`, ko: `국내 시중·지방·특수은행 18곳의 패널 데이터셋을 구축하고 10년 이상의 은행·채권시장 시계열 데이터를 통합했으며, 동남아시아 10개국 이상의 사례와 비교분석했습니다.`, html: false },
+  't-cs5-out': { en: `30+ executive presentations and policy briefs on CBDC and banking regulation, at the Korea Institute of Finance.`, ko: `한국금융연구원에서 CBDC와 은행 규제를 주제로 30건 이상의 경영진 보고서와 정책 브리프를 작성했습니다.`, html: false },
+  't-cs6-tag': { en: `Macro Research`, ko: `거시경제 리서치`, html: false },
+  't-cs6-title': { en: `China, Geopolitics & Semiconductor Outlook`, ko: `중국·지정학·반도체 경기전망`, html: false },
+  't-cs6-ask': { en: `How do shifting China-related geopolitics and semiconductor-cycle dynamics feed into a macroeconomic outlook for Korean businesses?`, ko: `변화하는 중국발 지정학 리스크와 반도체 경기 사이클이 국내 기업 대상 거시경제 전망에 어떻게 반영되어야 하는가?`, html: false },
+  't-cs6-app': { en: `Monitored 100+ indicators across 30+ economies via Bloomberg, CEIC, IMF, OECD, and World Bank, applying VAR and association analysis for four semiannual outlook reports.`, ko: `Bloomberg·CEIC·IMF·OECD·World Bank 데이터로 30개국 이상의 지표 100여 개를 모니터링하고, VAR과 연관성 분석을 적용해 반기별 전망보고서 4건을 작성했습니다.`, html: false },
+  't-cs6-out': { en: `Strategic research briefings on China exposure, semiconductors, and the digital economy that supported executive decision-making at SK Research Institute.`, ko: `SK경영경제연구소에서 중국 리스크·반도체·디지털경제를 주제로 한 전략 리서치를 통해 경영진의 의사결정을 지원했습니다.`, html: false },
   't-mark05': { en: `Toolkit`, ko: `도구`, html: false },
-  't-skills-h2': { en: `Skills &amp; Tools`, ko: `역량 및 도구`, html: false },
+  't-skills-h2': { en: `Skills & Tools`, ko: `역량 및 도구`, html: false },
   't-sk1-h': { en: `Analysis`, ko: `분석`, html: false },
   't-sk1-li0': { en: `Duration / survival analysis`, ko: `생존분석`, html: false },
-  't-sk1-li1': { en: `Regression &amp; hypothesis testing`, ko: `회귀분석 &amp; 가설검정`, html: false },
+  't-sk1-li1': { en: `Regression & hypothesis testing`, ko: `회귀분석 & 가설검정`, html: false },
   't-sk1-li2': { en: `Association-rule mining`, ko: `연관규칙 마이닝`, html: false },
   't-sk1-li3': { en: `Customer segmentation`, ko: `고객 세분화`, html: false },
   't-sk2-h': { en: `Tools`, ko: `도구`, html: false },
@@ -587,7 +625,7 @@ const I18N = {
   't-sk3-h': { en: `Domains`, ko: `분야`, html: false },
   't-sk3-li0': { en: `Digital finance policy`, ko: `디지털 금융 정책`, html: false },
   't-sk3-li1': { en: `Labor economics`, ko: `노동경제학`, html: false },
-  't-sk3-li2': { en: `Retail &amp; e-commerce strategy`, ko: `유통 &amp; 이커머스 전략`, html: false },
+  't-sk3-li2': { en: `Retail & e-commerce strategy`, ko: `유통 & 이커머스 전략`, html: false },
   't-sk3-li3': { en: `Data governance`, ko: `데이터 거버넌스`, html: false },
   't-sk4-h': { en: `Delivery`, ko: `산출물`, html: false },
   't-sk4-li0': { en: `Stakeholder briefings`, ko: `이해관계자 브리핑`, html: false },
@@ -595,7 +633,7 @@ const I18N = {
   't-sk4-li2': { en: `Policy memos`, ko: `정책 메모`, html: false },
   't-sk4-li3': { en: `Research writing`, ko: `연구 문서 작성`, html: false },
   't-contact-h2': { en: `Let's talk`, ko: `함께 이야기해요`, html: false },
-  't-contact-p': { en: `Open to research, data-strategy, and analytics roles. The fastest way to reach me is by email, or through GitHub below.`, ko: `리서치, 데이터 전략, 애널리틱스 관련 포지션에 열려 있습니다. 가장 빠른 연락 방법은 이메일이며, 아래 GitHub을 통해서도 연락할 수 있습니다.`, html: false },
+  't-contact-p': { en: `Open to research, data-strategy, and analytics roles.`, ko: `리서치, 데이터 전략, 애널리틱스 관련 포지션에 열려 있습니다.`, html: false },
   't-emailbtn': { en: `Email me`, ko: `이메일 보내기`, html: false },
   't-footer': { en: `© 2026 Li Yu. All rights reserved.`, ko: `© 2026 Li Yu. All rights reserved.`, html: false },
 };
