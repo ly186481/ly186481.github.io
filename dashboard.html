@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Macro Dashboard — Li Yu</title>
-<meta name="description" content="Domestic & global macro indicators relevant to equity markets — Li Yu, Economic Research & Strategy">
+<title>Macro Dashboard by Country — Li Yu</title>
+<meta name="description" content="Country-by-country macro indicators relevant to equity markets — Korea, US, Japan, China/HK, Eurozone, UK. Li Yu, Economic Research & Strategy">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -31,27 +31,45 @@ a{color:inherit;}
   background:var(--gold);border:none;padding:7px 14px;border-radius:20px;cursor:pointer;}
 #langToggle:hover{background:#c9a15f;}
 
-header.hero{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;padding:44px 24px 34px;margin-bottom:28px;}
+header.hero{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;padding:44px 24px 34px;margin-bottom:22px;}
 header.hero .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
 header.hero h1{font-family:'Playfair Display',serif;font-size:30px;margin:0 0 10px;line-height:1.25;}
-header.hero p{margin:0;max-width:660px;color:#c9d0e0;font-size:14px;line-height:1.6;}
+header.hero p{margin:0;max-width:680px;color:#c9d0e0;font-size:14px;line-height:1.6;}
 header.hero .updated{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#93a0bf;}
+#liveBadge{display:inline-block;margin-left:10px;padding:2px 9px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.3px;}
+#liveBadge.live{background:#1f4d33;color:#8ee6ae;}
+#liveBadge.static{background:#4a4025;color:#e8c77e;}
 
-.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--gold-dark);text-transform:uppercase;margin:36px 0 4px;}
-.section-title{font-family:'Playfair Display',serif;font-size:20px;margin:0 0 16px;}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 6px;margin-bottom:6px;-webkit-overflow-scrolling:touch;}
+.tab{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.3px;white-space:nowrap;
+  background:var(--card);color:var(--navy);border:1px solid var(--line);padding:10px 18px;border-radius:26px;cursor:pointer;}
+.tab:hover{border-color:var(--gold);}
+.tab.active{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 0 0 2px var(--gold) inset;}
+.tab .flag{margin-right:6px;font-size:14px;}
 
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;}
-.kpi-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;}
+.country-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:22px 0 4px;}
+.country-head h2{font-family:'Playfair Display',serif;font-size:24px;margin:0;}
+.country-head .tagline{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);}
+
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--gold-dark);text-transform:uppercase;margin:30px 0 4px;}
+.section-title{font-family:'Playfair Display',serif;font-size:19px;margin:0 0 14px;}
+
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;}
+.kpi-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;position:relative;}
 .kpi-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;}
 .kpi-value{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;}
 .kpi-change{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;margin-top:6px;}
+.kpi-src{position:absolute;top:10px;right:12px;width:7px;height:7px;border-radius:50%;}
+.kpi-src.live{background:#2f9e5e;}
+.kpi-src.stale{background:#c99a3a;}
+.kpi-src.manual{background:#9aa3b5;}
 .pos{color:var(--pos);} .neg{color:var(--neg);} .neu{color:var(--sub);}
 
-.chart-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px;}
+.chart-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px;margin-bottom:16px;}
 .chart-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;}
 .chart-card h3{margin:0 0 4px;font-family:'Playfair Display',serif;font-size:15px;font-weight:600;}
 .chart-card .note{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--sub);margin-bottom:14px;}
-canvas{max-height:270px;}
+canvas{max-height:260px;}
 
 .table-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:6px 22px 18px;overflow-x:auto;}
 table{width:100%;border-collapse:collapse;font-size:12.5px;}
@@ -60,14 +78,13 @@ th{text-align:left;padding:12px 10px 10px;border-bottom:2px solid var(--navy);co
 th:hover{color:var(--gold-dark);}
 td{padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap;}
 tr:hover td{background:#faf8f2;}
-.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;letter-spacing:.3px;}
-.tag.dom{background:#eaf0e9;color:var(--pos);}
-.tag.intl{background:#f2e7d6;color:var(--gold-dark);}
 .impact-up{color:var(--pos);font-weight:600;}
 .impact-down{color:var(--neg);font-weight:600;}
 .impact-mix{color:var(--sub);font-weight:600;}
 
-.footnote{margin-top:24px;padding:16px 18px;background:#f2ede0;border:1px dashed var(--gold);border-radius:var(--radius);
+.banner{margin-top:18px;padding:12px 16px;background:#f2ede0;border-left:3px solid var(--gold);border-radius:6px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:#5d5137;line-height:1.7;}
+.footnote{margin-top:28px;padding:16px 18px;background:#f2ede0;border:1px dashed var(--gold);border-radius:var(--radius);
   font-family:'JetBrains Mono',monospace;font-size:11px;color:#5d5137;line-height:1.7;}
 .footnote b{color:#4a4025;}
 
@@ -84,7 +101,7 @@ footer.page a{color:var(--gold-dark);text-decoration:none;}
   <span class="brand">Li Yu — Research &amp; Strategy</span>
   <div class="navRight">
     <a class="back" id="backLink" href="index.html">&larr; Back to portfolio</a>
-    <button id="langToggle" onclick="toggleLang()">한국어</button>
+    <button id="langToggle" type="button">한국어</button>
   </div>
 </nav>
 
@@ -93,320 +110,533 @@ footer.page a{color:var(--gold-dark);text-decoration:none;}
     <div class="kicker" id="t_kicker"></div>
     <h1 id="t_title"></h1>
     <p id="t_desc"></p>
-    <div class="updated" id="t_updated"></div>
+    <div class="updated" id="t_updated"><span id="t_updated_text"></span><span id="liveBadge" class="static"></span></div>
   </div>
 </header>
 
 <div class="wrap">
-
-  <div class="section-label" id="t_lbl1"></div>
-  <div class="section-title" id="t_title1"></div>
-  <div class="kpi-row" id="kpiRow"></div>
-
-  <div class="section-label" id="t_lbl2"></div>
-  <div class="section-title" id="t_title2"></div>
-  <div class="chart-row">
-    <div class="chart-card">
-      <h3 id="c1_title"></h3><div class="note" id="c1_note"></div>
-      <canvas id="idxChart"></canvas>
-    </div>
-    <div class="chart-card">
-      <h3 id="c2_title"></h3><div class="note" id="c2_note"></div>
-      <canvas id="rateChart"></canvas>
-    </div>
-  </div>
-  <div class="chart-row" style="margin-top:16px;">
-    <div class="chart-card">
-      <h3 id="c3_title"></h3><div class="note" id="c3_note"></div>
-      <canvas id="fxChart"></canvas>
-    </div>
-    <div class="chart-card">
-      <h3 id="c4_title"></h3><div class="note" id="c4_note"></div>
-      <canvas id="ktbChart"></canvas>
-    </div>
-  </div>
-
-  <div class="section-label" id="t_lbl3"></div>
-  <div class="section-title" id="t_title3"></div>
-  <div class="table-card">
-    <table id="dataTable">
-      <thead><tr>
-        <th data-k="region" id="th0"></th><th data-k="name" id="th1"></th><th data-k="value" id="th2"></th>
-        <th data-k="change" id="th3"></th><th data-k="impact" id="th4"></th>
-      </tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-
+  <div class="tabs" id="tabs"></div>
+  <div id="view"></div>
   <div class="footnote" id="t_footnote"></div>
-
   <footer class="page">
-    © 2026 Li Yu · <a href="index.html" id="t_footPortfolio">Portfolio</a> · <a href="https://github.com/ly186481">github.com/ly186481</a>
+    © 2026 Li Yu · <a href="index.html" id="t_footPortfolio">Portfolio</a>
   </footer>
 </div>
 
 <script>
+'use strict';
 const COLORS = ['#0f1f3d','#b8904f','#2f7d4f','#b3413a','#6a7286'];
-let LANG = localStorage.getItem('dashLang') || 'en';
+let LANG = 'en';
+try { LANG = localStorage.getItem('dashLang') || 'en'; } catch(e) {}
+const TAB_IDS = ['all','kr','us','eu','uk','jp','cn'];
+let TAB = (location.hash || '').replace('#','');
+if (TAB_IDS.indexOf(TAB) === -1) TAB = 'all';
+let LIVE = null;        // parsed data/macro.json, once loaded
+let liveCharts = [];
+let sortState = {col:null, dir:1};
 
-// ---------------- Static UI strings ----------------
+/* ---------------- static strings ---------------- */
 const STR = {
-  en: {
-    back:'← Back to portfolio', toggleShows:'한국어',
+  en:{
+    back:'← Back to portfolio', toggle:'한국어',
     kicker:'Exh. 06 · Dashboarding & Visualization',
-    title:'Macro Indicators Driving Equity Markets',
-    desc:'A single-page monitor of the domestic and global macro variables most relevant to equity-market direction — policy rates, bond yields, FX, and energy prices — compiled from public market reports (KRX, KB Securities, Mirae Asset, SBS Biz bond desk, FOMC statements) as of late September 2026.',
-    updated:'LATEST CONFIRMED DATA POINT — 2026.09.23 (KST) · SEE METHODOLOGY NOTE BELOW',
-    lbl1:'Snapshot', title1:'Key Indicators',
-    lbl2:'Trends', title2:'April – September 2026',
-    lbl3:'Detail', title3:'Indicator Summary',
-    c1t:'KOSPI vs. S&P 500', c1n:'Normalized, 100 = late-Apr close · each point is a confirmed closing price on the labeled date',
-    c2t:'Policy Rates — BOK vs. Fed', c2n:'%, midpoint of the Fed\'s target range shown',
-    c3t:'KRW / USD', c3n:'Won per dollar — continued won strength',
-    c4t:'Korea 3Y vs. 10Y KTB Yield', c4n:'KTB yields — confirmed trading days only (not evenly spaced months)',
-    th:['Region','Indicator','Value','As of / Change','Market Read'],
-    footPortfolio:'Portfolio',
-    footnote:'<b>METHODOLOGY —</b> These figures are not pulled live from BOK ECOS or US FRED APIs; they were cross-checked by hand against public market reports (search tools only, no API keys). Sources: Korea Exchange (KRX), KB Securities &amp; Mirae Asset market notes, SBS Biz bond-desk reports, Yonhap/Newsis wire coverage, kbthink (KB Financial Group Research) FOMC/BOK summaries, and KORI Insight\'s weekly review. KOSPI, KOSDAQ, KRW/USD and KTB yields reflect actual closes/quotes on the dates shown (mostly 2026.9.23 or 8.27); <b>the May S&amp;P 500 print, the July KRW/USD print, and the Apr–Aug Fed level are interpolated estimates</b> based on adjacent data points. For a live version, wire this array to the ECOS Open API (FX, base rate), the FRED API (DFF, DGS10, VIXCLS) and a KRX/Kosscom market-data feed on a server-side refresh job.'
+    title:'Macro Indicators Driving Equity Markets — by Country',
+    desc:'Pick a country to see the policy rates, bond yields, FX and equity levels that matter most for its stock market.',
+    updated:'Baseline data as of 2026.09.25 (KST) · see methodology below',
+    live:'LIVE DATA', static:'STATIC SNAPSHOT',
+    tabs:{all:'Overview', kr:'Korea', us:'United States', eu:'Eurozone', uk:'United Kingdom', jp:'Japan', cn:'China · HK'},
+    snap:'Snapshot', trends:'Trends', detail:'Detail',
+    keyInd:'Key Indicators', trendTitle:'April – September 2026', sumTitle:'Indicator Summary',
+    th:['Indicator','Value','As of / Change','Market Read'],
+    impact:{up:'Bullish', down:'Bearish', mix:'Mixed'},
+    portfolio:'Portfolio',
+    footnote:'<b>METHODOLOGY —</b> The baseline numbers below are not pulled live; they were cross-checked by hand against public market reports (search tools only, no API keys at authoring time). Sources: Korea Exchange (KRX), KB Securities and Mirae Asset market notes, SBS Biz bond-desk reports, Yonhap/Newsis, kbthink (KB Financial Group Research), KORI Insight, ECB, Bank of England, Trading Economics and Capital.com. Every card shows its own as-of date; older prints are labeled as dated. <b>The May S&amp;P 500 print, the July KRW/USD print and the Apr–Aug Fed level are interpolated estimates.</b> If this page is paired with the included scripts/fetch_data.py GitHub Action (reading Yahoo Finance, FRED, BOK ECOS, ECB and Bank of England APIs into data/macro.json), the green "LIVE DATA" badge above and the dots next to each card show when real-time values are in use instead — a gray dot means a figure is still the static baseline.'
   },
-  ko: {
-    back:'← 포트폴리오로', toggleShows:'EN',
+  ko:{
+    back:'← 포트폴리오로', toggle:'EN',
     kicker:'부록 06 · 대시보드 및 시각화',
-    title:'증시에 영향을 미치는 거시경제지표',
-    desc:'증시 방향에 가장 큰 영향을 주는 국내·해외 거시변수 — 정책금리, 채권금리, 환율, 에너지 가격 — 를 한 페이지로 모니터링합니다. 한국거래소, KB증권, 미래에셋증권, SBS Biz 채권시황, FOMC 성명 등 공개 자료를 기반으로 2026년 9월 말 기준 작성했습니다.',
-    updated:'최신 확인 데이터 — 2026.09.23 (KST) · 하단 방법론 참고',
-    lbl1:'스냅샷', title1:'주요 지표',
-    lbl2:'추세', title2:'2026년 4월 ~ 9월',
-    lbl3:'상세', title3:'지표 요약',
-    c1t:'코스피 vs S&P 500', c1n:'정규화 지수, 100 = 4월 말 종가 기준 · 각 지점은 표기된 날짜의 확인된 종가',
-    c2t:'정책금리 — 한국은행 vs 연준', c2n:'%, 연준은 목표 구간의 중간값 표시',
-    c3t:'원/달러 환율', c3n:'달러당 원화 — 원화 강세 흐름 지속',
-    c4t:'한국 국고채 3년물 vs 10년물', c4n:'국고채 금리 — 확인된 거래일만 표시 (등간격 월별 아님)',
-    th:['구분','지표','값','기준일 / 변동','시장 해석'],
-    footPortfolio:'포트폴리오',
-    footnote:'<b>방법론 —</b> 위 수치는 한국은행 ECOS나 美 FRED의 실시간 API가 아니라, 검색 도구만으로 공개된 시장 보도와 기관 리서치를 교차 확인해 수기로 채운 값입니다 (API 키 연동 없음). 출처: 한국거래소(KRX)·KB증권·미래에셋증권 마켓 리포트, SBS Biz 채권시장 시황, 연합뉴스·뉴시스, kbthink(KB금융지주 리서치)의 FOMC·금통위 요약, KORI Insight 주간 분석. 코스피·코스닥·원/달러·국고채는 표기된 날짜(대부분 2026.9.23 또는 8.27)의 실제 종가·고시 기준이며, <b>5월 S&amp;P500, 7월 원/달러, 4~8월 Fed 금리는 인접 시점 자료를 근거로 한 추정치</b>입니다. 실제 서비스로 운영하려면 ECOS Open API(환율·기준금리), FRED API(DFF·DGS10·VIXCLS), 코스콤/KRX 시세 피드를 서버에서 주기적으로 호출해 이 배열을 자동 갱신하는 구조를 권장합니다.'
+    title:'증시에 영향을 미치는 거시경제지표 — 국가별',
+    desc:'국가를 선택하면 해당 증시에 가장 중요한 정책금리·채권금리·환율·주가 수준을 볼 수 있습니다.',
+    updated:'기준 데이터 2026.09.25 (KST) · 하단 방법론 참고',
+    live:'실시간 데이터', static:'정적 스냅샷',
+    tabs:{all:'전체 비교', kr:'한국', us:'미국', eu:'유로존', uk:'영국', jp:'일본', cn:'중국 · 홍콩'},
+    snap:'스냅샷', trends:'추세', detail:'상세',
+    keyInd:'주요 지표', trendTitle:'2026년 4월 ~ 9월', sumTitle:'지표 요약',
+    th:['지표','값','기준일 / 변동','시장 해석'],
+    impact:{up:'상승요인', down:'하락요인', mix:'혼조'},
+    portfolio:'포트폴리오',
+    footnote:'<b>방법론 —</b> 아래 기준값은 실시간으로 받아온 것이 아니라, 검색 도구만으로 공개된 시장 보도를 교차 확인해 수기로 채운 값입니다(작성 시점 API 연동 없음). 출처: 한국거래소(KRX), KB증권·미래에셋증권 마켓 리포트, SBS Biz 채권시황, 연합뉴스·뉴시스, kbthink(KB금융지주 리서치), KORI Insight, ECB, Bank of England, Trading Economics·Capital.com. 각 카드에 기준일을 표기했으며, 오래된 수치는 "시점 오래됨"으로 표시했습니다. <b>5월 S&amp;P500, 7월 원/달러, 4~8월 Fed 금리는 추정치</b>입니다. 이 페이지를 함께 제공한 scripts/fetch_data.py GitHub Action(Yahoo Finance·FRED·한국은행 ECOS·ECB·Bank of England API를 data/macro.json으로 수집)과 연동하면, 위 초록색 "실시간 데이터" 배지와 각 카드 옆 점이 실데이터 사용 여부를 보여줍니다 — 회색 점은 아직 정적 기준값이라는 뜻입니다.'
   }
 };
 
-const REGION_LABEL = { en:{dom:'Domestic', intl:'Global'}, ko:{dom:'국내', intl:'해외'} };
-const IMPACT_LABEL = { en:{up:'Bullish', down:'Bearish', mix:'Mixed'}, ko:{up:'상승요인', down:'하락요인', mix:'혼조'} };
-
-// ---------------- KPI cards (values identical, labels localized) ----------------
-const KPIS = {
-  en: [
-    {label:'KOSPI', value:'7,080.92', change:'+0.90% · 9/23', pos:true},
-    {label:'KOSDAQ', value:'844.48', change:'+1.21% · 9/23', pos:true},
-    {label:'KRW / USD', value:'1,358.4', change:'Won strength · 9/23', pos:null},
-    {label:'BOK Base Rate', value:'3.00%', change:'2nd straight hike · 8/27', pos:false},
-    {label:'Fed Funds Rate', value:'3.75–4.00%', change:'+25bp hike · 9/16', pos:false},
-    {label:'Brent Crude', value:'$104.32', change:'War risk premium · 9/25', pos:false},
-  ],
-  ko: [
-    {label:'코스피', value:'7,080.92', change:'+0.90% · 9/23', pos:true},
-    {label:'코스닥', value:'844.48', change:'+1.21% · 9/23', pos:true},
-    {label:'원/달러', value:'1,358.4', change:'원화 강세 · 9/23', pos:null},
-    {label:'한국은행 기준금리', value:'3.00%', change:'2연속 인상 · 8/27', pos:false},
-    {label:'연준 기준금리', value:'3.75–4.00%', change:'25bp 인상 · 9/16', pos:false},
-    {label:'브렌트유', value:'$104.32', change:'전쟁 리스크 · 9/25', pos:false},
-  ]
-};
-
-// ---------------- Chart raw data (language-independent) ----------------
+/* ---------------- raw baseline chart data ---------------- */
 const DATES = ['4/22','5/6','6/24','7/14','8/27','9/23'];
 const KOSPI_RAW = [6417.93, 7384.56, 8203.84, 7284.41, 6912.37, 7080.92];
-const KOSPI_NORM = KOSPI_RAW.map(v => +(v/KOSPI_RAW[0]*100).toFixed(1));
-const SNP_RAW = [6850.00, 7100.00, 7358.22, 7538.44, 7674.37, 7706.03];
-const SNP_NORM = SNP_RAW.map(v => +(v/SNP_RAW[0]*100).toFixed(1));
+const SNP_RAW   = [6850.00, 7100.00, 7358.22, 7538.44, 7674.37, 7706.03];
+const norm = a => a.map(v => +(v/a[0]*100).toFixed(1));
 const KR_RATE = [2.50, 2.50, 2.50, 2.75, 3.00, 3.00];
 const US_RATE = [3.625, 3.625, 3.625, 3.625, 3.625, 3.875];
 const FX = [1479.5, 1455.1, 1541.9, 1450.0, 1386.1, 1358.4];
 const KTB_DATES = ['1/26','6/2','7/28','8/27'];
 const KTB_3Y = [3.096, 3.773, 3.829, 3.755];
 const KTB_10Y = [3.544, 4.135, 4.289, 4.238];
+const ECB_DATES = ['2/5','3/12','4/23','6/17','9/16'];
+const ECB_RATE  = [2.75, 2.50, 2.25, 2.25, 2.50];
+const BOE_DATES = ['2/5','3/19','4/30','7/30','9/17'];
+const BOE_RATE  = [3.75, 3.75, 3.75, 3.75, 3.75];
 
-const CHART_LBL = {
+const CH = {
   en:{kospi:'KOSPI', snp:'S&P 500', bok:'BOK', fed:'Fed (mid)', fx:'KRW/USD', k3:'3Y KTB', k10:'10Y KTB',
-      yIdx:'index (100 = late Apr)', yPct:'%', yFx:'KRW per USD'},
+      ecb:'ECB deposit rate', boe:'BoE Bank Rate',
+      yIdx:'index (100 = late Apr)', yPct:'%', yFx:'KRW per USD', yLvl:'index level'},
   ko:{kospi:'코스피', snp:'S&P 500', bok:'한국은행', fed:'연준(중간값)', fx:'원/달러', k3:'국고채 3년', k10:'국고채 10년',
-      yIdx:'지수 (100 = 4월 말)', yPct:'%', yFx:'원/달러'}
+      ecb:'ECB 예금금리', boe:'BoE 기준금리',
+      yIdx:'지수 (100 = 4월 말)', yPct:'%', yFx:'원/달러', yLvl:'지수'}
 };
 
-// ---------------- Table rows (name/change localized, value/impact/region shared) ----------------
-const TABLE = {
-  en: [
-    {region:'dom',name:'KOSPI Index',value:'7,080.92',change:'+0.90% (9/23)',impact:'up'},
-    {region:'dom',name:'KOSDAQ Index',value:'844.48',change:'+1.21% (9/23)',impact:'up'},
-    {region:'dom',name:'KRW / USD',value:'1,358.4',change:'Won strength continues (9/23)',impact:'mix'},
-    {region:'dom',name:'BOK Base Rate',value:'3.00%',change:'2nd straight hike (8/27)',impact:'mix'},
-    {region:'dom',name:'3Y KTB Yield',value:'3.755%',change:'-6.1bp (8/27)',impact:'mix'},
-    {region:'dom',name:'10Y KTB Yield',value:'4.238%',change:'-5.0bp (8/27)',impact:'mix'},
-    {region:'dom',name:'Exports (Sep 1–20)',value:'$71.4B',change:'Record high',impact:'up'},
-    {region:'dom',name:'Semiconductor Exports (Sep 1–20)',value:'$34.1B',change:'Record high',impact:'up'},
-    {region:'dom',name:'Consumer Sentiment Index',value:'106.6',change:'+2.1pt (MoM)',impact:'up'},
-    {region:'intl',name:'S&P 500',value:'7,706.03',change:'-0.75% (9/22)',impact:'down'},
-    {region:'intl',name:'Fed Funds Rate',value:'3.75–4.00%',change:'+25bp (9/16 FOMC)',impact:'down'},
-    {region:'intl',name:'Brent Crude',value:'$104.32',change:'Prolonged US-Iran war (9/25)',impact:'down'},
-    {region:'intl',name:'Japan Base Rate',value:'1.25%',change:'Yen watch',impact:'mix'},
-    {region:'intl',name:'Geopolitical Risk',value:'US–Iran war ongoing',change:'Backdrop for Sept FOMC hike',impact:'down'},
-  ],
-  ko: [
-    {region:'dom',name:'코스피 지수',value:'7,080.92',change:'+0.90% (9/23)',impact:'up'},
-    {region:'dom',name:'코스닥 지수',value:'844.48',change:'+1.21% (9/23)',impact:'up'},
-    {region:'dom',name:'원/달러 환율',value:'1,358.4',change:'원화 강세 지속 (9/23)',impact:'mix'},
-    {region:'dom',name:'한국은행 기준금리',value:'3.00%',change:'2연속 인상 (8/27)',impact:'mix'},
-    {region:'dom',name:'국고채 3년물 금리',value:'3.755%',change:'-6.1bp (8/27)',impact:'mix'},
-    {region:'dom',name:'국고채 10년물 금리',value:'4.238%',change:'-5.0bp (8/27)',impact:'mix'},
-    {region:'dom',name:'수출 (9/1~20)',value:'714억$',change:'역대 최대',impact:'up'},
-    {region:'dom',name:'반도체 수출 (9/1~20)',value:'341억$',change:'역대 최대',impact:'up'},
-    {region:'dom',name:'소비자심리지수',value:'106.6',change:'+2.1pt (전월비)',impact:'up'},
-    {region:'intl',name:'S&P 500',value:'7,706.03',change:'-0.75% (9/22)',impact:'down'},
-    {region:'intl',name:'연준 기준금리',value:'3.75–4.00%',change:'+25bp (9/16 FOMC)',impact:'down'},
-    {region:'intl',name:'브렌트유',value:'$104.32',change:'美-이란 전쟁 장기화 (9/25)',impact:'down'},
-    {region:'intl',name:'일본 기준금리',value:'1.25%',change:'엔화 변수',impact:'mix'},
-    {region:'intl',name:'지정학 리스크',value:'美-이란 전쟁 지속',change:'9월 FOMC 인상 배경',impact:'down'},
-  ]
+/* ---------------- per-country content ---------------- */
+/* each kpi/table row can carry a "key" that maps to a series in data/macro.json;
+   when LIVE data exists for that key, live value+asof override the baseline. */
+const V = {
+  all:{
+    flag:'🌐',
+    head:{en:'Cross-country overview', ko:'국가 간 비교'},
+    tag:{en:'Where each market stands, side by side', ko:'주요 증시 현황을 한눈에 비교'},
+    kpis:{
+      en:[
+        {l:'Fed Funds Rate', v:'3.75–4.00%', c:'+25bp hike · 9/16', s:false, key:'fed'},
+        {l:'BOK Base Rate', v:'3.00%', c:'2nd straight hike · 8/27', s:false, key:'bok'},
+        {l:'ECB Deposit Rate', v:'2.50%', c:'+25bp hike · 9/16', s:false, key:'ecb'},
+        {l:'BoE Bank Rate', v:'3.75%', c:'6th straight hold · 9/17', s:null, key:'boe'},
+        {l:'BOJ Policy Rate', v:'1.25%', c:'as reported ~9/25', s:null, key:'boj'},
+        {l:'Brent Crude', v:'$104.32', c:'War risk premium · 9/25', s:false, key:'brent'},
+      ],
+      ko:[
+        {l:'연준 기준금리', v:'3.75–4.00%', c:'25bp 인상 · 9/16', s:false, key:'fed'},
+        {l:'한국은행 기준금리', v:'3.00%', c:'2연속 인상 · 8/27', s:false, key:'bok'},
+        {l:'ECB 예금금리', v:'2.50%', c:'25bp 인상 · 9/16', s:false, key:'ecb'},
+        {l:'BoE 기준금리', v:'3.75%', c:'6회 연속 동결 · 9/17', s:null, key:'boe'},
+        {l:'일본은행 정책금리', v:'1.25%', c:'9/25경 보도 기준', s:null, key:'boj'},
+        {l:'브렌트유', v:'$104.32', c:'전쟁 리스크 · 9/25', s:false, key:'brent'},
+      ]},
+    charts:[
+      {t:{en:'KOSPI vs. S&P 500', ko:'코스피 vs S&P 500'}, n:{en:'Normalized, 100 = late-Apr close', ko:'정규화(4월 말=100)'},
+       build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[
+         {label:L.kospi,data:norm(KOSPI_RAW),borderColor:COLORS[0],tension:.25},
+         {label:L.snp,data:norm(SNP_RAW),borderColor:COLORS[1],tension:.25}]},
+         options:opts({y:{title:{display:true,text:L.yIdx}}})})},
+      {t:{en:'Policy Rates — 4 Central Banks', ko:'정책금리 — 4개 중앙은행'}, n:{en:'%, Fed shown at midpoint of target range', ko:'%, 연준은 목표 구간 중간값'},
+       build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[
+         {label:L.bok,data:KR_RATE,borderColor:COLORS[0],stepped:true},
+         {label:L.fed,data:US_RATE,borderColor:COLORS[1],stepped:true},
+         {label:L.ecb,data:[2.50,2.50,2.25,2.25,2.25,2.50],borderColor:COLORS[2],stepped:true},
+         {label:L.boe,data:[3.75,3.75,3.75,3.75,3.75,3.75],borderColor:COLORS[3],stepped:true}]},
+         options:opts({y:{title:{display:true,text:L.yPct}}})})}
+    ],
+    tableHead:{en:['Country','Equity index','Policy rate','10Y yield','Read'], ko:['국가','주가지수','정책금리','10년물 금리','해석']},
+    plainTable:true,
+    table:{
+      en:[
+        ['Korea','KOSPI 7,080.92 (9/23)','3.00% (8/27 hike)','4.238% (8/27)','Tightening, exports at record'],
+        ['United States','S&P 500 7,706.03 (~9/22)','3.75–4.00% (9/16 hike)','4.683% (8/12 auction)','Hawkish surprise, oil > $100'],
+        ['Eurozone','Euro Stoxx 50 ~6,477 (8/5, dated)','2.50% (9/16 hike)','n/a (not verified)','ECB resumed hiking in Sept'],
+        ['United Kingdom','FTSE 100 ~10,908 (7/29, dated)','3.75% (9/17 hold, 6-3 vote)','n/a (not verified)','BoE holding, 3 MPC members want a hike'],
+        ['Japan','Nikkei 225 65,872.07 (~9/23)','1.25% (~9/25)','~2.93% (9/10)','Rate-hike expectations weigh'],
+        ['China · HK','Hang Seng 24,704.75 (~9/23)','n/a (not verified)','n/a (not verified)','Limited data — see tab'],
+      ],
+      ko:[
+        ['한국','코스피 7,080.92 (9/23)','3.00% (8/27 인상)','4.238% (8/27)','긴축 국면, 수출은 역대 최대'],
+        ['미국','S&P 500 7,706.03 (~9/22)','3.75–4.00% (9/16 인상)','4.683% (8/12 입찰)','매파적 서프라이즈, 유가 $100 상회'],
+        ['유로존','Euro Stoxx 50 ~6,477 (8/5, 시점 오래됨)','2.50% (9/16 인상)','해당 없음(미확인)','ECB 9월 다시 인상 전환'],
+        ['영국','FTSE 100 ~10,908 (7/29, 시점 오래됨)','3.75% (9/17 동결, 6-3)','해당 없음(미확인)','BoE 동결 유지, 위원 3명은 인상 요구'],
+        ['일본','닛케이225 65,872.07 (~9/23)','1.25% (~9/25)','~2.93% (9/10)','금리 인상 기대가 부담'],
+        ['중국 · 홍콩','항셍 24,704.75 (~9/23)','해당 없음(미확인)','해당 없음(미확인)','데이터 제한 — 해당 탭 참고'],
+      ]},
+    banner:{en:'Common thread: Korea, the US and the ECB all tightened this quarter while the BoE held only on a 6-3 split — a very different backdrop from the 2025 global easing cycle, with Brent above $100 on the prolonged US–Iran conflict.',
+            ko:'공통 흐름: 이번 분기 한국·미국·ECB가 모두 긴축으로 돌아섰고, BoE도 6-3 표결로 겨우 동결을 유지했습니다 — 2025년의 글로벌 완화 국면과는 크게 다른 배경이며, 美-이란 갈등 장기화로 브렌트유는 $100를 웃돌고 있습니다.'}
+  },
+  kr:{
+    flag:'🇰🇷',
+    head:{en:'Korea', ko:'한국'}, tag:{en:'KOSPI · KOSDAQ · KRW · KTB · BOK', ko:'코스피 · 코스닥 · 원화 · 국고채 · 한국은행'},
+    kpis:{
+      en:[
+        {l:'KOSPI', v:'7,080.92', c:'+0.90% · 9/23', s:true, key:'kospi'},
+        {l:'KOSDAQ', v:'844.48', c:'+1.21% · 9/23', s:true, key:'kosdaq'},
+        {l:'KRW / USD', v:'1,358.4', c:'Won strength · 9/23', s:null, key:'usdkrw'},
+        {l:'BOK Base Rate', v:'3.00%', c:'2nd straight hike · 8/27', s:false, key:'bok'},
+        {l:'3Y KTB Yield', v:'3.755%', c:'-6.1bp · 8/27', s:null, key:'ktb3'},
+        {l:'10Y KTB Yield', v:'4.238%', c:'-5.0bp · 8/27', s:null, key:'ktb10'},
+      ],
+      ko:[
+        {l:'코스피', v:'7,080.92', c:'+0.90% · 9/23', s:true, key:'kospi'},
+        {l:'코스닥', v:'844.48', c:'+1.21% · 9/23', s:true, key:'kosdaq'},
+        {l:'원/달러', v:'1,358.4', c:'원화 강세 · 9/23', s:null, key:'usdkrw'},
+        {l:'한국은행 기준금리', v:'3.00%', c:'2연속 인상 · 8/27', s:false, key:'bok'},
+        {l:'국고채 3년', v:'3.755%', c:'-6.1bp · 8/27', s:null, key:'ktb3'},
+        {l:'국고채 10년', v:'4.238%', c:'-5.0bp · 8/27', s:null, key:'ktb10'},
+      ]},
+    charts:[
+      {t:{en:'KOSPI', ko:'코스피'}, n:{en:'Closes on labeled dates · intraday all-time high 9,385.59 on 6/19', ko:'표기된 날짜 종가 · 6/19 장중 사상 최고 9,385.59'},
+       build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[{label:L.kospi,data:KOSPI_RAW,borderColor:COLORS[0],backgroundColor:COLORS[0]+'18',fill:true,tension:.25}]},
+         options:opts({y:{title:{display:true,text:L.yLvl}}})})},
+      {t:{en:'BOK Base Rate', ko:'한국은행 기준금리'}, n:{en:'%, hikes on 7/16 and 8/27', ko:'%, 7/16·8/27 인상'},
+       build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[{label:L.bok,data:KR_RATE,borderColor:COLORS[0],stepped:true}]},
+         options:opts({y:{title:{display:true,text:L.yPct}}})})},
+      {t:{en:'KRW / USD', ko:'원/달러 환율'}, n:{en:'Won per dollar — continued won strength (7/14 interpolated)', ko:'달러당 원화 — 원화 강세 흐름 (7/14는 보간 추정)'},
+       build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[{label:L.fx,data:FX,borderColor:COLORS[2],backgroundColor:COLORS[2]+'22',fill:true,tension:.25}]},
+         options:opts({y:{title:{display:true,text:L.yFx}}})})},
+      {t:{en:'3Y vs. 10Y KTB Yield', ko:'국고채 3년 vs 10년'}, n:{en:'Confirmed trading days only (not evenly spaced)', ko:'확인된 거래일만 표시 (등간격 아님)'},
+       build:(c,L)=>new Chart(c,{type:'line',data:{labels:KTB_DATES,datasets:[
+         {label:L.k3,data:KTB_3Y,borderColor:COLORS[0],tension:.25},
+         {label:L.k10,data:KTB_10Y,borderColor:COLORS[3],tension:.25}]},
+         options:opts({y:{title:{display:true,text:L.yPct}}})})}
+    ],
+    table:{
+      en:[
+        ['KOSPI Index','7,080.92','+0.90% (9/23)','up','kospi'],
+        ['KOSDAQ Index','844.48','+1.21% (9/23)','up','kosdaq'],
+        ['KRW / USD','1,358.4','Won strength continues (9/23)','mix','usdkrw'],
+        ['BOK Base Rate','3.00%','2nd straight hike (8/27)','mix','bok'],
+        ['3Y KTB Yield','3.755%','-6.1bp (8/27)','mix','ktb3'],
+        ['10Y KTB Yield','4.238%','-5.0bp (8/27)','mix','ktb10'],
+        ['Exports (Sep 1–20)','$71.4B','Record high','up',null],
+        ['Semiconductor Exports (Sep 1–20)','$34.1B','Record high','up',null],
+        ['Consumer Sentiment Index','106.6','+2.1pt (MoM)','up',null],
+      ],
+      ko:[
+        ['코스피 지수','7,080.92','+0.90% (9/23)','up','kospi'],
+        ['코스닥 지수','844.48','+1.21% (9/23)','up','kosdaq'],
+        ['원/달러 환율','1,358.4','원화 강세 지속 (9/23)','mix','usdkrw'],
+        ['한국은행 기준금리','3.00%','2연속 인상 (8/27)','mix','bok'],
+        ['국고채 3년물 금리','3.755%','-6.1bp (8/27)','mix','ktb3'],
+        ['국고채 10년물 금리','4.238%','-5.0bp (8/27)','mix','ktb10'],
+        ['수출 (9/1~20)','714억$','역대 최대','up',null],
+        ['반도체 수출 (9/1~20)','341억$','역대 최대','up',null],
+        ['소비자심리지수','106.6','+2.1pt (전월비)','up',null],
+      ]},
+    banner:null
+  },
+  us:{
+    flag:'🇺🇸',
+    head:{en:'United States', ko:'미국'}, tag:{en:'S&P 500 · Fed · Treasuries · VIX · Oil', ko:'S&P 500 · 연준 · 국채 · VIX · 유가'},
+    kpis:{
+      en:[
+        {l:'S&P 500', v:'7,706.03', c:'-0.75% · ~9/22', s:false, key:'spx'},
+        {l:'Fed Funds Rate', v:'3.75–4.00%', c:'+25bp hike · 9/16', s:false, key:'fed'},
+        {l:'10Y Treasury', v:'4.683%', c:'auction yield · 8/12', s:false, key:'us10'},
+        {l:'VIX', v:'15.13', c:'8/21 session', s:null, key:'vix'},
+        {l:'Brent Crude', v:'$104.32', c:'War risk premium · 9/25', s:false, key:'brent'},
+      ],
+      ko:[
+        {l:'S&P 500', v:'7,706.03', c:'-0.75% · ~9/22', s:false, key:'spx'},
+        {l:'연준 기준금리', v:'3.75–4.00%', c:'25bp 인상 · 9/16', s:false, key:'fed'},
+        {l:'美 10년물 국채', v:'4.683%', c:'입찰 금리 · 8/12', s:false, key:'us10'},
+        {l:'VIX', v:'15.13', c:'8/21 세션', s:null, key:'vix'},
+        {l:'브렌트유', v:'$104.32', c:'전쟁 리스크 · 9/25', s:false, key:'brent'},
+      ]},
+    charts:[
+      {t:{en:'S&P 500', ko:'S&P 500'}, n:{en:'Closes on labeled dates (5/6 interpolated)', ko:'표기된 날짜 종가 (5/6은 보간 추정)'},
+       build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[{label:L.snp,data:SNP_RAW,borderColor:COLORS[1],backgroundColor:COLORS[1]+'22',fill:true,tension:.25}]},
+         options:opts({y:{title:{display:true,text:L.yLvl}}})})},
+      {t:{en:'Fed Funds Target — midpoint', ko:'연준 목표금리 — 중간값'}, n:{en:'%, Apr–Aug range 3.50–3.75% (inferred), 9/16 hike to 3.75–4.00%', ko:'%, 4~8월 3.50~3.75%(추정) → 9/16 인상 후 3.75~4.00%'},
+       build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[{label:L.fed,data:US_RATE,borderColor:COLORS[3],stepped:true}]},
+         options:opts({y:{title:{display:true,text:L.yPct}}})})}
+    ],
+    table:{
+      en:[
+        ['S&P 500','7,706.03','-0.75% (~9/22)','down','spx'],
+        ['Fed Funds Rate','3.75–4.00%','+25bp (9/16 FOMC)','down','fed'],
+        ['10Y Treasury Yield','4.683%','Auction yield (8/12)','down','us10'],
+        ['VIX','15.13','8/21 session','mix','vix'],
+        ['Brent Crude','$104.32','Prolonged US–Iran war (9/25)','down','brent'],
+        ['Geopolitical Risk','US–Iran war ongoing','Backdrop for Sept FOMC hike','down',null],
+      ],
+      ko:[
+        ['S&P 500','7,706.03','-0.75% (~9/22)','down','spx'],
+        ['연준 기준금리','3.75–4.00%','+25bp (9/16 FOMC)','down','fed'],
+        ['美 10년물 국채금리','4.683%','입찰 금리 (8/12)','down','us10'],
+        ['VIX','15.13','8/21 세션','mix','vix'],
+        ['브렌트유','$104.32','美-이란 전쟁 장기화 (9/25)','down','brent'],
+        ['지정학 리스크','美-이란 전쟁 지속','9월 FOMC 인상 배경','down',null],
+      ]},
+    banner:{en:'The Fed raised rates in September after five straight holds — a hawkish turn driven by war-related inflation pressure.', ko:'연준은 5회 연속 동결 끝에 9월 금리를 인상했습니다 — 전쟁발 물가 압력에 따른 매파적 전환입니다.'}
+  },
+  eu:{
+    flag:'🇪🇺',
+    head:{en:'Eurozone', ko:'유로존'}, tag:{en:'Euro Stoxx 50 · ECB · Bund', ko:'유로스톡스50 · ECB · 독일국채'},
+    kpis:{
+      en:[
+        {l:'Euro Stoxx 50', v:'~6,477', c:'8/5 — dated', s:null, key:'stoxx50'},
+        {l:'ECB Deposit Rate', v:'2.50%', c:'+25bp hike · 9/16', s:false, key:'ecb'},
+        {l:'EUR / USD', v:'n/a', c:'not verified', s:null, key:'eurusd'},
+      ],
+      ko:[
+        {l:'유로스톡스50', v:'~6,477', c:'8/5 — 시점 오래됨', s:null, key:'stoxx50'},
+        {l:'ECB 예금금리', v:'2.50%', c:'25bp 인상 · 9/16', s:false, key:'ecb'},
+        {l:'EUR / USD', v:'해당 없음', c:'미확인', s:null, key:'eurusd'},
+      ]},
+    charts:[
+      {t:{en:'ECB Deposit Facility Rate', ko:'ECB 예금금리'}, n:{en:'%, cut through June then hiked twice (Sep)', ko:'%, 6월까지 인하 후 9월 두 차례 인상'},
+       build:(c,L)=>new Chart(c,{type:'line',data:{labels:ECB_DATES,datasets:[{label:L.ecb,data:ECB_RATE,borderColor:COLORS[2],stepped:true}]},
+         options:opts({y:{title:{display:true,text:L.yPct}}})})}
+    ],
+    table:{
+      en:[
+        ['Euro Stoxx 50','~6,477','8/5 close (dated)','mix','stoxx50'],
+        ['ECB Deposit Facility Rate','2.50%','+25bp hike (9/16, effective)','down','ecb'],
+        ['EUR / USD','n/a','Not verified this edit','mix','eurusd'],
+      ],
+      ko:[
+        ['유로스톡스50','~6,477','8/5 종가 (시점 오래됨)','mix','stoxx50'],
+        ['ECB 예금금리','2.50%','25bp 인상 (9/16 발효)','down','ecb'],
+        ['EUR / USD','해당 없음','이번 작업에서 미확인','mix','eurusd'],
+      ]},
+    banner:{en:'ECB history (deposit rate): 2.75% (2/5) → 2.50% (3/12) → 2.25% (4/23, 6/17) → 2.50% (9/16) — a cutting cycle that reversed into a hike in September. Euro Stoxx 50 and EUR/USD could not be pinned to a September date with search alone; the live-data script below can fill these in automatically.', ko:'ECB 예금금리 추이: 2.75%(2/5) → 2.50%(3/12) → 2.25%(4/23, 6/17) → 2.50%(9/16) — 인하 사이클이 9월 인상으로 전환됐습니다. 유로스톡스50과 EUR/USD는 검색만으로 9월 시점 수치를 확정하지 못했습니다 — 아래 실시간 데이터 스크립트를 연결하면 자동으로 채워집니다.'}
+  },
+  uk:{
+    flag:'🇬🇧',
+    head:{en:'United Kingdom', ko:'영국'}, tag:{en:'FTSE 100 · BoE · Gilts', ko:'FTSE 100 · BoE · 영국국채'},
+    kpis:{
+      en:[
+        {l:'FTSE 100', v:'~10,908', c:'7/29 — dated', s:null, key:'ftse100'},
+        {l:'BoE Bank Rate', v:'3.75%', c:'6th straight hold · 9/17 (6-3)', s:null, key:'boe'},
+        {l:'GBP / USD', v:'n/a', c:'not verified', s:null, key:'gbpusd'},
+      ],
+      ko:[
+        {l:'FTSE 100', v:'~10,908', c:'7/29 — 시점 오래됨', s:null, key:'ftse100'},
+        {l:'BoE 기준금리', v:'3.75%', c:'6회 연속 동결 · 9/17 (6-3)', s:null, key:'boe'},
+        {l:'GBP / USD', v:'해당 없음', c:'미확인', s:null, key:'gbpusd'},
+      ]},
+    charts:[
+      {t:{en:'BoE Bank Rate', ko:'BoE 기준금리'}, n:{en:'%, held at 3.75% every meeting since the Dec-2025 cut', ko:'%, 2025년 12월 인하 이후 매 회의 3.75% 동결'},
+       build:(c,L)=>new Chart(c,{type:'line',data:{labels:BOE_DATES,datasets:[{label:L.boe,data:BOE_RATE,borderColor:COLORS[3],stepped:true}]},
+         options:opts({y:{title:{display:true,text:L.yPct},suggestedMin:3,suggestedMax:4.25}})})}
+    ],
+    table:{
+      en:[
+        ['FTSE 100','~10,908','7/29 close (dated), near Feb-27 record','mix','ftse100'],
+        ['BoE Bank Rate','3.75%','Hold, 6-3 vote (9/17) — 3 members wanted +25bp','mix','boe'],
+        ['GBP / USD','n/a','Not verified this edit','mix','gbpusd'],
+      ],
+      ko:[
+        ['FTSE 100','~10,908','7/29 종가 (시점 오래됨), 2/27 최고치 근접','mix','ftse100'],
+        ['BoE 기준금리','3.75%','동결, 6-3 표결 (9/17) — 위원 3명은 25bp 인상 요구','mix','boe'],
+        ['GBP / USD','해당 없음','이번 작업에서 미확인','mix','gbpusd'],
+      ]},
+    banner:{en:'BoE has held Bank Rate at 3.75% for six straight meetings since the December 2025 cut, but the 9/17 vote split 6-3, and the MPC statement flagged that a prolonged Middle East conflict could force a hike. FTSE 100 could not be pinned to a September date with search alone.', ko:'BoE는 2025년 12월 인하 이후 6회 연속 3.75% 동결을 유지했지만, 9/17 표결은 6-3으로 갈렸고 금통위 성명은 중동 분쟁 장기화 시 인상 가능성을 시사했습니다. FTSE 100은 검색만으로 9월 시점 수치를 확정하지 못했습니다.'}
+  },
+  jp:{
+    flag:'🇯🇵',
+    head:{en:'Japan', ko:'일본'}, tag:{en:'Nikkei 225 · BOJ · JGB', ko:'닛케이225 · 일본은행 · 국채'},
+    kpis:{
+      en:[
+        {l:'Nikkei 225', v:'65,872.07', c:'~9/23 snapshot', s:null, key:'nikkei'},
+        {l:'BOJ Policy Rate', v:'1.25%', c:'as reported ~9/25', s:null, key:'boj'},
+        {l:'10Y JGB Yield', v:'~2.93%', c:'9/10', s:false, key:'jgb10'},
+        {l:'Nikkei daily move', v:'-2.19%', c:'9/11 · rate-hike worries', s:false, key:null},
+      ],
+      ko:[
+        {l:'닛케이225', v:'65,872.07', c:'~9/23 스냅샷', s:null, key:'nikkei'},
+        {l:'일본은행 정책금리', v:'1.25%', c:'9/25경 보도 기준', s:null, key:'boj'},
+        {l:'10년 국채(JGB) 금리', v:'~2.93%', c:'9/10', s:false, key:'jgb10'},
+        {l:'닛케이 일간 변동', v:'-2.19%', c:'9/11 · 금리인상 우려', s:false, key:null},
+      ]},
+    charts:null,
+    table:{
+      en:[
+        ['Nikkei 225','65,872.07','~9/23 snapshot','mix','nikkei'],
+        ['BOJ Policy Rate','1.25%','As reported ~9/25','mix','boj'],
+        ['10Y JGB Yield','~2.93%','9/10, ahead of 9/17–18 BOJ meeting','down','jgb10'],
+        ['Nikkei 225 daily move','-2.19%','9/11 — Fed & BOJ hike expectations','down',null],
+        ['Manufacturer Sentiment','Improved','2nd straight month (Sep)','up',null],
+      ],
+      ko:[
+        ['닛케이225','65,872.07','~9/23 스냅샷','mix','nikkei'],
+        ['일본은행 정책금리','1.25%','9/25경 보도 기준','mix','boj'],
+        ['일본 10년 국채금리','~2.93%','9/10, 9/17~18 금정위 직전','down','jgb10'],
+        ['닛케이225 일간 변동','-2.19%','9/11 — 연준·BOJ 인상 기대','down',null],
+        ['제조업 체감경기','개선','9월 2개월 연속','up',null],
+      ]},
+    banner:{en:'Trend chart pending: I could not confirm a clean daily Nikkei/JGB series, so this tab shows dated point values only. The fetch script below can pull a real Nikkei series from Yahoo Finance automatically.', ko:'추세 차트 보류: 일관된 닛케이·JGB 일별 시계열을 확인하지 못해, 기준일이 붙은 개별 수치만 표시했습니다. 아래 수집 스크립트를 연결하면 Yahoo Finance에서 실제 닛케이 시계열을 자동으로 가져옵니다.'}
+  },
+  cn:{
+    flag:'🇨🇳',
+    head:{en:'China · Hong Kong', ko:'중국 · 홍콩'}, tag:{en:'Hang Seng · Shanghai Composite · PMI', ko:'항셍 · 상하이종합 · PMI'},
+    kpis:{
+      en:[
+        {l:'Hang Seng', v:'24,704.75', c:'~9/23 snapshot', s:null, key:'hsi'},
+        {l:'Shanghai Composite', v:'3,949', c:'4/1 close — dated', s:null, key:'shcomp'},
+        {l:'NBS Non-Mfg PMI', v:'49.5', c:'Feb 2026 — dated', s:false, key:'cn_pmi'},
+      ],
+      ko:[
+        {l:'항셍지수', v:'24,704.75', c:'~9/23 스냅샷', s:null, key:'hsi'},
+        {l:'상하이종합', v:'3,949', c:'4/1 종가 — 시점 오래됨', s:null, key:'shcomp'},
+        {l:'中 비제조업 PMI(NBS)', v:'49.5', c:'2026.2월 — 시점 오래됨', s:false, key:'cn_pmi'},
+      ]},
+    charts:null,
+    table:{
+      en:[
+        ['Hang Seng Index','24,704.75','~9/23 snapshot','mix','hsi'],
+        ['Shanghai Composite','3,949','4/1 close (dated)','mix','shcomp'],
+        ['NBS Non-Manufacturing PMI','49.5','Feb 2026 (dated) — below 50','down','cn_pmi'],
+      ],
+      ko:[
+        ['항셍지수','24,704.75','~9/23 스냅샷','mix','hsi'],
+        ['상하이종합지수','3,949','4/1 종가 (시점 오래됨)','mix','shcomp'],
+        ['中 비제조업 PMI(국가통계국)','49.5','2026.2월 (시점 오래됨) — 50 하회','down','cn_pmi'],
+      ]},
+    banner:{en:'Limited data: the Shanghai Composite and PMI prints here are months older than the other tabs. A September China dataset (PMI, PBoC LPR, CSI 300) is the next thing to add.', ko:'데이터 제한: 상하이종합과 PMI는 다른 탭보다 몇 달 오래된 수치입니다. 9월 기준 중국 데이터(PMI, LPR, CSI300) 보강이 다음 과제입니다.'}
+  }
 };
 
-let charts = {};
-let sortState = {key:null, dir:1};
+/* ---------------- live data helpers ---------------- */
+function liveFor(key){
+  if (!key || !LIVE || !LIVE.series || !LIVE.series[key]) return null;
+  return LIVE.series[key];
+}
+function fmtNum(n){
+  if (n === null || n === undefined) return 'n/a';
+  const abs = Math.abs(n);
+  const dec = abs >= 1000 ? 2 : abs >= 10 ? 3 : 4;
+  return n.toLocaleString(undefined, {maximumFractionDigits: dec});
+}
+function pctChange(last, prev){
+  if (prev === null || prev === undefined || prev === 0) return null;
+  return ((last - prev) / prev) * 100;
+}
+
+/* ---------------- rendering ---------------- */
+function opts(scales){
+  return {responsive:true, animation:false, scales, plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}}};
+}
 
 function renderStatic(){
   const s = STR[LANG];
   document.getElementById('htmlRoot').lang = LANG;
   document.getElementById('backLink').textContent = s.back;
-  document.getElementById('langToggle').textContent = s.toggleShows;
+  document.getElementById('langToggle').textContent = s.toggle;
   document.getElementById('t_kicker').textContent = s.kicker;
   document.getElementById('t_title').textContent = s.title;
   document.getElementById('t_desc').textContent = s.desc;
-  document.getElementById('t_updated').textContent = s.updated;
-  document.getElementById('t_lbl1').textContent = s.lbl1;
-  document.getElementById('t_title1').textContent = s.title1;
-  document.getElementById('t_lbl2').textContent = s.lbl2;
-  document.getElementById('t_title2').textContent = s.title2;
-  document.getElementById('t_lbl3').textContent = s.lbl3;
-  document.getElementById('t_title3').textContent = s.title3;
-  document.getElementById('c1_title').textContent = s.c1t;
-  document.getElementById('c1_note').textContent = s.c1n;
-  document.getElementById('c2_title').textContent = s.c2t;
-  document.getElementById('c2_note').textContent = s.c2n;
-  document.getElementById('c3_title').textContent = s.c3t;
-  document.getElementById('c3_note').textContent = s.c3n;
-  document.getElementById('c4_title').textContent = s.c4t;
-  document.getElementById('c4_note').textContent = s.c4n;
-  s.th.forEach((t,i)=> document.getElementById('th'+i).textContent = t);
-  document.getElementById('t_footPortfolio').textContent = s.footPortfolio;
+  document.getElementById('t_updated_text').textContent = s.updated;
+  const badge = document.getElementById('liveBadge');
+  if (LIVE && LIVE.generated_utc) {
+    badge.textContent = s.live; badge.className = 'live';
+  } else {
+    badge.textContent = s.static; badge.className = 'static';
+  }
+  document.getElementById('t_footPortfolio').textContent = s.portfolio;
   document.getElementById('t_footnote').innerHTML = s.footnote;
+  document.getElementById('tabs').innerHTML = TAB_IDS.map(id =>
+    `<button type="button" class="tab ${id===TAB?'active':''}" data-tab="${id}"><span class="flag">${V[id].flag}</span>${s.tabs[id]}</button>`).join('');
 }
 
-function renderKPIs(){
-  document.getElementById('kpiRow').innerHTML = KPIS[LANG].map(k=>`
-    <div class="kpi-card">
-      <div class="kpi-label">${k.label}</div>
-      <div class="kpi-value">${k.value}</div>
-      <div class="kpi-change ${k.pos===true?'pos':k.pos===false?'neg':'neu'}">${k.change}</div>
-    </div>`).join('');
+function kpiCardHtml(k){
+  const live = liveFor(k.key);
+  let value = k.v, change = k.c, dotClass = null;
+  if (live) {
+    value = fmtNum(live.last);
+    const pct = pctChange(live.last, live.prev);
+    change = (pct !== null ? (pct >= 0 ? '+' : '') + pct.toFixed(2) + '% · ' : '') + (live.asof || '');
+    dotClass = live.stale ? 'stale' : (live.src === 'manual' ? 'manual' : 'live');
+  }
+  const sentiment = live ? (pctChange(live.last, live.prev) >= 0 ? true : false) : k.s;
+  const dot = dotClass ? `<span class="kpi-src ${dotClass}" title="${dotClass}"></span>` : '';
+  return `<div class="kpi-card">${dot}<div class="kpi-label">${k.l}</div><div class="kpi-value">${value}</div><div class="kpi-change ${sentiment===true?'pos':sentiment===false?'neg':'neu'}">${change}</div></div>`;
 }
 
-function renderTable(rows){
-  document.querySelector('#dataTable tbody').innerHTML = rows.map(r=>{
-    const label = IMPACT_LABEL[LANG][r.impact];
-    const cls = 'impact-'+r.impact;
-    const tagCls = r.region==='dom'?'dom':'intl';
-    const regionLabel = REGION_LABEL[LANG][r.region];
-    return `<tr>
-      <td><span class="tag ${tagCls}">${regionLabel}</span></td>
-      <td>${r.name}</td><td class="mono">${r.value}</td><td class="mono">${r.change}</td>
-      <td class="${cls}">${label}</td>
-    </tr>`;
-  }).join('');
+function tableRowHtml(r, plain){
+  const s = STR[LANG];
+  if (plain) {
+    return '<tr>' + r.map((x,i)=>`<td class="${i>0&&i<4?'mono':''}">${x}</td>`).join('') + '</tr>';
+  }
+  const [n,v,c,imp,key] = r;
+  const live = liveFor(key);
+  let value = v, change = c;
+  if (live) {
+    value = fmtNum(live.last);
+    const pct = pctChange(live.last, live.prev);
+    change = (pct !== null ? (pct >= 0 ? '+' : '') + pct.toFixed(2) + '% ' : '') + '(' + (live.asof || '') + ')';
+  }
+  return `<tr><td>${n}</td><td class="mono">${value}</td><td class="mono">${change}</td><td class="impact-${imp}">${s.impact[imp]}</td></tr>`;
 }
 
-document.querySelectorAll('#dataTable th').forEach(th=>{
-  th.addEventListener('click', ()=>{
-    const k = th.dataset.k;
-    sortState.dir = (sortState.key===k) ? -sortState.dir : 1;
-    sortState.key = k;
-    renderTable([...TABLE[LANG]].sort((a,b)=>(a[k]>b[k]?1:-1)*sortState.dir));
-  });
-});
-
-function baseOpts(extra={}){
-  return Object.assign({responsive:true, animation:false,
-    plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}}}, extra);
+function renderTable(rows, head, plain){
+  const body = rows.map(r => tableRowHtml(r, plain)).join('');
+  return `<div class="table-card"><table><thead><tr>${head.map((h,i)=>`<th data-col="${i}">${h}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
 }
 
-function buildCharts(){
-  const L = CHART_LBL[LANG];
-
-  charts.idx = new Chart(document.getElementById('idxChart'), {
-    type:'line',
-    data:{labels:DATES, datasets:[
-      {label:L.kospi, data:KOSPI_NORM, borderColor:COLORS[0], backgroundColor:COLORS[0]+'18', tension:.25},
-      {label:L.snp, data:SNP_NORM, borderColor:COLORS[1], backgroundColor:COLORS[1]+'18', tension:.25}
-    ]},
-    options: baseOpts({scales:{y:{title:{display:true,text:L.yIdx}}}})
-  });
-
-  charts.rate = new Chart(document.getElementById('rateChart'), {
-    type:'line',
-    data:{labels:DATES, datasets:[
-      {label:L.bok, data:KR_RATE, borderColor:COLORS[0], stepped:true},
-      {label:L.fed, data:US_RATE, borderColor:COLORS[1], stepped:true}
-    ]},
-    options: baseOpts({scales:{y:{title:{display:true,text:L.yPct}}}})
-  });
-
-  charts.fx = new Chart(document.getElementById('fxChart'), {
-    type:'line',
-    data:{labels:DATES, datasets:[{label:L.fx, data:FX, borderColor:COLORS[2], backgroundColor:COLORS[2]+'22', fill:true, tension:.25}]},
-    options: baseOpts({scales:{y:{title:{display:true,text:L.yFx}}}})
-  });
-
-  charts.ktb = new Chart(document.getElementById('ktbChart'), {
-    type:'line',
-    data:{labels:KTB_DATES, datasets:[
-      {label:L.k3, data:KTB_3Y, borderColor:COLORS[0], tension:.25},
-      {label:L.k10, data:KTB_10Y, borderColor:COLORS[3], tension:.25}
-    ]},
-    options: baseOpts({scales:{y:{title:{display:true,text:L.yPct}}}})
-  });
+function attachSort(cfg){
+  const rows = cfg.table[LANG];
+  document.querySelectorAll('#view th').forEach(th => th.addEventListener('click', () => {
+    const col = +th.dataset.col;
+    sortState.dir = (sortState.col===col) ? -sortState.dir : 1;
+    sortState.col = col;
+    const sorted = [...rows].sort((a,b)=> (a[col]>b[col]?1:-1)*sortState.dir);
+    const holder = document.querySelector('#view .table-card');
+    const head = cfg.plainTable ? cfg.tableHead[LANG] : STR[LANG].th;
+    holder.outerHTML = renderTable(sorted, head, !!cfg.plainTable);
+    attachSort(cfg);
+  }));
 }
 
-function updateChartLabels(){
-  const L = CHART_LBL[LANG];
-  charts.idx.data.datasets[0].label = L.kospi;
-  charts.idx.data.datasets[1].label = L.snp;
-  charts.idx.options.scales.y.title.text = L.yIdx;
-  charts.idx.update();
+function renderView(){
+  liveCharts.forEach(c => c.destroy()); liveCharts = [];
+  const s = STR[LANG], cfg = V[TAB], L = CH[LANG];
+  let html = `<div class="country-head"><h2>${cfg.flag} ${cfg.head[LANG]}</h2><span class="tagline">${cfg.tag[LANG]}</span></div>`;
+  html += `<div class="section-label">${s.snap}</div><div class="section-title">${s.keyInd}</div><div class="kpi-row">` +
+    cfg.kpis[LANG].map(kpiCardHtml).join('') + '</div>';
+  if (cfg.charts) {
+    html += `<div class="section-label">${s.trends}</div><div class="section-title">${s.trendTitle}</div><div class="chart-row">` +
+      cfg.charts.map((c,i)=>`<div class="chart-card"><h3>${c.t[LANG]}</h3><div class="note">${c.n[LANG]}</div><canvas id="ch${i}"></canvas></div>`).join('') + '</div>';
+  }
+  html += `<div class="section-label">${s.detail}</div><div class="section-title">${s.sumTitle}</div>`;
+  const head = cfg.plainTable ? cfg.tableHead[LANG] : s.th;
+  html += renderTable(cfg.table[LANG], head, !!cfg.plainTable);
+  if (cfg.banner) html += `<div class="banner">${cfg.banner[LANG]}</div>`;
+  document.getElementById('view').innerHTML = html;
+  if (cfg.charts) cfg.charts.forEach((c,i) => liveCharts.push(c.build(document.getElementById('ch'+i), L)));
+  sortState = {col:null, dir:1};
+  attachSort(cfg);
+}
 
-  charts.rate.data.datasets[0].label = L.bok;
-  charts.rate.data.datasets[1].label = L.fed;
-  charts.rate.options.scales.y.title.text = L.yPct;
-  charts.rate.update();
-
-  charts.fx.data.datasets[0].label = L.fx;
-  charts.fx.options.scales.y.title.text = L.yFx;
-  charts.fx.update();
-
-  charts.ktb.data.datasets[0].label = L.k3;
-  charts.ktb.data.datasets[1].label = L.k10;
-  charts.ktb.options.scales.y.title.text = L.yPct;
-  charts.ktb.update();
+function setTab(id){
+  if (TAB_IDS.indexOf(id) === -1) return;
+  TAB = id;
+  try { history.replaceState(null, '', '#' + id); } catch(e) {}
+  renderStatic();
+  renderView();
 }
 
 function toggleLang(){
   LANG = (LANG === 'en') ? 'ko' : 'en';
-  localStorage.setItem('dashLang', LANG);
+  try { localStorage.setItem('dashLang', LANG); } catch(e) {}
   renderStatic();
-  renderKPIs();
-  sortState = {key:null, dir:1};
-  renderTable(TABLE[LANG]);
-  updateChartLabels();
+  renderView();
 }
 
+/* event delegation — robust against any single element being re-created */
+document.getElementById('tabs').addEventListener('click', function(e){
+  const btn = e.target.closest('.tab');
+  if (btn && btn.dataset.tab) setTab(btn.dataset.tab);
+});
+document.getElementById('langToggle').addEventListener('click', toggleLang);
+window.addEventListener('hashchange', function(){
+  const h = (location.hash || '').replace('#','');
+  if (TAB_IDS.indexOf(h) !== -1 && h !== TAB) setTab(h);
+});
+
 renderStatic();
-renderKPIs();
-renderTable(TABLE[LANG]);
-buildCharts();
+renderView();
+
+/* try to load live data (fails silently on file:// or if data/macro.json is absent) */
+fetch('data/macro.json', {cache:'no-store'}).then(r => r.ok ? r.json() : null).then(j => {
+  if (j && j.series && Object.keys(j.series).length) {
+    LIVE = j;
+    renderStatic();
+    renderView();
+  }
+}).catch(function(){ /* static snapshot stays in place */ });
 </script>
 </body>
 </html>
