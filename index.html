@@ -209,13 +209,6 @@
   .skill-col li{padding:9px 0; border-bottom:1px solid var(--rule-soft); color:var(--ink-soft); font-size:14.5px;}
   .skill-col li:last-child{border-bottom:none;}
 
-  .contact-box{
-    background:var(--navy); color:var(--paper); padding:60px 52px;
-    display:flex; justify-content:space-between; align-items:center; gap:30px; flex-wrap:wrap;
-  }
-  .contact-box h2{color:#f4f1e8;}
-  .contact-box p{color:#b7c0cf; max-width:48ch; margin:0;}
-  .contact-links{display:flex; gap:14px; flex-wrap:wrap;}
   footer{padding:36px 0; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
   footer a{color:var(--ink-soft); border-bottom:1px solid var(--rule);}
@@ -237,8 +230,7 @@
       <li><a href="#research"><span class="num">03</span><span id="t-nav-research">Research</span></a></li>
       <li><a href="#casestudies"><span class="num">04</span><span id="t-nav-casestudies">Case Studies</span></a></li>
       <li><a href="#skills"><span class="num">05</span><span id="t-nav-skills">Skills</span></a></li>
-      <li><a href="#contact"><span class="num">06</span><span id="t-nav-contact">Contact</span></a></li>
-      <li><a href="dashboard.html"><span class="num">07</span><span id="t-nav-dashboard">Dashboard</span></a></li>
+      <li><a href="dashboard.html"><span class="num">06</span><span id="t-nav-dashboard">Dashboard</span></a></li>
     </ul>
   </nav>
 </header>
@@ -485,18 +477,6 @@
   </div>
 </section>
 
-<section class="alt" id="contact">
-  <div class="wrap">
-    <div class="contact-box">
-      <div>
-        <h2 id="t-contact-h2">Let's talk</h2>
-        <p id="t-contact-p">Open to research, data-strategy, and analytics roles.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <footer class="wrap">
   <span id="t-footer">© 2026 Li Yu. All rights reserved.</span>
   <span><a href="https://github.com/ly186481" target="_blank" rel="noopener">github.com/ly186481</a></span>
@@ -523,7 +503,6 @@ const I18N = {
   't-nav-research': { en: `Research`, ko: `연구`, html: false },
   't-nav-casestudies': { en: `Case Studies`, ko: `케이스 스터디`, html: false },
   't-nav-skills': { en: `Skills`, ko: `역량`, html: false },
-  't-nav-contact': { en: `Contact`, ko: `연락처`, html: false },
   't-nav-dashboard': { en: `Dashboard`, ko: `대시보드`, html: false },
   't-eyebrow': { en: `Economics · Data Governance · Strategy`, ko: `경제학 · 데이터 거버넌스 · 전략`, html: false },
   't-h1': { en: `Not just the numbers — reading data from <em>every angle</em>.`, ko: `숫자만이 아니라, <em>다각도</em>에서 데이터를 읽습니다.`, html: true },
@@ -632,9 +611,6 @@ const I18N = {
   't-sk4-li1': { en: `Dashboard design`, ko: `대시보드 설계`, html: false },
   't-sk4-li2': { en: `Policy memos`, ko: `정책 메모`, html: false },
   't-sk4-li3': { en: `Research writing`, ko: `연구 문서 작성`, html: false },
-  't-contact-h2': { en: `Let's talk`, ko: `함께 이야기해요`, html: false },
-  't-contact-p': { en: `Open to research, data-strategy, and analytics roles.`, ko: `리서치, 데이터 전략, 애널리틱스 관련 포지션에 열려 있습니다.`, html: false },
-  't-emailbtn': { en: `Email me`, ko: `이메일 보내기`, html: false },
   't-footer': { en: `© 2026 Li Yu. All rights reserved.`, ko: `© 2026 Li Yu. All rights reserved.`, html: false },
 };
 
