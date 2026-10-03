@@ -84,6 +84,8 @@ tr:hover td{background:#faf8f2;}
 
 .banner{margin-top:18px;padding:12px 16px;background:#f2ede0;border-left:3px solid var(--gold);border-radius:6px;
   font-family:'JetBrains Mono',monospace;font-size:11px;color:#5d5137;line-height:1.7;}
+.disclaimer{margin-top:14px;padding:0 2px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--sub);
+  text-align:center;line-height:1.6;}
 .footnote{margin-top:28px;padding:16px 18px;background:#f2ede0;border:1px dashed var(--gold);border-radius:var(--radius);
   font-family:'JetBrains Mono',monospace;font-size:11px;color:#5d5137;line-height:1.7;}
 .footnote b{color:#4a4025;}
@@ -118,6 +120,7 @@ footer.page a{color:var(--gold-dark);text-decoration:none;}
   <div class="tabs" id="tabs"></div>
   <div id="view"></div>
   <div class="footnote" id="t_footnote"></div>
+  <div class="disclaimer" id="t_disclaimer"></div>
   <footer class="page">
     © 2026 Li Yu · <a href="index.html" id="t_footPortfolio">Portfolio</a>
   </footer>
@@ -150,6 +153,7 @@ const STR = {
     th:['Indicator','Value','As of / Change','Market Read'],
     impact:{up:'Bullish', down:'Bearish', mix:'Mixed'},
     portfolio:'Portfolio',
+    disclaimer:'This page is for informational and portfolio-demonstration purposes only. It is not investment advice, and figures may be delayed, estimated, or inaccurate — verify with an official source before relying on them for any decision.',
     footnote:'<b>METHODOLOGY —</b> The baseline numbers below are not pulled live; they were cross-checked by hand against public market reports (search tools only, no API keys at authoring time). Sources: Korea Exchange (KRX), KB Securities and Mirae Asset market notes, SBS Biz bond-desk reports, Yonhap/Newsis, kbthink (KB Financial Group Research), KORI Insight, ECB, Bank of England, Trading Economics and Capital.com. Every card shows its own as-of date; older prints are labeled as dated. <b>The May S&amp;P 500 print, the July KRW/USD print and the Apr–Aug Fed level are interpolated estimates.</b> If this page is paired with the included scripts/fetch_data.py GitHub Action (reading Yahoo Finance, FRED, BOK ECOS, ECB and Bank of England APIs into data/macro.json), the green "LIVE DATA" badge above and the dots next to each card show when real-time values are in use instead — a gray dot means a figure is still the static baseline.'
   },
   ko:{
@@ -165,6 +169,7 @@ const STR = {
     th:['지표','값','기준일 / 변동','시장 해석'],
     impact:{up:'상승요인', down:'하락요인', mix:'혼조'},
     portfolio:'포트폴리오',
+    disclaimer:'이 페이지는 정보 제공 및 포트폴리오 시연 목적으로만 제공되며, 투자 조언이 아닙니다. 수치는 지연·추정되거나 부정확할 수 있으니, 실제 의사결정에 활용하기 전 공식 출처로 확인하시기 바랍니다.',
     footnote:'<b>방법론 —</b> 아래 기준값은 실시간으로 받아온 것이 아니라, 검색 도구만으로 공개된 시장 보도를 교차 확인해 수기로 채운 값입니다(작성 시점 API 연동 없음). 출처: 한국거래소(KRX), KB증권·미래에셋증권 마켓 리포트, SBS Biz 채권시황, 연합뉴스·뉴시스, kbthink(KB금융지주 리서치), KORI Insight, ECB, Bank of England, Trading Economics·Capital.com. 각 카드에 기준일을 표기했으며, 오래된 수치는 "시점 오래됨"으로 표시했습니다. <b>5월 S&amp;P500, 7월 원/달러, 4~8월 Fed 금리는 추정치</b>입니다. 이 페이지를 함께 제공한 scripts/fetch_data.py GitHub Action(Yahoo Finance·FRED·한국은행 ECOS·ECB·Bank of England API를 data/macro.json으로 수집)과 연동하면, 위 초록색 "실시간 데이터" 배지와 각 카드 옆 점이 실데이터 사용 여부를 보여줍니다 — 회색 점은 아직 정적 기준값이라는 뜻입니다.'
   }
 };
@@ -527,6 +532,7 @@ function renderStatic(){
   }
   document.getElementById('t_footPortfolio').textContent = s.portfolio;
   document.getElementById('t_footnote').innerHTML = s.footnote;
+  document.getElementById('t_disclaimer').textContent = s.disclaimer;
   document.getElementById('tabs').innerHTML = TAB_IDS.map(id =>
     `<button type="button" class="tab ${id===TAB?'active':''}" data-tab="${id}"><span class="flag">${V[id].flag}</span>${s.tabs[id]}</button>`).join('');
 }
