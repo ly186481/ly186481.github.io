@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>경제 한입 — 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF6EC; --paper:#FFFFFF; --ink:#2B1B2E; --ink-soft:#6B5B6E;
+  --honey:#E8A33D; --honey-deep:#C97F1E; --sage:#6B8F71; --rust:#C4604A;
+  --line:#E9DCC8; --radius:18px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--cream);}
+body{
+  font-family:'Gowun Dodum','Noto Sans KR',sans-serif;
+  color:var(--ink);
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  -webkit-text-size-adjust:100%;
+}
+a{color:inherit;}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px 60px;}
+
+.topnav{display:flex;justify-content:flex-start;padding:18px 20px 0;}
+.topnav a{font-size:12.5px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);
+  padding:7px 14px;border-radius:20px;}
+.topnav a:hover{border-color:var(--honey);color:var(--ink);}
+
+.masthead{padding:30px 20px 34px;text-align:center;}
+.mark{
+  width:58px;height:58px;margin:0 auto 18px;border-radius:50%;
+  background:var(--honey);display:flex;align-items:center;justify-content:center;
+  font-size:26px;box-shadow:0 6px 0 var(--honey-deep);
+}
+.wordmark{font-family:'Gowun Batang',serif;font-weight:700;font-size:30px;letter-spacing:.02em;margin:0;}
+.tagline{font-family:'Gowun Batang',serif;font-style:italic;font-size:14.5px;color:var(--ink-soft);
+  margin-top:14px;line-height:1.7;}
+
+.subscribe-row{text-align:center;margin-top:22px;}
+.btn{
+  font-family:'Gowun Dodum',sans-serif;font-size:14px;padding:12px 26px;border-radius:30px;
+  border:none;cursor:pointer;text-decoration:none;display:inline-block;
+}
+.btn.primary{background:var(--honey);color:var(--ink);font-weight:700;box-shadow:0 4px 0 var(--honey-deep);}
+
+.section-label{font-family:'Gowun Dodum',sans-serif;font-size:11.5px;letter-spacing:.08em;color:var(--honey-deep);
+  text-transform:uppercase;margin:44px 0 16px;text-align:center;}
+
+.issue-card{
+  background:var(--paper);border-radius:var(--radius);padding:24px 26px;margin-bottom:16px;
+  display:block;text-decoration:none;color:var(--ink);box-shadow:0 2px 0 var(--line);
+  transition:transform .15s ease;
+}
+.issue-card:hover{transform:translateY(-2px);}
+.issue-card .no{font-family:'Gowun Dodum',sans-serif;font-size:11.5px;color:var(--honey-deep);
+  font-weight:700;letter-spacing:.04em;}
+.issue-card .date{font-size:11.5px;color:var(--ink-soft);margin-left:8px;}
+.issue-card h3{font-family:'Gowun Batang',serif;font-size:19px;margin:8px 0 8px;line-height:1.5;}
+.issue-card p{font-size:13.5px;color:var(--ink-soft);margin:0;line-height:1.7;}
+.issue-card .read{font-size:12.5px;color:var(--honey-deep);margin-top:12px;font-weight:700;}
+
+footer{margin-top:40px;text-align:center;font-size:11.5px;color:var(--ink-soft);line-height:1.8;}
+footer .brand{font-family:'Gowun Batang',serif;margin-bottom:4px;}
+
+@media (max-width:480px){
+  .masthead{padding:24px 16px 26px;}
+  .wordmark{font-size:26px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="topnav">
+    <a href="index.html">&larr; 포트폴리오로</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mark">🍪</div>
+    <p class="wordmark">경제 한입</p>
+    <p class="tagline">경제, 처음이라도 괜찮아요.<br>하루 한입씩 삼키다 보면 어느새 소화됩니다.</p>
+  </div>
+
+  <div class="subscribe-row">
+    <a class="btn primary" href="https://econbite.stibee.com/" target="_blank" rel="noopener">구독하기</a>
+  </div>
+
+  <div class="section-label">지난 호 보기</div>
+
+  <a class="issue-card" href="econbite_2.html">
+    <span class="no">2호</span><span class="date">2026년 10월 첫째 주</span>
+    <h3>환율이 오르면 좋은 거예요, 나쁜 거예요?</h3>
+    <p>환율 상승·하락이 누구에게 유리한지 입장별로 정리하고, 환헤지형·환노출형 해외투자 체크포인트까지.</p>
+    <div class="read">읽어보기 →</div>
+  </a>
+
+  <a class="issue-card" href="econbite.html">
+    <span class="no">1호</span><span class="date">2026년 9월 넷째 주</span>
+    <h3>기준금리가 또 올랐다는데, 그게 뭐길래?</h3>
+    <p>한국은행 2연속 금리 인상이 내 적금·대출·집값에 어떤 의미인지, 반도체 수출 역대 최대 소식까지.</p>
+    <div class="read">읽어보기 →</div>
+  </a>
+
+  <footer>
+    <p class="brand">— 경제 한입</p>
+    <p>본 뉴스레터는 투자 권유가 아니며, 정보 제공 목적입니다.</p>
+  </footer>
+
+</div>
+</body>
+</html>
