@@ -3,166 +3,178 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>실업 기간과 정신건강 — 생존분석으로 읽는 석사 논문</title>
-<meta name="description" content="Mental Health and Unemployment Duration: Evidence Using Duration Analysis. 논문의 질문, 모델, 해석법을 단계별로 설명합니다.">
+<title>마음이 지치면 실업은 길어질까 — 생존분석으로 읽는 석사 논문</title>
+<meta name="description" content="Mental Health and Unemployment Duration: Evidence Using Duration Analysis. NLSY97과 Cox 비례위험모형으로 정신건강과 실업 기간의 관계를 분석한 논문을 단계별로 설명합니다.">
 <style>
-:root{--bg:#F5F7FA;--ink:#14202B;--sub:#55636F;--line:#D5DCE4;--acc:#1F5FBF;--tint:#E6EEFB;--code:#101A24;--codeink:#DCE6F0;--warn:#FFF4DB;--warnline:#E3B93C;--ph:#FFE9A8}
-@media (prefers-color-scheme:dark){:root{--bg:#0F161D;--ink:#E6ECF2;--sub:#9AA9B6;--line:#26333F;--acc:#7DA8F0;--tint:#17263A;--code:#0A1017;--warn:#2A2412;--warnline:#8A6F1E;--ph:#5A4A12}}
+:root{--bg:#F5F7FA;--ink:#14202B;--sub:#55636F;--line:#D5DCE4;--acc:#1F5FBF;--tint:#E6EEFB;--code:#101A24;--codeink:#DCE6F0;--warn:#FFF4DB;--warnline:#E3B93C}
+@media (prefers-color-scheme:dark){:root{--bg:#0F161D;--ink:#E6ECF2;--sub:#9AA9B6;--line:#26333F;--acc:#7DA8F0;--tint:#17263A;--code:#0A1017;--warn:#2A2412;--warnline:#8A6F1E}}
 *{box-sizing:border-box}
-html{scroll-padding-top:20px}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 .wrap{max-width:760px;margin:0 auto;padding:24px 20px 64px}
 a{color:var(--acc)}
 .back{font-size:14px;text-decoration:none}
 h1{font-size:clamp(26px,5.5vw,38px);line-height:1.3;margin:28px 0 6px;letter-spacing:-.02em}
 .en{color:var(--sub);font-size:15px;margin:0 0 20px}
-.lede{max-width:34em;margin:0 0 20px}
-.toc{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:8px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.facts div{border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--sub)}
+.facts b{display:block;font-size:19px;color:var(--ink)}
+.toc{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 h2{font-size:23px;margin:44px 0 10px;padding-left:12px;border-left:4px solid var(--acc);letter-spacing:-.01em}
-h3{font-size:17px;margin:24px 0 6px}
+h3{font-size:17px;margin:26px 0 6px}
 p,li{font-size:16px}
 ul,ol{padding-left:22px}li{margin:4px 0}
 .box{background:var(--tint);border-radius:8px;padding:14px 16px;margin:14px 0}
 .warn{background:var(--warn);border-left:4px solid var(--warnline);padding:12px 16px;border-radius:4px;margin:14px 0}
-.ph{background:var(--ph);padding:0 5px;border-radius:3px;font-size:.95em}
-pre{background:var(--code);color:var(--codeink);padding:16px;border-radius:8px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:12px 0}
-code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em}
-p code,li code,td code{background:var(--tint);padding:1px 5px;border-radius:4px}
-.scroll{overflow-x:auto}
+p code,li code,td .scroll{overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:15px;margin:12px 0}
 th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
-.spells{width:100%}
-.spells text{font-size:12px;fill:var(--sub);font-family:inherit}
+td.n,th.n{text-align:right;white-space:nowrap}
 figure{margin:16px 0}
 figcaption{font-size:13px;color:var(--sub)}
-.ctrl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+svg{width:100%;height:auto}
+svg text{fill:var(--sub);font-size:12px;font-family:inherit}
+.ctrl{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:8px 0}
 .ctrl input[type=range]{flex:1;min-width:180px}
 .ctrl input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 #simOut{font-weight:600;margin:6px 0}
-svg text{fill:var(--sub);font-size:12px;font-family:inherit}
+.note{font-size:13px;color:var(--sub)}
 footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
 </style>
 </head>
 <body>
 <div class="wrap">
 <a class="back" href="models.html#surv">← 모델 한입으로</a>
-<h1>실업이 길어질수록 마음은 어떻게 되나, 그리고 그 반대는?</h1>
+<h1>마음이 지치면 실업은 길어질까</h1>
 <p class="en">M.A. Thesis, SUNY Albany — Mental Health and Unemployment Duration: Evidence Using Duration Analysis</p>
-<p class="lede">제 석사 논문은 <b>실업 기간</b>을 하나의 숫자가 아니라 “시간이 흐르며 취업으로 빠져나갈 위험”으로 모델링합니다. 이 페이지는 그 방법을 처음 보는 사람도 따라올 수 있게 단계별로 풀어 쓴 해설입니다.</p>
-<div class="box"><b>안내</b> — 노란색 <span class="ph">[ ]</span> 칸은 논문의 실제 데이터·변수·추정 결과를 넣는 자리입니다. 아래 그림과 슬라이더는 원리를 보여주는 <b>가상 예시이며 논문 결과가 아닙니다.</b></div>
+<p>실업과 정신건강의 관계는 흔히 “실업이 마음을 아프게 한다”는 방향으로만 이야기됩니다. 제 논문은 반대 방향, 즉 <b>마음 상태가 실업에서 벗어나는 속도에 영향을 주는지</b>를 생존분석으로 살펴봅니다.</p>
+<div class="facts">
+<div><b>NLSY97</b>미국 청년 패널</div>
+<div><b>2010 → 2015</b>정신건강 → 노동시장 결과</div>
+<div><b>Cox PH</b>비례위험모형</div>
+<div><b>남 863 · 여 1,215</b>분석 표본</div>
+</div>
 <nav class="toc" aria-label="목차">
-<a href="#q">1 연구 질문</a><a href="#why">2 왜 생존분석</a><a href="#data">3 데이터 구조</a><a href="#km">4 Kaplan–Meier</a><a href="#cox">5 Cox 모형</a><a href="#read">6 결과 읽기</a><a href="#limit">7 한계</a><a href="#code">8 코드</a>
+<a href="#q">1 연구 질문</a><a href="#id">2 식별 전략</a><a href="#data">3 데이터·변수</a><a href="#why">4 왜 생존분석</a><a href="#cox">5 Cox 모형</a><a href="#res">6 결과</a><a href="#limit">7 한계</a>
 </nav>
 
 <h2 id="q">1. 연구 질문</h2>
-<p>실업과 정신건강은 서로 영향을 줍니다. 오래 실업 상태일수록 우울이나 불안이 커질 수 있고, 반대로 정신건강이 나쁜 사람은 구직이 어려워 실업이 길어질 수 있습니다. 논문은 이 중 <b>정신건강 상태가 실업 기간(취업까지 걸리는 시간)과 어떤 관계를 보이는가</b>를 duration analysis로 다룹니다.</p>
-<ul>
-<li>사건(event): 실업에서 벗어남(취업) — <span class="ph">[논문의 사건 정의 확인: 취업만? 비경제활동 이동 포함?]</span></li>
-<li>핵심 설명변수: 정신건강 지표 — <span class="ph">[변수명·측정 방식·범주]</span></li>
-<li>통제변수: <span class="ph">[연령, 성별, 학력, 실업 전 직종 등]</span></li>
-<li>데이터: <span class="ph">[데이터 이름, 표본 수, 관찰 기간]</span></li>
-</ul>
+<p>정신질환이 소득, 고용, 경제활동 참가를 낮춘다는 연구는 많고, 반대로 실업이 정신건강을 해친다는 연구도 많습니다. 그런데 <b>정신건강이 실업 기간의 길이에 미치는 영향</b>은 경제학에서 거의 다뤄지지 않았습니다. 논문은 이 공백을 겨냥합니다.</p>
+<p>장기실업은 기술 감가, 인적 네트워크 상실, 낙인 효과를 낳고, 우울과 동기 상실이 구직 자체를 어렵게 만들 수도 있습니다. 그렇다면 정신건강이 나쁜 사람은 일자리를 찾는 데 더 오래 걸릴 것이라는 가설이 나옵니다.</p>
 
-<h2 id="why">2. 왜 OLS나 로짓이 아니라 생존분석인가</h2>
-<table><tbody>
-<tr><th>평균 기간을 OLS로</th><td>조사 종료 시점까지 아직 실업 중인 사람(중도절단)의 기간은 “최소 이만큼”만 알 수 있어, 그냥 쓰거나 빼면 기간이 짧게 편향됩니다.</td></tr>
-<tr><th>취업 여부를 로짓으로</th><td>“취업했나”만 보고 <b>언제</b> 했는지의 정보를 버립니다. 3개월 만에 취업한 사람과 1년 만에 한 사람이 같아집니다.</td></tr>
-<tr><th>생존분석</th><td>기간과 중도절단을 함께 쓰고, 시점별 취업 위험(hazard)을 모델링합니다.</td></tr>
-</tbody></table>
-
-<h2 id="data">3. 데이터는 이렇게 생깁니다</h2>
-<p>각 사람은 하나의 “실업 spell”을 가집니다. 취업한 사람은 사건이 관찰되고, 조사가 끝날 때까지 취업하지 못한 사람은 <b>중도절단</b>됩니다.</p>
+<h2 id="id">2. 식별 전략: 시간 순서로 역인과 줄이기</h2>
+<p>같은 시점에 정신건강과 실업 기간을 함께 재면, 마음이 먼저 무너졌는지 실업이 먼저였는지 알 수 없습니다. NLSY97은 각 조사 회차에 <b>지난 인터뷰 이후에 일어난 일</b>만 기록하므로, 서로 다른 회차의 변수를 쓰면 사건의 순서를 정할 수 있습니다.</p>
 <figure>
-<svg class="spells" viewBox="0 0 480 170" role="img" aria-label="실업 spell 예시. 사람 1과 3은 취업으로 종료, 사람 2와 4는 관찰 종료로 중도절단">
-<line x1="60" y1="140" x2="450" y2="140" stroke="currentColor" opacity=".4"/>
-<text x="60" y="158">실업 시작(t=0)</text><text x="360" y="158">관찰 종료</text>
-<line x1="400" y1="14" x2="400" y2="140" stroke="currentColor" stroke-dasharray="4 4" opacity=".4"/>
-<text x="6" y="34">사람 1</text><line x1="60" y1="30" x2="170" y2="30" stroke="#1F5FBF" stroke-width="4"/><circle cx="170" cy="30" r="6" fill="#1F5FBF"/><text x="182" y="34">취업(사건)</text>
-<text x="6" y="70">사람 2</text><line x1="60" y1="66" x2="400" y2="66" stroke="#C2571A" stroke-width="4"/><text x="408" y="70">×</text>
-<text x="6" y="106">사람 3</text><line x1="60" y1="102" x2="270" y2="102" stroke="#1F5FBF" stroke-width="4"/><circle cx="270" cy="102" r="6" fill="#1F5FBF"/><text x="282" y="106">취업(사건)</text>
-<text x="6" y="130">사람 4</text><line x1="60" y1="126" x2="330" y2="126" stroke="#C2571A" stroke-width="4"/><text x="338" y="130">×</text>
+<svg viewBox="0 0 480 120" role="img" aria-label="2010년 14차 조사에서 정신건강 측정, 2015년 17차 조사에서 실업 기간 측정을 보여주는 타임라인">
+<line x1="40" y1="60" x2="440" y2="60" stroke="currentColor" opacity=".4"/>
+<circle cx="90" cy="60" r="8" fill="#1F5FBF"/><circle cx="390" cy="60" r="8" fill="#C2571A"/>
+<text x="52" y="38">14차 조사 (2010)</text><text x="52" y="90">정신건강 MHI-5 측정</text>
+<text x="330" y="38">17차 조사 (2015)</text><text x="316" y="90">실업 기간 · 취업 여부 측정</text>
+<path d="M104,60 H374" stroke="#1F5FBF" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+<text x="196" y="52">“앞선 마음 상태가 이후 결과에 영향?”</text>
 </svg>
-<figcaption>● 사건 발생, × 중도절단. 가상 예시.</figcaption>
+<figcaption>설계 개념도.</figcaption>
 </figure>
-<p>분석 테이블은 사람마다 한 줄이며 <code>duration</code>(경과 기간), <code>event</code>(1=취업, 0=중도절단), 정신건강 변수와 통제변수로 구성됩니다.</p>
+<p>정신건강 변수는 2010년 14차(MHI 변수가 있는 회차 중 17차와 가장 가까운 회차), 나머지 변수는 2015년 17차에서 가져옵니다.</p>
 
-<h2 id="km">4. Kaplan–Meier: 먼저 그림부터</h2>
-<p>모형을 돌리기 전에 정신건강 상태별로 생존곡선을 그립니다. 여기서 <b>생존</b>은 “아직 실업 상태”라는 뜻입니다. 곡선이 느리게 내려가는 집단은 실업에서 늦게 벗어납니다.</p>
-<div class="box">S(t) = ∏ (1 − dᵢ / nᵢ) — 사건이 일어난 각 시점마다 “그 시점에 위험에 노출된 nᵢ명 중 dᵢ명이 취업”한 비율을 곱해 나갑니다. 중도절단된 사람은 그 시점까지는 분모에 포함되었다가 빠집니다.</div>
-<p>집단 간 차이는 log-rank 검정으로 확인합니다. 결과: <span class="ph">[집단별 중위 실업 기간, log-rank p값]</span></p>
-
-<h2 id="cox">5. Cox 비례위험모형: 다른 조건을 같게 놓고 비교</h2>
-<div class="box">h(t | x) = h₀(t) · exp(β₁·정신건강 + β₂·연령 + …)</div>
+<h2 id="data">3. 데이터와 변수</h2>
 <ul>
-<li><b>h₀(t)</b>: 모든 설명변수가 기준값일 때의 기본 위험. Cox 모형은 이 모양을 가정하지 않습니다(반모수).</li>
-<li><b>exp(β)</b>: 위험비(HR). 변수가 한 단위 달라질 때 취업 위험이 몇 배가 되는가.</li>
-<li><b>비례위험 가정</b>: HR이 시간에 관계없이 일정하다. 이 가정이 모형의 전제입니다.</li>
+<li><b>데이터</b>: NLSY97. 1980~84년생 8,984명을 추적하는 패널. 17차 응답자 7,103명(횡단면 5,271 + 소수집단 과대표집 1,832).</li>
+<li><b>표본</b>: 연령 30~36세(학업·은퇴 영향 최소화). 직장 간 공백이 1주 이상인 사람만 포함(원표본의 61.7% 제외). 소득·학력·결혼 상태 결측 제외. 남녀를 분리해 추정.</li>
+<li><b>실업 기간</b>: 가장 최근 직장 간 공백의 주(week) 수. 현재 취업 중이면 이전 직장과 현재 직장 사이 공백, 현재 실업 중이면 공백이 진행 중이라 <b>중도절단</b>.</li>
+<li><b>통제변수</b>: 연령, 결혼 상태, 교육 연수, 가구소득.</li>
 </ul>
+<h3>정신건강 지표: MHI-5</h3>
+<p>Veit & Ware(1983)의 5문항 Mental Health Inventory를 합산했습니다. 신경과민, 침울함, 아무것도 기분을 풀어주지 못할 만큼 처짐(우울)은 자주 느낄수록, 평온함과 행복은 덜 느낄수록 점수가 높습니다. <b>점수가 높을수록 정신건강이 나쁩니다.</b></p>
+<div class="scroll"><table>
+<thead><tr><th>하위 척도</th><th class="n">남성 평균</th><th class="n">여성 평균</th></tr></thead><tbody>
+<tr><td>종합 점수</td><td class="n">9.32</td><td class="n">9.90</td></tr>
+<tr><td>신경과민 (Nervousness)</td><td class="n">1.63</td><td class="n">1.81</td></tr>
+<tr><td>우울 (Depression)</td><td class="n">1.38</td><td class="n">1.43</td></tr>
+<tr><td>평균 실업 기간(주)</td><td class="n">49.11</td><td class="n">57.72</td></tr>
+</tbody></table></div>
+<p class="note">가중 평균, 논문 Table 2 중 일부.</p>
 
-<h3>직접 움직여 보기: HR이 곡선을 어떻게 바꾸나</h3>
-<p>기준 집단의 월 취업 위험을 8%로 가정하고, 비교 집단의 HR을 바꿔 보세요.</p>
-<div class="ctrl"><label for="hr">HR</label><input id="hr" type="range" min="0.3" max="2.5" step="0.05" value="0.6"><b id="hrv">0.60</b></div>
+<h2 id="why">4. 왜 생존분석인가</h2>
+<table><tbody>
+<tr><th>OLS로 기간 회귀</th><td>아직 실업 중인 사람의 기간은 “최소 이만큼”일 뿐인데, 이를 그대로 쓰면 기간이 짧게 측정됩니다.</td></tr>
+<tr><th>취업 여부 로짓·프로빗</th><td>취업했는지만 보고 <b>얼마나 걸렸는지</b>를 버립니다.</td></tr>
+<tr><th>생존분석</th><td>기간과 중도절단을 함께 활용하고, 시점별 취업 위험(hazard)을 모델링합니다.</td></tr>
+</tbody></table>
+<div class="box"><b>용어 정리</b> — 여기서 “생존”은 <b>아직 실업 상태</b>, “사건(failure)”은 <b>취업</b>입니다.<br>생존함수 S(t): t주까지 실업 상태일 확률<br>위험함수 h(t): t주까지 일을 못 구한 사람이 바로 다음 순간 취업할 확률</div>
+
+<h2 id="cox">5. Cox 비례위험모형</h2>
+<div class="box">h(t | x) = h₀(t) · exp(x′β)</div>
+<ul>
+<li><b>h₀(t)</b>: 기저위험. 특정 분포(와이블, 지수 등)를 가정하지 않는 것이 Cox 모형의 장점입니다. 논문도 분포 가정을 두지 않았습니다.</li>
+<li><b>추정</b>: 편우도(partial likelihood)를 극대화합니다. 각 취업 시점마다 “그 시점에 아직 실업 중이던 사람들 중 하필 이 사람이 취업할 확률”을 곱하는 방식이라, 기간의 <b>순서</b>만 쓰고 중도절단 자료도 자연스럽게 처리됩니다.</li>
+<li><b>exp(β)</b>: 위험비(HR). 설명변수가 한 단위 커질 때 취업 위험이 몇 배가 되는가.</li>
+</ul>
+<h3>직접 움직여 보기: 점수 차이가 곡선을 얼마나 바꾸나</h3>
+<p>논문의 정신건강 종합 점수 계수로 HR을 계산하고, 곡선은 <b>가상의 기저위험</b>(주당 1.5%)을 가정해 그립니다. 주황선은 점수가 더 높은(정신건강이 더 나쁜) 사람입니다.</p>
+<div class="ctrl">
+<label><input type="radio" name="sex" value="m" checked> 남성 (β = −0.051)</label>
+<label><input type="radio" name="sex" value="f"> 여성 (β = −0.029)</label>
+</div>
+<div class="ctrl"><label for="d">점수 차이</label><input id="d" type="range" min="0" max="10" step="1" value="5"><b id="dv">5점</b></div>
 <figure>
-<svg id="sim" viewBox="0 0 480 230" width="100%" role="img" aria-label="HR 슬라이더에 따라 비교 집단의 생존곡선이 기준 집단 대비 이동하는 가상 그래프"></svg>
-<figcaption>가상 모형. 파란선=기준 집단, 주황선=비교 집단.</figcaption>
+<svg id="sim" viewBox="0 0 480 230" role="img" aria-label="정신건강 점수 차이에 따른 생존곡선 이동을 보여주는 가상 그래프"></svg>
+<figcaption>곡선의 높이는 설명용 가정이며 논문 추정치가 아닙니다. HR만 논문 계수에서 가져왔습니다.</figcaption>
 </figure>
 <p id="simOut" aria-live="polite"></p>
 
-<h2 id="read">6. 논문 결과, 이렇게 읽습니다</h2>
-<table class="scroll"><thead><tr><th>변수</th><th>HR</th><th>95% 신뢰구간</th><th>p</th></tr></thead><tbody>
-<tr><td><span class="ph">[정신건강 지표]</span></td><td><span class="ph">[ ]</span></td><td><span class="ph">[ ]</span></td><td><span class="ph">[ ]</span></td></tr>
-<tr><td><span class="ph">[통제변수]</span></td><td><span class="ph">[ ]</span></td><td><span class="ph">[ ]</span></td><td><span class="ph">[ ]</span></td></tr>
-</tbody></table>
+<h2 id="res">6. 결과 읽기</h2>
+<h3>Cox 모형 추정 결과 (논문 Table 4)</h3>
+<div class="scroll"><table>
+<thead><tr><th>표본 · 변수</th><th class="n">계수 (SE)</th><th class="n">HR = exp(β)</th><th class="n">95% CI</th></tr></thead><tbody>
+<tr><td>여성 · 정신건강 종합</td><td class="n">−0.029 (0.016)*</td><td class="n">0.971</td><td class="n">0.941–1.002</td></tr>
+<tr><td>여성 · 신경과민</td><td class="n">−0.244 (0.066)***</td><td class="n">0.784</td><td class="n">0.688–0.892</td></tr>
+<tr><td>여성 · 우울</td><td class="n">−0.190 (0.093)**</td><td class="n">0.827</td><td class="n">0.689–0.992</td></tr>
+<tr><td>남성 · 정신건강 종합</td><td class="n">−0.051 (0.018)***</td><td class="n">0.950</td><td class="n">0.917–0.984</td></tr>
+<tr><td>남성 · 5개 하위 척도</td><td class="n" colspan="3">유의하지 않음</td></tr>
+</tbody></table></div>
+<p class="note">* p&lt;0.10, ** p&lt;0.05, *** p&lt;0.01. HR과 신뢰구간은 계수와 표준오차(β±1.96·SE)에서 계산한 값입니다.</p>
 <ol>
-<li><b>방향</b>: 사건이 “취업”이므로 HR&lt;1이면 취업이 늦어지고(실업 장기화), HR&gt;1이면 빨라집니다.</li>
-<li><b>크기</b>: HR=0.70이면 다른 조건이 같을 때 취업 위험이 30% 낮습니다. 실제 기간 변화는 위의 슬라이더처럼 곡선으로 번역해서 보여주는 것이 좋습니다.</li>
-<li><b>불확실성</b>: 신뢰구간이 1을 포함하면 “관계가 없다”가 아니라 “이 표본으로는 구분하기 어렵다”입니다.</li>
-<li><b>가정 점검</b>: Schoenfeld 잔차 검정 결과 — <span class="ph">[cox.zph p값, 문제 변수 여부]</span></li>
+<li><b>방향</b>: 사건이 취업이므로 HR&lt;1은 취업이 늦어진다는 뜻입니다. 점수가 높을수록 정신건강이 나쁘니 “나쁠수록 실업이 길다”로 읽힙니다.</li>
+<li><b>크기</b>: 남성은 점수 1점 상승에 취업 위험이 약 5.0% 낮고, 5점 차이면 약 22.5% 낮습니다. 여성은 종합 점수 1점당 약 2.9% 낮은데 10% 수준에서만 유의합니다.</li>
+<li><b>여성은 하위 척도가 더 말해줍니다</b>: 신경과민 점수 1점 상승에 취업 위험이 약 22%, 우울은 약 17% 낮았습니다.</li>
+<li><b>OLS와 비교</b>: 남성은 점수 1점당 실업 기간이 약 1.6주 길어졌고, 여성은 신경과민 1점당 약 5.6주 길어졌습니다. 두 방법이 같은 방향을 가리킵니다.</li>
+<li><b>고용 상태</b>: 점수가 오르면 취업 확률이 여성 약 0.9%p, 남성 약 1.1%p 낮아집니다(프로빗).</li>
 </ol>
-<div class="warn"><b>해석 문장 예시</b> — “다른 조건이 같을 때, <span class="ph">[정신건강 지표]</span>가 <span class="ph">[더 나쁜]</span> 집단은 취업으로 이동할 위험이 <span class="ph">[ ]</span>% <span class="ph">[낮았다/높았다]</span>.” 연관성을 말하는 문장이며 원인이라고 쓰지 않습니다.</div>
+<div class="warn"><b>해석 문장 예시</b> — “다른 조건이 같을 때, MHI-5 점수가 1점 높은 남성은 취업으로 이동할 위험이 약 5% 낮았다.” 시간 순서를 둔 설계이지만, 이것만으로 인과를 단정하지 않고 <b>연관성</b>으로 서술합니다.</div>
+<p>통제변수 중에서는 결혼 상태 더미가 눈에 띕니다. 계수 방향이 남녀에서 반대로, 여성은 HR 약 0.64, 남성은 약 1.55였습니다.</p>
 
-<h2 id="limit">7. 한계와 해석의 선</h2>
+<h2 id="limit">7. 한계</h2>
 <ul>
-<li><b>역인과</b>: 정신건강이 나빠서 취업이 늦어진 것인지, 실업이 길어져 정신건강이 나빠진 것인지 이 설계만으로는 구분하기 어렵습니다. 실업 이전 시점의 정신건강을 쓰는지 여부가 중요합니다. <span class="ph">[논문의 측정 시점]</span></li>
-<li><b>관측되지 않는 이질성</b>: 측정되지 않은 개인 특성(동기, 숙련도)이 위험에 영향을 주면 효과가 왜곡됩니다. frailty 모형이 대안입니다.</li>
-<li><b>경쟁위험</b>: 취업 대신 구직을 포기하고 경제활동을 떠난 사람을 어떻게 처리했는지에 따라 결과가 달라집니다.</li>
-<li><b>시간에 따라 변하는 변수</b>: 정신건강이 실업 기간 중 바뀐다면 time-varying covariate 설정이 필요합니다.</li>
+<li><b>측정 한계</b>: NLSY97의 MHI-5 문항은 4단계 응답뿐이라, 6단계 원형 척도에 기반한 기존 위험군 기준값(52, 54, 74)을 쓰기 어려웠습니다. 그래서 위험군 분류 대신 합산 점수를 사용했습니다.</li>
+<li><b>표본 선택</b>: 직장 간 공백이 1주 이상인 사람만 포함해 원표본의 61.7%가 빠졌습니다. 결과는 “공백을 겪은 사람들”에 대한 것입니다.</li>
+<li><b>길이 0 기간 제외</b>: Cox 모형은 길이 0인 기간을 다루지 못해 해당 관측이 제외됩니다.</li>
+<li><b>관측되지 않는 이질성</b>: 동기, 숙련도처럼 측정되지 않은 개인 특성이 위험에 영향을 줄 수 있습니다.</li>
+<li><b>설계의 의미</b>: 시간 순서는 역인과를 줄여 주지만, 2010년의 마음 상태와 이후 결과에 함께 영향을 주는 요인까지 걷어내지는 못합니다.</li>
 </ul>
 
-<h2 id="code">8. 재현 코드 템플릿</h2>
-<pre><code>library(survival); library(survminer)
-
-df$event &lt;- as.integer(df$exit_to_job)          # 1=취업, 0=중도절단
-fit &lt;- survfit(Surv(duration, event) ~ mh_group, data = df)
-ggsurvplot(fit, data = df, risk.table = TRUE, conf.int = TRUE,
-           xlab = "실업 후 경과 기간", ylab = "아직 실업 상태일 확률")
-survdiff(Surv(duration, event) ~ mh_group, data = df)
-
-cox &lt;- coxph(Surv(duration, event) ~ mh_group + age + female + edu, data = df)
-summary(cox)                  # exp(coef)=HR, conf.int
-cox.zph(cox); ggcoxzph(cox.zph(cox))   # 비례위험 가정
-ggforest(cox, data = df)      # HR 숲 그림</code></pre>
-
-<footer>정보 제공 및 학습 목적의 해설입니다. 가상 예시는 논문의 실제 결과가 아닙니다.</footer>
+<footer>정보 제공 목적의 논문 해설입니다. 수치는 논문 원문 기준이며, HR·신뢰구간·그림 곡선은 설명을 위해 계산하거나 가정한 값입니다.</footer>
 </div>
 <script>
 (function(){
-  var s=document.getElementById('hr'),v=document.getElementById('hrv'),svg=document.getElementById('sim'),out=document.getElementById('simOut');
-  var L=0.08,X0=50,X1=450,Y0=20,Y1=190,T=24;
+  var B={m:-0.051,f:-0.029},L=0.015,T=104,X0=50,X1=450,Y0=20,Y1=190;
+  var d=document.getElementById('d'),dv=document.getElementById('dv'),svg=document.getElementById('sim'),out=document.getElementById('simOut');
   function px(t){return X0+(X1-X0)*t/T}
   function py(p){return Y1-(Y1-Y0)*p}
-  function path(rate,color){var d='';for(var t=0;t<=T;t+=0.5){d+=(t?'L':'M')+px(t).toFixed(1)+','+py(Math.exp(-rate*t)).toFixed(1)}return '<path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="2.5"/>'}
+  function path(r,c){var s='';for(var t=0;t<=T;t+=2){s+=(t?'L':'M')+px(t).toFixed(1)+','+py(Math.exp(-r*t)).toFixed(1)}return '<path d="'+s+'" fill="none" stroke="'+c+'" stroke-width="2.5"/>'}
   function draw(){
-    var hr=parseFloat(s.value);v.textContent=hr.toFixed(2);
-    var g='<line x1="'+X0+'" y1="'+Y0+'" x2="'+X0+'" y2="'+Y1+'" stroke="currentColor" opacity=".4"/><line x1="'+X0+'" y1="'+Y1+'" x2="'+X1+'" y2="'+Y1+'" stroke="currentColor" opacity=".4"/>';
-    g+='<line x1="'+X0+'" y1="'+py(.5)+'" x2="'+X1+'" y2="'+py(.5)+'" stroke="currentColor" stroke-dasharray="4 4" opacity=".3"/><text x="8" y="'+(py(.5)+4)+'">50%</text><text x="14" y="'+(Y0+5)+'">100%</text><text x="30" y="'+(Y1+4)+'">0</text>';
-    for(var m=0;m<=24;m+=6)g+='<text x="'+(px(m)-6)+'" y="'+(Y1+16)+'">'+m+'</text>';
-    g+='<text x="230" y="224">실업 후 개월</text>'+path(L,'#1F5FBF')+path(L*hr,'#C2571A');
+    var sx=document.querySelector('input[name=sex]:checked').value,k=parseInt(d.value,10);
+    dv.textContent=k+'점';
+    var hr=Math.exp(B[sx]*k),g='<line x1="'+X0+'" y1="'+Y0+'" x2="'+X0+'" y2="'+Y1+'" stroke="currentColor" opacity=".4"/><line x1="'+X0+'" y1="'+Y1+'" x2="'+X1+'" y2="'+Y1+'" stroke="currentColor" opacity=".4"/>';
+    g+='<line x1="'+X0+'" y1="'+py(.5)+'" x2="'+X1+'" y2="'+py(.5)+'" stroke="currentColor" stroke-dasharray="4 4" opacity=".3"/><text x="14" y="'+(py(.5)+4)+'">50%</text><text x="8" y="'+(Y0+5)+'">100%</text><text x="30" y="'+(Y1+4)+'">0</text>';
+    [0,26,52,78,104].forEach(function(w){g+='<text x="'+(px(w)-8)+'" y="'+(Y1+16)+'">'+w+'</text>'});
+    g+='<text x="200" y="224">실업 후 경과 주 (아직 실업 상태일 확률)</text>'+path(L,'#1F5FBF')+path(L*hr,'#C2571A');
     svg.innerHTML=g;
     var m0=Math.log(2)/L,m1=Math.log(2)/(L*hr);
-    out.textContent='중위 실업 기간: 기준 '+m0.toFixed(1)+'개월 vs 비교 '+m1.toFixed(1)+'개월 (HR '+hr.toFixed(2)+(hr<1?', 취업이 늦어짐':hr>1?', 취업이 빨라짐':', 차이 없음')+')';
+    out.textContent=k===0?'점수 차이가 없으면 두 곡선이 겹칩니다.':'점수 '+k+'점 차이 → HR '+hr.toFixed(3)+' (취업 위험 약 '+((1-hr)*100).toFixed(1)+'% 낮음). 가상 기저위험에서 중위 실업 기간 '+m0.toFixed(0)+'주 vs '+m1.toFixed(0)+'주'+(sx==='f'?' · 여성 종합 점수는 10% 수준 유의':' · 남성 종합 점수는 1% 수준 유의');
   }
-  s.addEventListener('input',draw);draw();
+  d.addEventListener('input',draw);
+  document.querySelectorAll('input[name=sex]').forEach(function(r){r.addEventListener('change',draw)});
+  draw();
 })();
 </script>
 </body>
