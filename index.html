@@ -202,12 +202,6 @@
   .apc dd{margin:5px 0 0; color:var(--ink-soft); font-size:14px;}
   @media (max-width:760px){ .case-grid{grid-template-columns:1fr;} }
 
-  .skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule);}
-  .skill-col{background:var(--card); padding:26px 28px;}
-  .skill-col h4{font-size:12px; font-family:'IBM Plex Mono',monospace; color:var(--brass-dim); text-transform:uppercase; letter-spacing:.08em; margin-bottom:16px;}
-  .skill-col ul{list-style:none; margin:0; padding:0;}
-  .skill-col li{padding:9px 0; border-bottom:1px solid var(--rule-soft); color:var(--ink-soft); font-size:14.5px;}
-  .skill-col li:last-child{border-bottom:none;}
 
   footer{padding:36px 0; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
@@ -229,11 +223,10 @@
       <li><a href="#experience"><span class="num">02</span><span id="t-nav-experience">Experience</span></a></li>
       <li><a href="#research"><span class="num">03</span><span id="t-nav-research">Research</span></a></li>
       <li><a href="#casestudies"><span class="num">04</span><span id="t-nav-casestudies">Case Studies</span></a></li>
-      <li><a href="#skills"><span class="num">05</span><span id="t-nav-skills">Skills</span></a></li>
-      <li><a href="dashboard.html"><span class="num">06</span><span id="t-nav-dashboard">Dashboard</span></a></li>
-      <li><a href="econbite-archive.html"><span class="num">07</span><span id="t-nav-econbite">경제한입</span></a></li>
-      <li><a href="models.html"><span class="num">08</span><span id="t-nav-models">Models</span></a></li>
-      <li><a href="bank.html"><span class="num">09</span><span id="t-nav-bank">Bank</span></a></li>
+      <li><a href="dashboard.html"><span class="num">05</span><span id="t-nav-dashboard">Dashboard</span></a></li>
+      <li><a href="econbite-archive.html"><span class="num">06</span><span id="t-nav-econbite">경제한입</span></a></li>
+      <li><a href="models.html"><span class="num">07</span><span id="t-nav-models">Models</span></a></li>
+      <li><a href="bank.html"><span class="num">08</span><span id="t-nav-bank">Bank</span></a></li>
     </ul>
   </nav>
 </header>
@@ -432,54 +425,6 @@
     </div>
   </div>
 </section>
-
-<section id="skills">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="ledger"><span class="code">EXH. 05</span><span class="leader"></span><span class="mark" id="t-mark05">Toolkit</span></div>
-      <h2 id="t-skills-h2">Skills &amp; Tools</h2>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-col">
-        <h4 id="t-sk1-h">Analysis</h4>
-        <ul>
-          <li id="t-sk1-li0">Duration / survival analysis</li>
-          <li id="t-sk1-li1">Regression &amp; hypothesis testing</li>
-          <li id="t-sk1-li2">Association-rule mining</li>
-          <li id="t-sk1-li3">Customer segmentation</li>
-        </ul>
-      </div>
-      <div class="skill-col">
-        <h4 id="t-sk2-h">Tools</h4>
-        <ul>
-          <li id="t-sk2-li0">R (arules, arulesViz)</li>
-          <li id="t-sk2-li1">Tableau</li>
-          <li id="t-sk2-li2">SQL</li>
-          <li id="t-sk2-li3">Excel / financial modeling</li>
-        </ul>
-      </div>
-      <div class="skill-col">
-        <h4 id="t-sk3-h">Domains</h4>
-        <ul>
-          <li id="t-sk3-li0">Digital finance policy</li>
-          <li id="t-sk3-li1">Labor economics</li>
-          <li id="t-sk3-li2">Retail &amp; e-commerce strategy</li>
-          <li id="t-sk3-li3">Data governance</li>
-        </ul>
-      </div>
-      <div class="skill-col">
-        <h4 id="t-sk4-h">Delivery</h4>
-        <ul>
-          <li id="t-sk4-li0">Stakeholder briefings</li>
-          <li id="t-sk4-li1">Dashboard design</li>
-          <li id="t-sk4-li2">Policy memos</li>
-          <li id="t-sk4-li3">Research writing</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer class="wrap">
   <span id="t-footer">© 2026 Li Yu. All rights reserved.</span>
   <span><a href="https://github.com/ly186481" target="_blank" rel="noopener">github.com/ly186481</a></span>
@@ -505,7 +450,6 @@ const I18N = {
   't-nav-experience': { en: `Experience`, ko: `경력`, html: false },
   't-nav-research': { en: `Research`, ko: `연구`, html: false },
   't-nav-casestudies': { en: `Case Studies`, ko: `케이스 스터디`, html: false },
-  't-nav-skills': { en: `Skills`, ko: `역량`, html: false },
   't-nav-dashboard': { en: `Dashboard`, ko: `대시보드`, html: false },
   't-nav-econbite': { en: `Econbite`, ko: `경제한입`, html: false },
   't-nav-models': { en: `Models`, ko: `모델 한입`, html: false },
@@ -595,28 +539,6 @@ const I18N = {
   't-cs6-ask': { en: `How do shifting China-related geopolitics and semiconductor-cycle dynamics feed into a macroeconomic outlook for Korean businesses?`, ko: `변화하는 중국발 지정학 리스크와 반도체 경기 사이클이 국내 기업 대상 거시경제 전망에 어떻게 반영되어야 하는가?`, html: false },
   't-cs6-app': { en: `Monitored 100+ indicators across 30+ economies via Bloomberg, CEIC, IMF, OECD, and World Bank, applying VAR and association analysis for four semiannual outlook reports.`, ko: `Bloomberg·CEIC·IMF·OECD·World Bank 데이터로 30개국 이상의 지표 100여 개를 모니터링하고, VAR과 연관성 분석을 적용해 반기별 전망보고서 4건을 작성했습니다.`, html: false },
   't-cs6-out': { en: `Strategic research briefings on China exposure, semiconductors, and the digital economy that supported executive decision-making at SK Research Institute.`, ko: `SK경영경제연구소에서 중국 리스크·반도체·디지털경제를 주제로 한 전략 리서치를 통해 경영진의 의사결정을 지원했습니다.`, html: false },
-  't-mark05': { en: `Toolkit`, ko: `도구`, html: false },
-  't-skills-h2': { en: `Skills & Tools`, ko: `역량 및 도구`, html: false },
-  't-sk1-h': { en: `Analysis`, ko: `분석`, html: false },
-  't-sk1-li0': { en: `Duration / survival analysis`, ko: `생존분석`, html: false },
-  't-sk1-li1': { en: `Regression & hypothesis testing`, ko: `회귀분석 & 가설검정`, html: false },
-  't-sk1-li2': { en: `Association-rule mining`, ko: `연관규칙 마이닝`, html: false },
-  't-sk1-li3': { en: `Customer segmentation`, ko: `고객 세분화`, html: false },
-  't-sk2-h': { en: `Tools`, ko: `도구`, html: false },
-  't-sk2-li0': { en: `R (arules, arulesViz)`, ko: `R (arules, arulesViz)`, html: false },
-  't-sk2-li1': { en: `Tableau`, ko: `Tableau`, html: false },
-  't-sk2-li2': { en: `SQL`, ko: `SQL`, html: false },
-  't-sk2-li3': { en: `Excel / financial modeling`, ko: `Excel / 재무 모델링`, html: false },
-  't-sk3-h': { en: `Domains`, ko: `분야`, html: false },
-  't-sk3-li0': { en: `Digital finance policy`, ko: `디지털 금융 정책`, html: false },
-  't-sk3-li1': { en: `Labor economics`, ko: `노동경제학`, html: false },
-  't-sk3-li2': { en: `Retail & e-commerce strategy`, ko: `유통 & 이커머스 전략`, html: false },
-  't-sk3-li3': { en: `Data governance`, ko: `데이터 거버넌스`, html: false },
-  't-sk4-h': { en: `Delivery`, ko: `산출물`, html: false },
-  't-sk4-li0': { en: `Stakeholder briefings`, ko: `이해관계자 브리핑`, html: false },
-  't-sk4-li1': { en: `Dashboard design`, ko: `대시보드 설계`, html: false },
-  't-sk4-li2': { en: `Policy memos`, ko: `정책 메모`, html: false },
-  't-sk4-li3': { en: `Research writing`, ko: `연구 문서 작성`, html: false },
   't-footer': { en: `© 2026 Li Yu. All rights reserved.`, ko: `© 2026 Li Yu. All rights reserved.`, html: false },
 };
 
