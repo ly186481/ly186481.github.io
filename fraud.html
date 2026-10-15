@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>카드 사기 탐지 모델 — 불균형 데이터에서 나쁜 거래 찾기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<meta name="description" content="Credit Card Fraud Detection: Predictive Models. 극단적 불균형 데이터를 다루는 모델 선택, 평가, 임계값 설정을 단계별로 설명합니다.">
+<style>
+:root{--cream:#FBF6EC;--paper:#FFFFFF;--ink:#2B1B2E;--sub:#6B5B6E;--honey:#E8A33D;--honey-deep:#C97F1E;--sage:#6B8F71;--rust:#C4604A;--line:#E9DCC8;--tint:#FFF3DC;--r:18px}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Gowun Dodum','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;line-height:1.85;-webkit-text-size-adjust:100%;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+.wrap{max-width:680px;margin:0 auto;padding:20px 20px 64px}
+a{color:var(--honey-deep)}
+.back{display:inline-block;font-size:13.5px;padding:6px 14px;border:1px solid var(--line);border-radius:30px;color:var(--sub);text-decoration:none;background:var(--paper)}
+.mark{width:58px;height:58px;margin:30px auto 16px;border-radius:50%;background:var(--honey);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 6px 0 var(--honey-deep)}
+h1{font-family:'Gowun Batang',serif;font-size:clamp(26px,6vw,34px);line-height:1.35;margin:0 0 10px;text-align:center;letter-spacing:.01em}
+.en{color:var(--sub);font-size:13.5px;margin:0 0 20px;text-align:center}
+.lede{color:var(--sub);margin:0 auto 26px;max-width:34em;text-align:center}
+h2{font-family:'Gowun Batang',serif;font-size:24px;margin:0 0 4px;font-weight:700}
+.wrap>h2,section>h2{margin-top:44px}
+section.panel>h2{margin-top:0}
+.tag{color:var(--sub);font-size:14px;margin:0 0 22px;font-family:'Gowun Batang',serif;font-style:italic}
+h3{font-family:'Gowun Batang',serif;font-size:18px;margin:30px 0 10px}
+h3::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--honey);margin-right:10px;vertical-align:middle}
+p,li{font-size:16px}
+ul,ol{padding-left:22px}li{margin:5px 0}
+nav.tabs{position:sticky;top:0;z-index:5;display:flex;gap:8px;overflow-x:auto;padding:12px 2px;background:var(--cream);margin-bottom:26px}
+nav.tabs button{flex:0 0 auto;font:inherit;font-size:15px;padding:9px 18px;border:1px solid var(--line);background:var(--paper);color:var(--sub);border-radius:30px;cursor:pointer}
+nav.tabs button[aria-selected="true"]{background:var(--honey);border-color:var(--honey);color:var(--ink);font-weight:700;box-shadow:0 4px 0 var(--honey-deep);transform:translateY(-1px)}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--honey-deep);outline-offset:2px}
+section.panel{display:none}
+section.panel.on{display:block}
+.box{background:var(--paper);border-radius:var(--r);padding:18px 22px;margin:16px 0;box-shadow:0 2px 0 var(--line)}
+.warn{background:var(--tint);border-left:4px solid var(--honey);padding:14px 20px;border-radius:var(--r);margin:16px 0}
+.warn b:first-child{color:var(--honey-deep)}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:12px 0;background:var(--paper);border-radius:var(--r);overflow:hidden}
+th,td{border-bottom:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top}
+th{color:var(--sub);font-weight:400;white-space:nowrap}
+tr:last-child th,tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;white-space:nowrap}
+.scroll{overflow-x:auto}
+pre{background:var(--ink);color:#F1E6F2;padding:18px 20px;border-radius:var(--r);overflow-x:auto;font-size:13.5px;line-height:1.65;margin:14px 0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em}
+p code,li code,td code{background:var(--tint);padding:1px 6px;border-radius:6px}
+figure{margin:18px 0;background:var(--paper);border-radius:var(--r);padding:14px 14px 10px;box-shadow:0 2px 0 var(--line)}
+figcaption,.note{font-size:13px;color:var(--sub)}
+svg{width:100%;height:auto}
+svg text{fill:var(--sub);font-size:12px;font-family:inherit}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:14px 0}
+.calc label,.ctrl label{font-size:14px;color:var(--sub);display:block}
+.calc input,.calc select{width:100%;font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink)}
+.out,#calcOut,#simOut{font-weight:700;margin:8px 0;background:var(--tint);border-radius:12px;padding:10px 16px}
+.ctrl{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:10px 0}
+.ctrl input[type=range]{flex:1;min-width:180px;accent-color:var(--honey-deep)}
+.ctrl label{display:inline}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
+.facts div{background:var(--paper);border-radius:var(--r);padding:12px 14px;font-size:14px;color:var(--sub);box-shadow:0 2px 0 var(--line)}
+.facts b{display:block;font-family:'Gowun Batang',serif;font-size:19px;color:var(--ink)}
+.toc{display:flex;flex-wrap:wrap;gap:8px;font-size:14px;padding:6px 0 4px}
+.toc a{padding:5px 12px;border:1px solid var(--line);border-radius:30px;background:var(--paper);text-decoration:none;color:var(--sub)}
+footer{margin-top:56px;text-align:center;font-size:12px;color:var(--sub);line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="models.html#fraud">← 모델 한입으로</a>
+<div class="mark" aria-hidden="true">🕵️</div>
+<h1>수백 건 중 하나뿐인 나쁜 거래 찾기</h1>
+<p class="en">Credit Card Fraud Detection: Predictive Models</p>
+<p class="lede">카드 사기 탐지는 “정확도 99.8%”가 아무 의미 없는 문제입니다. 극단적으로 불균형한 데이터에서 모델을 고르고, 평가하고, 경보 기준을 정하는 과정을 단계별로 풀어 썼습니다.</p>
+<div class="facts">
+<div><b>0.17%</b>ULB 공개 데이터의 사기 비율</div>
+<div><b>PR-AUC</b>핵심 평가지표</div>
+<div><b>시간 순서</b>검증 분할 원칙</div>
+<div><b>비용 기준</b>경보 임계값 결정</div>
+</div>
+<nav class="toc" aria-label="목차">
+<a href="#q">1 문제 정의</a><a href="#hard">2 왜 어려운가</a><a href="#feat">3 데이터·특징</a><a href="#model">4 모델</a><a href="#imb">5 불균형 처리</a><a href="#eval">6 평가</a><a href="#cost">7 임계값·비용</a><a href="#ops">8 운영</a>
+</nav>
+
+<h2 id="q">1. 문제 정의</h2>
+<p>카드 승인 요청이 들어오면 몇 백 밀리초 안에 <b>승인, 차단, 추가 인증</b> 중 하나를 정해야 합니다. 모델은 거래마다 사기 확률 점수를 내고, 점수가 기준선을 넘으면 경보를 울립니다. 점수가 애매한 거래는 사후 조사 대기열의 우선순위에도 쓰입니다.</p>
+<div class="box">목표: 사기는 최대한 잡되, 정상 고객이 결제 거절을 겪는 일은 최소로.<br>이 둘은 서로 맞바꾸는 관계라서, 모델 점수와 별개로 <b>경보 기준 설계</b>가 핵심입니다.</div>
+
+<h2 id="hard">2. 왜 어려운가</h2>
+<table><tbody>
+<tr><th>극단적 불균형</th><td>대표적 공개 데이터인 ULB 신용카드 데이터는 거래 284,807건 중 사기가 492건(약 0.17%)입니다.</td></tr>
+<tr><th>정확도의 함정</th><td>전부 정상이라고 답해도 정확도 99.8%입니다. 정확도로는 모델의 가치를 알 수 없습니다.</td></tr>
+<tr><th>사기범의 적응</th><td>수법이 바뀌어 과거 패턴이 낡습니다(컨셉 드리프트).</td></tr>
+<tr><th>라벨 지연</th><td>사기 확정은 고객 이의 제기를 거쳐 몇 주 뒤에 됩니다. 최근 데이터일수록 사기가 덜 표시되어 있습니다.</td></tr>
+</tbody></table>
+
+<h2 id="feat">3. 데이터와 특징</h2>
+<p>원시 거래(금액, 시각, 가맹점, 지역)만으로는 약하고, 카드별 <b>과거 행동과 비교한 변수</b>가 성능을 좌우합니다.</p>
+<ul>
+<li><b>빈도</b>: 최근 10분·1시간·24시간 거래 횟수</li>
+<li><b>금액</b>: 평소 결제액 대비 비율, 직전 거래 대비 증가폭</li>
+<li><b>맥락</b>: 해외 결제, 신규 가맹점, 심야, 온라인·오프라인 전환</li>
+<li><b>이동</b>: 직전 거래와의 거리와 시간 간격(물리적으로 불가능한 이동)</li>
+</ul>
+<div class="warn"><b>주의</b> — 특징은 <b>해당 거래 시점까지의 정보로만</b> 만들어야 합니다. 미래 정보가 섞이면 검증 성능이 부풀려지는 데이터 누수가 됩니다.</div>
+
+<h2 id="model">4. 자주 쓰는 모델</h2>
+<table><tbody>
+<tr><th>로지스틱 회귀</th><td>기준선 모델. 계수로 설명이 가능해 고객 문의와 감독 대응에 유리</td></tr>
+<tr><th>랜덤포레스트·그래디언트부스팅</th><td>XGBoost, LightGBM 등. 정형 거래 데이터에서 비선형 관계와 변수 간 상호작용을 잘 잡아 실무 주력</td></tr>
+<tr><th>이상탐지</th><td>Isolation Forest, 오토인코더. 라벨이 적거나 새로운 유형을 찾을 때 보조로 사용</td></tr>
+<tr><th>룰 엔진</th><td>모델과 병행. 특정 가맹점 차단처럼 즉시 대응이 필요한 경우</td></tr>
+</tbody></table>
+<p>보통 로지스틱 회귀를 기준선으로 두고, 부스팅 모델이 얼마나 더 나은지 비교한 뒤 비용 대비 효과로 선택합니다.</p>
+
+<h2 id="imb">5. 불균형 처리</h2>
+<ul>
+<li><b>클래스 가중치</b>: 사기 거래의 오류에 더 큰 벌점을 줍니다. 가장 단순하고 안전한 출발점입니다.</li>
+<li><b>언더샘플링</b>: 정상 거래를 일부만 사용해 학습합니다. 정보 손실이 있습니다.</li>
+<li><b>SMOTE(합성 과표집)</b>: 사기 거래와 비슷한 가상 샘플을 만들어 늘립니다.</li>
+</ul>
+<div class="warn"><b>흔한 실수</b> — 샘플링을 <b>데이터 분할 전에</b> 적용하면 검증 데이터에 학습 정보가 새어 들어갑니다. 분할한 뒤 <b>학습 데이터에만</b> 적용하고, 검증·테스트 데이터는 실제 분포(불균형) 그대로 둡니다.</div>
+
+<h2 id="eval">6. 평가</h2>
+<table><tbody>
+<tr><th>탐지율 (Recall)</th><td>실제 사기 중 잡아낸 비율</td></tr>
+<tr><th>적중률 (Precision)</th><td>경보를 울린 거래 중 진짜 사기의 비율</td></tr>
+<tr><th>PR-AUC</th><td>재현율-정밀도 곡선 아래 면적. 불균형 데이터에서는 ROC-AUC보다 개선 폭이 잘 드러납니다.</td></tr>
+<tr><th>검증 방식</th><td>과거로 학습하고 이후 기간으로 검증하는 <b>시간 순서 분할</b>. 무작위 분할은 같은 카드의 거래가 양쪽에 섞여 성능이 부풀려집니다.</td></tr>
+</tbody></table>
+
+<h2 id="cost">7. 임계값과 비용: 직접 계산해 보기</h2>
+<p>점수 기준선을 낮추면 탐지율은 오르지만 오탐이 늘어납니다. 아래에서 오탐률이 낮아 보여도 적중률이 얼마나 떨어지는지 확인해 보세요.</p>
+<div class="calc">
+<div><label for="fn">거래 수</label><input id="fn" type="number" min="1" step="10000" value="1000000"></div>
+<div><label for="fr">사기 비율 (%)</label><input id="fr" type="number" min="0" max="100" step="0.05" value="0.2"></div>
+<div><label for="fd">탐지율 (%)</label><input id="fd" type="number" min="0" max="100" step="1" value="80"></div>
+<div><label for="ff">오탐률 (%)</label><input id="ff" type="number" min="0" max="100" step="0.1" value="0.5"></div>
+<div><label for="fl">사기 1건 피해 (원)</label><input id="fl" type="number" min="0" step="10000" value="300000"></div>
+<div><label for="fc">오탐 1건 비용 (원)</label><input id="fc" type="number" min="0" step="1000" value="5000"></div>
+</div>
+<p class="out" id="fraudOut" aria-live="polite"></p>
+<p class="note">오탐률은 정상 거래 중 잘못 의심한 비율입니다. 가상의 입력값이며 실제 은행의 수치가 아닙니다.</p>
+
+<h2 id="ops">8. 운영과 한계</h2>
+<ul>
+<li><b>드리프트 관리</b>: 정기적 재학습, 점수 분포와 탐지율 모니터링</li>
+<li><b>설명 가능성</b>: 고객이 거절 사유를 물으면 답할 수 있는 사유 코드 제공</li>
+<li><b>사람과의 협업</b>: 모델이 조사 대기열의 순서를 정하고, 확정은 조사 인력이 합니다.</li>
+<li><b>데이터 한계</b>: 공개 데이터는 변수가 익명화되어 있어 특징 설계 연습에는 한계가 있습니다.</li>
+</ul>
+
+<footer>학습·정보 제공 목적의 해설입니다. 계산기의 수치는 설명을 위한 가정입니다.</footer>
+</div>
+<script>
+(function(){
+  function g(i){return parseFloat(document.getElementById(i).value)}
+  function f(x,d){return x.toLocaleString('ko-KR',{maximumFractionDigits:d})}
+  function fraud(){var n=g('fn'),r=g('fr')/100,d=g('fd')/100,o=g('ff')/100,l=g('fl'),c=g('fc'),out=document.getElementById('fraudOut');
+    if(!(n>0)||!(r>=0&&r<=1)||!(d>=0&&d<=1)||!(o>=0&&o<=1)||!(l>=0)||!(c>=0)){out.textContent='입력값을 확인하세요.';return}
+    var F=n*r,tp=F*d,fp=(n-F)*o,al=tp+fp,pr=al>0?tp/al:0,net=tp*l-fp*c;
+    out.textContent='사기 '+f(F,0)+'건 중 '+f(tp,0)+'건 탐지, 오탐 '+f(fp,0)+'건 → 경보 '+f(al,0)+'건 중 진짜 사기 '+f(pr*100,1)+'%. 순효과(막은 피해 − 오탐 비용) '+f(net/100000000,2)+'억원';}
+  ['fn','fr','fd','ff','fl','fc'].forEach(function(i){document.getElementById(i).addEventListener('input',fraud)});
+  fraud();
+})();
+</script>
+</body>
+</html>
