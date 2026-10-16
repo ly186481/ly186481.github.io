@@ -145,43 +145,43 @@ const STR = {
     kicker:'Exh. 05 · Dashboarding & Visualization',
     title:'Macro Indicators Driving Equity Markets — by Country',
     desc:'Pick a country to see the policy rates, bond yields, FX and equity levels that matter most for its stock market.',
-    updated:'Baseline data as of 2026.09.25 (KST) · see methodology below',
+    updated:'Baseline data as of 2026.10.15 (KST) · see methodology below',
     live:'LIVE DATA', static:'STATIC SNAPSHOT',
     tabs:{all:'Overview', kr:'Korea', us:'United States', eu:'Eurozone', uk:'United Kingdom', jp:'Japan', cn:'China · HK'},
     snap:'Snapshot', trends:'Trends', detail:'Detail',
-    keyInd:'Key Indicators', trendTitle:'April – September 2026', sumTitle:'Indicator Summary',
+    keyInd:'Key Indicators', trendTitle:'April – October 2026', sumTitle:'Indicator Summary',
     th:['Indicator','Value','As of / Change','Market Read'],
     impact:{up:'Bullish', down:'Bearish', mix:'Mixed'},
     portfolio:'Portfolio',
     disclaimer:'This page is for informational and portfolio-demonstration purposes only. It is not investment advice, and figures may be delayed, estimated, or inaccurate — verify with an official source before relying on them for any decision.',
-    footnote:'<b>METHODOLOGY —</b> The baseline numbers below are not pulled live; they were cross-checked by hand against public market reports (search tools only, no API keys at authoring time). Sources: Korea Exchange (KRX), KB Securities and Mirae Asset market notes, SBS Biz bond-desk reports, Yonhap/Newsis, kbthink (KB Financial Group Research), KORI Insight, ECB, Bank of England, Trading Economics and Capital.com. Every card shows its own as-of date; older prints are labeled as dated. <b>The May S&amp;P 500 print, the July KRW/USD print and the Apr–Aug Fed level are interpolated estimates.</b> If this page is paired with the included scripts/fetch_data.py GitHub Action (reading Yahoo Finance, FRED, BOK ECOS, ECB and Bank of England APIs into data/macro.json), the green "LIVE DATA" badge above and the dots next to each card show when real-time values are in use instead — a gray dot means a figure is still the static baseline.'
+    footnote:'<b>METHODOLOGY —</b> <b>Oct. 16 update:</b> Korea, US, Japan and mainland China values are 10/15 closes (Hang Seng: 10/8). Eurozone, UK, BOJ, KTB and China PMI rows were not refreshed and remain dated. The baseline numbers below are not pulled live; they were cross-checked by hand against public market reports (search tools only, no API keys at authoring time). Sources: Korea Exchange (KRX), KB Securities and Mirae Asset market notes, SBS Biz bond-desk reports, Yonhap/Newsis, kbthink (KB Financial Group Research), KORI Insight, ECB, Bank of England, Trading Economics and Capital.com. Every card shows its own as-of date; older prints are labeled as dated. <b>The May S&amp;P 500 print, the July KRW/USD print and the Apr–Aug Fed level are interpolated estimates.</b> If this page is paired with the included scripts/fetch_data.py GitHub Action (reading Yahoo Finance, FRED, BOK ECOS, ECB and Bank of England APIs into data/macro.json), the green "LIVE DATA" badge above and the dots next to each card show when real-time values are in use instead — a gray dot means a figure is still the static baseline.'
   },
   ko:{
     back:'← 포트폴리오로', toggle:'EN',
     kicker:'부록 05 · 대시보드 및 시각화',
     title:'증시에 영향을 미치는 거시경제지표 — 국가별',
     desc:'국가를 선택하면 해당 증시에 가장 중요한 정책금리·채권금리·환율·주가 수준을 볼 수 있습니다.',
-    updated:'기준 데이터 2026.09.25 (KST) · 하단 방법론 참고',
+    updated:'기준 데이터 2026.10.15 (KST) · 하단 방법론 참고',
     live:'실시간 데이터', static:'정적 스냅샷',
     tabs:{all:'전체 비교', kr:'한국', us:'미국', eu:'유로존', uk:'영국', jp:'일본', cn:'중국 · 홍콩'},
     snap:'스냅샷', trends:'추세', detail:'상세',
-    keyInd:'주요 지표', trendTitle:'2026년 4월 ~ 9월', sumTitle:'지표 요약',
+    keyInd:'주요 지표', trendTitle:'2026년 4월 ~ 10월', sumTitle:'지표 요약',
     th:['지표','값','기준일 / 변동','시장 해석'],
     impact:{up:'상승요인', down:'하락요인', mix:'혼조'},
     portfolio:'포트폴리오',
     disclaimer:'이 페이지는 정보 제공 및 포트폴리오 시연 목적으로만 제공되며, 투자 조언이 아닙니다. 수치는 지연·추정되거나 부정확할 수 있으니, 실제 의사결정에 활용하기 전 공식 출처로 확인하시기 바랍니다.',
-    footnote:'<b>방법론 —</b> 아래 기준값은 실시간으로 받아온 것이 아니라, 검색 도구만으로 공개된 시장 보도를 교차 확인해 수기로 채운 값입니다(작성 시점 API 연동 없음). 출처: 한국거래소(KRX), KB증권·미래에셋증권 마켓 리포트, SBS Biz 채권시황, 연합뉴스·뉴시스, kbthink(KB금융지주 리서치), KORI Insight, ECB, Bank of England, Trading Economics·Capital.com. 각 카드에 기준일을 표기했으며, 오래된 수치는 "시점 오래됨"으로 표시했습니다. <b>5월 S&amp;P500, 7월 원/달러, 4~8월 Fed 금리는 추정치</b>입니다. 이 페이지를 함께 제공한 scripts/fetch_data.py GitHub Action(Yahoo Finance·FRED·한국은행 ECOS·ECB·Bank of England API를 data/macro.json으로 수집)과 연동하면, 위 초록색 "실시간 데이터" 배지와 각 카드 옆 점이 실데이터 사용 여부를 보여줍니다 — 회색 점은 아직 정적 기준값이라는 뜻입니다.'
+    footnote:'<b>방법론 —</b> <b>10/16 업데이트:</b> 한국·미국·일본·중국 본토는 10/15 종가(항셍은 10/8) 기준입니다. 유로존·영국·일본은행·국고채·중국 PMI는 갱신하지 못해 기존 값을 유지합니다. 아래 기준값은 실시간으로 받아온 것이 아니라, 검색 도구만으로 공개된 시장 보도를 교차 확인해 수기로 채운 값입니다(작성 시점 API 연동 없음). 출처: 한국거래소(KRX), KB증권·미래에셋증권 마켓 리포트, SBS Biz 채권시황, 연합뉴스·뉴시스, kbthink(KB금융지주 리서치), KORI Insight, ECB, Bank of England, Trading Economics·Capital.com. 각 카드에 기준일을 표기했으며, 오래된 수치는 "시점 오래됨"으로 표시했습니다. <b>5월 S&amp;P500, 7월 원/달러, 4~8월 Fed 금리는 추정치</b>입니다. 이 페이지를 함께 제공한 scripts/fetch_data.py GitHub Action(Yahoo Finance·FRED·한국은행 ECOS·ECB·Bank of England API를 data/macro.json으로 수집)과 연동하면, 위 초록색 "실시간 데이터" 배지와 각 카드 옆 점이 실데이터 사용 여부를 보여줍니다 — 회색 점은 아직 정적 기준값이라는 뜻입니다.'
   }
 };
 
 /* ---------------- raw baseline chart data ---------------- */
-const DATES = ['4/22','5/6','6/24','7/14','8/27','9/23'];
-const KOSPI_RAW = [6417.93, 7384.56, 8203.84, 7284.41, 6912.37, 7080.92];
-const SNP_RAW   = [6850.00, 7100.00, 7358.22, 7538.44, 7674.37, 7706.03];
+const DATES = ['4/22','5/6','6/24','7/14','8/27','9/23','10/15'];
+const KOSPI_RAW = [6417.93, 7384.56, 8203.84, 7284.41, 6912.37, 7080.92, 5554.22];
+const SNP_RAW   = [6850.00, 7100.00, 7358.22, 7538.44, 7674.37, 7706.03, 7744.06];
 const norm = a => a.map(v => +(v/a[0]*100).toFixed(1));
-const KR_RATE = [2.50, 2.50, 2.50, 2.75, 3.00, 3.00];
-const US_RATE = [3.625, 3.625, 3.625, 3.625, 3.625, 3.875];
-const FX = [1479.5, 1455.1, 1541.9, 1450.0, 1386.1, 1358.4];
+const KR_RATE = [2.50, 2.50, 2.50, 2.75, 3.00, 3.00, 3.00];
+const US_RATE = [3.625, 3.625, 3.625, 3.625, 3.625, 3.875, 3.875];
+const FX = [1479.5, 1455.1, 1541.9, 1450.0, 1386.1, 1358.4, 1344.6];
 const KTB_DATES = ['1/26','6/2','7/28','8/27'];
 const KTB_3Y = [3.096, 3.773, 3.829, 3.755];
 const KTB_10Y = [3.544, 4.135, 4.289, 4.238];
@@ -209,20 +209,20 @@ const V = {
     tag:{en:'Where each market stands, side by side', ko:'주요 증시 현황을 한눈에 비교'},
     kpis:{
       en:[
-        {l:'Fed Funds Rate', v:'3.75–4.00%', c:'+25bp hike · 9/16', s:false, key:'fed'},
+        {l:'Fed Funds Rate', v:'3.75–4.00%', c:'Hiked 9/16 · FOMC 10/27–28', s:false, key:'fed'},
         {l:'BOK Base Rate', v:'3.00%', c:'2nd straight hike · 8/27', s:false, key:'bok'},
         {l:'ECB Deposit Rate', v:'2.50%', c:'+25bp hike · 9/16', s:false, key:'ecb'},
         {l:'BoE Bank Rate', v:'3.75%', c:'6th straight hold · 9/17', s:null, key:'boe'},
         {l:'BOJ Policy Rate', v:'1.25%', c:'as reported ~9/25', s:null, key:'boj'},
-        {l:'Brent Crude', v:'$104.32', c:'War risk premium · 9/25', s:false, key:'brent'},
+        {l:'Brent Crude', v:'$104.32', c:'9/25 — Oct. price not verified', s:false, key:'brent'},
       ],
       ko:[
-        {l:'연준 기준금리', v:'3.75–4.00%', c:'25bp 인상 · 9/16', s:false, key:'fed'},
+        {l:'연준 기준금리', v:'3.75–4.00%', c:'9/16 인상 · FOMC 10/27~28', s:false, key:'fed'},
         {l:'한국은행 기준금리', v:'3.00%', c:'2연속 인상 · 8/27', s:false, key:'bok'},
         {l:'ECB 예금금리', v:'2.50%', c:'25bp 인상 · 9/16', s:false, key:'ecb'},
         {l:'BoE 기준금리', v:'3.75%', c:'6회 연속 동결 · 9/17', s:null, key:'boe'},
         {l:'일본은행 정책금리', v:'1.25%', c:'9/25경 보도 기준', s:null, key:'boj'},
-        {l:'브렌트유', v:'$104.32', c:'전쟁 리스크 · 9/25', s:false, key:'brent'},
+        {l:'브렌트유', v:'$104.32', c:'9/25 기준 — 10월 미확인', s:false, key:'brent'},
       ]},
     charts:[
       {t:{en:'KOSPI vs. S&P 500', ko:'코스피 vs S&P 500'}, n:{en:'Normalized, 100 = late-Apr close', ko:'정규화(4월 말=100)'},
@@ -234,60 +234,60 @@ const V = {
        build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[
          {label:L.bok,data:KR_RATE,borderColor:COLORS[0],stepped:true},
          {label:L.fed,data:US_RATE,borderColor:COLORS[1],stepped:true},
-         {label:L.ecb,data:[2.50,2.50,2.25,2.25,2.25,2.50],borderColor:COLORS[2],stepped:true},
-         {label:L.boe,data:[3.75,3.75,3.75,3.75,3.75,3.75],borderColor:COLORS[3],stepped:true}]},
+         {label:L.ecb,data:[2.50,2.50,2.25,2.25,2.25,2.50,2.50],borderColor:COLORS[2],stepped:true},
+         {label:L.boe,data:[3.75,3.75,3.75,3.75,3.75,3.75,3.75],borderColor:COLORS[3],stepped:true}]},
          options:opts({y:{title:{display:true,text:L.yPct}}})})}
     ],
     tableHead:{en:['Country','Equity index','Policy rate','10Y yield','Read'], ko:['국가','주가지수','정책금리','10년물 금리','해석']},
     plainTable:true,
     table:{
       en:[
-        ['Korea','KOSPI 7,080.92 (9/23)','3.00% (8/27 hike)','4.238% (8/27)','Tightening, exports at record'],
-        ['United States','S&P 500 7,706.03 (~9/22)','3.75–4.00% (9/16 hike)','4.683% (8/12 auction)','Hawkish surprise, oil > $100'],
+        ['Korea','KOSPI 5,554.22 (10/15)','3.00% (8/27 hike)','4.238% (8/27, dated)','Record sell-off: about −21% in 7 sessions'],
+        ['United States','S&P 500 7,744.06 (10/15)','3.75–4.00% (9/16 hike)','5.086% (10/15)','Hot CPI 3.7%, Oct hike odds ~26–29%'],
         ['Eurozone','Euro Stoxx 50 ~6,477 (8/5, dated)','2.50% (9/16 hike)','n/a (not verified)','ECB resumed hiking in Sept'],
         ['United Kingdom','FTSE 100 ~10,908 (7/29, dated)','3.75% (9/17 hold, 6-3 vote)','n/a (not verified)','BoE holding, 3 MPC members want a hike'],
-        ['Japan','Nikkei 225 65,872.07 (~9/23)','1.25% (~9/25)','~2.93% (9/10)','Rate-hike expectations weigh'],
-        ['China · HK','Hang Seng 24,704.75 (~9/23)','n/a (not verified)','n/a (not verified)','Limited data — see tab'],
+        ['Japan','Nikkei 225 64,425.95 (10/15)','1.25% (~9/25, dated)','~2.93% (9/10, dated)','3rd-largest one-day drop (−4.90%)'],
+        ['China · HK','Hang Seng 23,785.79 (10/8)','n/a (not verified)','n/a (not verified)','Shanghai Comp 3,707.48 (10/15, −1.59%)'],
       ],
       ko:[
-        ['한국','코스피 7,080.92 (9/23)','3.00% (8/27 인상)','4.238% (8/27)','긴축 국면, 수출은 역대 최대'],
-        ['미국','S&P 500 7,706.03 (~9/22)','3.75–4.00% (9/16 인상)','4.683% (8/12 입찰)','매파적 서프라이즈, 유가 $100 상회'],
+        ['한국','코스피 5,554.22 (10/15)','3.00% (8/27 인상)','4.238% (8/27, 시점 오래됨)','역대급 급락: 7거래일 약 −21%'],
+        ['미국','S&P 500 7,744.06 (10/15)','3.75–4.00% (9/16 인상)','5.086% (10/15)','CPI 3.7% 쇼크, 10월 인상 확률 약 26~29%'],
         ['유로존','Euro Stoxx 50 ~6,477 (8/5, 시점 오래됨)','2.50% (9/16 인상)','해당 없음(미확인)','ECB 9월 다시 인상 전환'],
         ['영국','FTSE 100 ~10,908 (7/29, 시점 오래됨)','3.75% (9/17 동결, 6-3)','해당 없음(미확인)','BoE 동결 유지, 위원 3명은 인상 요구'],
-        ['일본','닛케이225 65,872.07 (~9/23)','1.25% (~9/25)','~2.93% (9/10)','금리 인상 기대가 부담'],
-        ['중국 · 홍콩','항셍 24,704.75 (~9/23)','해당 없음(미확인)','해당 없음(미확인)','데이터 제한 — 해당 탭 참고'],
+        ['일본','닛케이225 64,425.95 (10/15)','1.25% (~9/25, 시점 오래됨)','~2.93% (9/10, 시점 오래됨)','역대 3위 일일 낙폭 (−4.90%)'],
+        ['중국 · 홍콩','항셍 23,785.79 (10/8)','해당 없음(미확인)','해당 없음(미확인)','상하이종합 3,707.48 (10/15, −1.59%)'],
       ]},
-    banner:{en:'Common thread: Korea, the US and the ECB all tightened this quarter while the BoE held only on a 6-3 split — a very different backdrop from the 2025 global easing cycle, with Brent above $100 on the prolonged US–Iran conflict.',
-            ko:'공통 흐름: 이번 분기 한국·미국·ECB가 모두 긴축으로 돌아섰고, BoE도 6-3 표결로 겨우 동결을 유지했습니다 — 2025년의 글로벌 완화 국면과는 크게 다른 배경이며, 美-이란 갈등 장기화로 브렌트유는 $100를 웃돌고 있습니다.'}
+    banner:{en:'Common thread: a hotter-than-expected US September CPI (3.7%) and an AI-financing scare hit chip-heavy Asian markets hardest on 10/15 — KOSPI −7.57%, Nikkei −4.90% — with the Fed (3.75–4.00%) next deciding on 10/27–28. Eurozone, UK, BOJ and KTB rows were not refreshed in this update.',
+            ko:'공통 흐름: 예상을 웃돈 美 9월 CPI(3.7%)와 AI 자금조달 우려로 10/15 반도체 비중이 큰 아시아 증시가 가장 크게 흔들렸습니다 — 코스피 −7.57%, 닛케이 −4.90%. 연준(3.75–4.00%)의 다음 결정은 10/27~28입니다. 유로존·영국·일본은행·국고채 항목은 이번에 갱신하지 못했습니다.'}
   },
   kr:{
     flag:'🇰🇷',
     head:{en:'Korea', ko:'한국'}, tag:{en:'KOSPI · KOSDAQ · KRW · KTB · BOK', ko:'코스피 · 코스닥 · 원화 · 국고채 · 한국은행'},
     kpis:{
       en:[
-        {l:'KOSPI', v:'7,080.92', c:'+0.90% · 9/23', s:true, key:'kospi'},
-        {l:'KOSDAQ', v:'844.48', c:'+1.21% · 9/23', s:true, key:'kosdaq'},
-        {l:'KRW / USD', v:'1,358.4', c:'Won strength · 9/23', s:null, key:'usdkrw'},
+        {l:'KOSPI', v:'5,554.22', c:'−7.57% · 10/15', s:false, key:'kospi'},
+        {l:'KOSDAQ', v:'760.82', c:'−7.65% · 10/15', s:false, key:'kosdaq'},
+        {l:'KRW / USD', v:'1,344.6', c:'+6.3 won (weaker) · 10/15', s:null, key:'usdkrw'},
         {l:'BOK Base Rate', v:'3.00%', c:'2nd straight hike · 8/27', s:false, key:'bok'},
         {l:'3Y KTB Yield', v:'3.755%', c:'-6.1bp · 8/27', s:null, key:'ktb3'},
         {l:'10Y KTB Yield', v:'4.238%', c:'-5.0bp · 8/27', s:null, key:'ktb10'},
       ],
       ko:[
-        {l:'코스피', v:'7,080.92', c:'+0.90% · 9/23', s:true, key:'kospi'},
-        {l:'코스닥', v:'844.48', c:'+1.21% · 9/23', s:true, key:'kosdaq'},
-        {l:'원/달러', v:'1,358.4', c:'원화 강세 · 9/23', s:null, key:'usdkrw'},
+        {l:'코스피', v:'5,554.22', c:'−7.57% · 10/15', s:false, key:'kospi'},
+        {l:'코스닥', v:'760.82', c:'−7.65% · 10/15', s:false, key:'kosdaq'},
+        {l:'원/달러', v:'1,344.6', c:'6.3원 상승(원화 약세) · 10/15', s:null, key:'usdkrw'},
         {l:'한국은행 기준금리', v:'3.00%', c:'2연속 인상 · 8/27', s:false, key:'bok'},
         {l:'국고채 3년', v:'3.755%', c:'-6.1bp · 8/27', s:null, key:'ktb3'},
         {l:'국고채 10년', v:'4.238%', c:'-5.0bp · 8/27', s:null, key:'ktb10'},
       ]},
     charts:[
-      {t:{en:'KOSPI', ko:'코스피'}, n:{en:'Closes on labeled dates · intraday all-time high 9,385.59 on 6/19', ko:'표기된 날짜 종가 · 6/19 장중 사상 최고 9,385.59'},
+      {t:{en:'KOSPI', ko:'코스피'}, n:{en:'Closes on labeled dates · intraday all-time high 9,385.59 on 6/19 · 10/15 crash close', ko:'표기된 날짜 종가 · 6/19 장중 사상 최고 9,385.59 · 10/15 폭락 종가'},
        build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[{label:L.kospi,data:KOSPI_RAW,borderColor:COLORS[0],backgroundColor:COLORS[0]+'18',fill:true,tension:.25}]},
          options:opts({y:{title:{display:true,text:L.yLvl}}})})},
       {t:{en:'BOK Base Rate', ko:'한국은행 기준금리'}, n:{en:'%, hikes on 7/16 and 8/27', ko:'%, 7/16·8/27 인상'},
        build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[{label:L.bok,data:KR_RATE,borderColor:COLORS[0],stepped:true}]},
          options:opts({y:{title:{display:true,text:L.yPct}}})})},
-      {t:{en:'KRW / USD', ko:'원/달러 환율'}, n:{en:'Won per dollar — continued won strength (7/14 interpolated)', ko:'달러당 원화 — 원화 강세 흐름 (7/14는 보간 추정)'},
+      {t:{en:'KRW / USD', ko:'원/달러 환율'}, n:{en:'Won per dollar — won weakened on 10/15 (7/14 interpolated)', ko:'달러당 원화 — 10/15 원화 약세 (7/14는 보간 추정)'},
        build:(c,L)=>new Chart(c,{type:'line',data:{labels:DATES,datasets:[{label:L.fx,data:FX,borderColor:COLORS[2],backgroundColor:COLORS[2]+'22',fill:true,tension:.25}]},
          options:opts({y:{title:{display:true,text:L.yFx}}})})},
       {t:{en:'3Y vs. 10Y KTB Yield', ko:'국고채 3년 vs 10년'}, n:{en:'Confirmed trading days only (not evenly spaced)', ko:'확인된 거래일만 표시 (등간격 아님)'},
@@ -298,9 +298,9 @@ const V = {
     ],
     table:{
       en:[
-        ['KOSPI Index','7,080.92','+0.90% (9/23)','up','kospi'],
-        ['KOSDAQ Index','844.48','+1.21% (9/23)','up','kosdaq'],
-        ['KRW / USD','1,358.4','Won strength continues (9/23)','mix','usdkrw'],
+        ['KOSPI Index','5,554.22','−7.57% (10/15) · about −21% in 7 sessions','down','kospi'],
+        ['KOSDAQ Index','760.82','−7.65% (10/15)','down','kosdaq'],
+        ['KRW / USD','1,344.6','+6.3 won, won weaker (10/15)','mix','usdkrw'],
         ['BOK Base Rate','3.00%','2nd straight hike (8/27)','mix','bok'],
         ['3Y KTB Yield','3.755%','-6.1bp (8/27)','mix','ktb3'],
         ['10Y KTB Yield','4.238%','-5.0bp (8/27)','mix','ktb10'],
@@ -309,9 +309,9 @@ const V = {
         ['Consumer Sentiment Index','106.6','+2.1pt (MoM)','up',null],
       ],
       ko:[
-        ['코스피 지수','7,080.92','+0.90% (9/23)','up','kospi'],
-        ['코스닥 지수','844.48','+1.21% (9/23)','up','kosdaq'],
-        ['원/달러 환율','1,358.4','원화 강세 지속 (9/23)','mix','usdkrw'],
+        ['코스피 지수','5,554.22','−7.57% (10/15) · 7거래일 약 −21%','down','kospi'],
+        ['코스닥 지수','760.82','−7.65% (10/15)','down','kosdaq'],
+        ['원/달러 환율','1,344.6','6.3원 상승, 원화 약세 (10/15)','mix','usdkrw'],
         ['한국은행 기준금리','3.00%','2연속 인상 (8/27)','mix','bok'],
         ['국고채 3년물 금리','3.755%','-6.1bp (8/27)','mix','ktb3'],
         ['국고채 10년물 금리','4.238%','-5.0bp (8/27)','mix','ktb10'],
@@ -326,18 +326,18 @@ const V = {
     head:{en:'United States', ko:'미국'}, tag:{en:'S&P 500 · Fed · Treasuries · VIX · Oil', ko:'S&P 500 · 연준 · 국채 · VIX · 유가'},
     kpis:{
       en:[
-        {l:'S&P 500', v:'7,706.03', c:'-0.75% · ~9/22', s:false, key:'spx'},
-        {l:'Fed Funds Rate', v:'3.75–4.00%', c:'+25bp hike · 9/16', s:false, key:'fed'},
-        {l:'10Y Treasury', v:'4.683%', c:'auction yield · 8/12', s:false, key:'us10'},
-        {l:'VIX', v:'15.13', c:'8/21 session', s:null, key:'vix'},
-        {l:'Brent Crude', v:'$104.32', c:'War risk premium · 9/25', s:false, key:'brent'},
+        {l:'S&P 500', v:'7,744.06', c:'+0.33% · 10/15', s:null, key:'spx'},
+        {l:'Fed Funds Rate', v:'3.75–4.00%', c:'Hiked 9/16 · FOMC 10/27–28', s:false, key:'fed'},
+        {l:'10Y Treasury', v:'5.086%', c:'10/15 · biggest 1-day drop since 8/1', s:false, key:'us10'},
+        {l:'VIX', v:'15.3', c:'10/13 · before sell-off', s:null, key:'vix'},
+        {l:'Brent Crude', v:'$104.32', c:'9/25 — Oct. price not verified', s:false, key:'brent'},
       ],
       ko:[
-        {l:'S&P 500', v:'7,706.03', c:'-0.75% · ~9/22', s:false, key:'spx'},
-        {l:'연준 기준금리', v:'3.75–4.00%', c:'25bp 인상 · 9/16', s:false, key:'fed'},
-        {l:'美 10년물 국채', v:'4.683%', c:'입찰 금리 · 8/12', s:false, key:'us10'},
-        {l:'VIX', v:'15.13', c:'8/21 세션', s:null, key:'vix'},
-        {l:'브렌트유', v:'$104.32', c:'전쟁 리스크 · 9/25', s:false, key:'brent'},
+        {l:'S&P 500', v:'7,744.06', c:'+0.33% · 10/15', s:null, key:'spx'},
+        {l:'연준 기준금리', v:'3.75–4.00%', c:'9/16 인상 · FOMC 10/27~28', s:false, key:'fed'},
+        {l:'美 10년물 국채', v:'5.086%', c:'10/15 · 8/1 이후 최대 일일 하락', s:false, key:'us10'},
+        {l:'VIX', v:'15.3', c:'10/13 · 급락 이전', s:null, key:'vix'},
+        {l:'브렌트유', v:'$104.32', c:'9/25 기준 — 10월 미확인', s:false, key:'brent'},
       ]},
     charts:[
       {t:{en:'S&P 500', ko:'S&P 500'}, n:{en:'Closes on labeled dates (5/6 interpolated)', ko:'표기된 날짜 종가 (5/6은 보간 추정)'},
@@ -349,22 +349,25 @@ const V = {
     ],
     table:{
       en:[
-        ['S&P 500','7,706.03','-0.75% (~9/22)','down','spx'],
-        ['Fed Funds Rate','3.75–4.00%','+25bp (9/16 FOMC)','down','fed'],
-        ['10Y Treasury Yield','4.683%','Auction yield (8/12)','down','us10'],
-        ['VIX','15.13','8/21 session','mix','vix'],
-        ['Brent Crude','$104.32','Prolonged US–Iran war (9/25)','down','brent'],
+        ['S&P 500','7,744.06','+0.33% (10/15), −1.11% on 10/14','mix','spx'],
+        ['Fed Funds Rate','3.75–4.00%','+25bp (9/16 FOMC) · Oct hike odds ~26–29%','down','fed'],
+        ['US CPI (Sep)','3.7% YoY','vs 3.6% expected, prior 3.4% (10/14)','down',null],
+        ['10Y Treasury Yield','5.086%','10/15 — after 5.21% on 10/13','down','us10'],
+        ['VIX','15.3','10/13 (before sell-off)','mix','vix'],
+        ['Brent Crude','$104.32','9/25 (Oct. not verified) · Sept +14%','down','brent'],
         ['Geopolitical Risk','US–Iran war ongoing','Backdrop for Sept FOMC hike','down',null],
       ],
       ko:[
-        ['S&P 500','7,706.03','-0.75% (~9/22)','down','spx'],
-        ['연준 기준금리','3.75–4.00%','+25bp (9/16 FOMC)','down','fed'],
-        ['美 10년물 국채금리','4.683%','입찰 금리 (8/12)','down','us10'],
-        ['VIX','15.13','8/21 세션','mix','vix'],
-        ['브렌트유','$104.32','美-이란 전쟁 장기화 (9/25)','down','brent'],
+        ['S&P 500','7,744.06','+0.33% (10/15), −1.11% on 10/14','mix','spx'],
+        ['연준 기준금리','3.75–4.00%','+25bp (9/16 FOMC) · 10월 인상 확률 약 26~29%','down','fed'],
+        ['미국 CPI (9월)','3.7%','예상 3.6%·전월 3.4% (10/14)','down',null],
+        ['美 10년물 국채금리','5.086%','10/15 — 10/13의 5.21%에서 하락','down','us10'],
+        ['VIX','15.3','10/13 (급락 이전)','mix','vix'],
+        ['브렌트유','$104.32','9/25 기준(10월 미확인) · 9월 +14%','down','brent'],
         ['지정학 리스크','美-이란 전쟁 지속','9월 FOMC 인상 배경','down',null],
       ]},
-    banner:{en:'The Fed raised rates in September after five straight holds — a hawkish turn driven by war-related inflation pressure.', ko:'연준은 5회 연속 동결 끝에 9월 금리를 인상했습니다 — 전쟁발 물가 압력에 따른 매파적 전환입니다.'}
+    banner:{en:'September CPI came in at 3.7% against 3.6% expected, and October rate-hike odds spiked as high as 55% before settling near 26–29%. The 10Y yield fell to 5.09% on 10/15 after trading above 5.2% on 10/13. Next FOMC: 10/27–28.',
+            ko:'9월 CPI가 예상 3.6%를 웃도는 3.7%로 나오면서 10월 금리 인상 확률이 한때 55%까지 치솟았다가 26~29% 안팎으로 내려왔습니다. 10년물 금리는 10/13 5.2%대에서 10/15 5.09%로 하락했습니다. 다음 FOMC는 10/27~28입니다.'}
   },
   eu:{
     flag:'🇪🇺',
@@ -435,62 +438,64 @@ const V = {
     head:{en:'Japan', ko:'일본'}, tag:{en:'Nikkei 225 · BOJ · JGB', ko:'닛케이225 · 일본은행 · 국채'},
     kpis:{
       en:[
-        {l:'Nikkei 225', v:'65,872.07', c:'~9/23 snapshot', s:null, key:'nikkei'},
+        {l:'Nikkei 225', v:'64,425.95', c:'−4.90% · 10/15', s:false, key:'nikkei'},
         {l:'BOJ Policy Rate', v:'1.25%', c:'as reported ~9/25', s:null, key:'boj'},
         {l:'10Y JGB Yield', v:'~2.93%', c:'9/10', s:false, key:'jgb10'},
-        {l:'Nikkei daily move', v:'-2.19%', c:'9/11 · rate-hike worries', s:false, key:null},
+        {l:'Nikkei daily move', v:'-4.90%', c:'10/15 · 3rd-largest drop', s:false, key:null},
       ],
       ko:[
-        {l:'닛케이225', v:'65,872.07', c:'~9/23 스냅샷', s:null, key:'nikkei'},
+        {l:'닛케이225', v:'64,425.95', c:'−4.90% · 10/15', s:false, key:'nikkei'},
         {l:'일본은행 정책금리', v:'1.25%', c:'9/25경 보도 기준', s:null, key:'boj'},
         {l:'10년 국채(JGB) 금리', v:'~2.93%', c:'9/10', s:false, key:'jgb10'},
-        {l:'닛케이 일간 변동', v:'-2.19%', c:'9/11 · 금리인상 우려', s:false, key:null},
+        {l:'닛케이 일간 변동', v:'-4.90%', c:'10/15 · 역대 3위 낙폭', s:false, key:null},
       ]},
     charts:null,
     table:{
       en:[
-        ['Nikkei 225','65,872.07','~9/23 snapshot','mix','nikkei'],
+        ['Nikkei 225','64,425.95','−4.90% (10/15), 6th straight decline','down','nikkei'],
         ['BOJ Policy Rate','1.25%','As reported ~9/25','mix','boj'],
         ['10Y JGB Yield','~2.93%','9/10, ahead of 9/17–18 BOJ meeting','down','jgb10'],
-        ['Nikkei 225 daily move','-2.19%','9/11 — Fed & BOJ hike expectations','down',null],
+        ['Nikkei 225 daily move','-4.90%','10/15 — US CPI shock, AI/chip sell-off','down',null],
         ['Manufacturer Sentiment','Improved','2nd straight month (Sep)','up',null],
       ],
       ko:[
-        ['닛케이225','65,872.07','~9/23 스냅샷','mix','nikkei'],
+        ['닛케이225','64,425.95','−4.90% (10/15), 6거래일 연속 하락','down','nikkei'],
         ['일본은행 정책금리','1.25%','9/25경 보도 기준','mix','boj'],
         ['일본 10년 국채금리','~2.93%','9/10, 9/17~18 금정위 직전','down','jgb10'],
-        ['닛케이225 일간 변동','-2.19%','9/11 — 연준·BOJ 인상 기대','down',null],
+        ['닛케이225 일간 변동','-4.90%','10/15 — 美 CPI 쇼크·AI·반도체 매도','down',null],
         ['제조업 체감경기','개선','9월 2개월 연속','up',null],
       ]},
-    banner:{en:'Trend chart pending: I could not confirm a clean daily Nikkei/JGB series, so this tab shows dated point values only. The fetch script below can pull a real Nikkei series from Yahoo Finance automatically.', ko:'추세 차트 보류: 일관된 닛케이·JGB 일별 시계열을 확인하지 못해, 기준일이 붙은 개별 수치만 표시했습니다. 아래 수집 스크립트를 연결하면 Yahoo Finance에서 실제 닛케이 시계열을 자동으로 가져옵니다.'}
+    banner:{en:'The Nikkei fell 4.90% on 10/15, the third-largest one-day drop on record, led by Advantest (−14.95%) and Kioxia (−12.32%) as US CPI and AI-financing worries spread. BOJ rate and JGB yield rows were not refreshed. Trend chart pending: no clean daily series confirmed.',
+            ko:'닛케이는 10/15 4.90% 하락해 역대 3위 일일 낙폭을 기록했습니다. 美 CPI와 AI 자금조달 우려 속에 어드반테스트(−14.95%), 키옥시아(−12.32%)가 급락을 주도했습니다. 일본은행 금리와 국채 금리 항목은 갱신하지 못했고, 추세 차트는 일간 시계열을 확인하지 못해 보류했습니다.'}
   },
   cn:{
     flag:'🇨🇳',
     head:{en:'China · Hong Kong', ko:'중국 · 홍콩'}, tag:{en:'Hang Seng · Shanghai Composite · PMI', ko:'항셍 · 상하이종합 · PMI'},
     kpis:{
       en:[
-        {l:'Hang Seng', v:'24,704.75', c:'~9/23 snapshot', s:null, key:'hsi'},
-        {l:'Shanghai Composite', v:'3,949', c:'4/1 close — dated', s:null, key:'shcomp'},
+        {l:'Hang Seng', v:'23,785.79', c:'10/8 close · 3-month low', s:false, key:'hsi'},
+        {l:'Shanghai Composite', v:'3,707.48', c:'10/15 · −1.59%', s:false, key:'shcomp'},
         {l:'NBS Non-Mfg PMI', v:'49.5', c:'Feb 2026 — dated', s:false, key:'cn_pmi'},
       ],
       ko:[
-        {l:'항셍지수', v:'24,704.75', c:'~9/23 스냅샷', s:null, key:'hsi'},
-        {l:'상하이종합', v:'3,949', c:'4/1 종가 — 시점 오래됨', s:null, key:'shcomp'},
+        {l:'항셍지수', v:'23,785.79', c:'10/8 종가 · 3개월 저점', s:false, key:'hsi'},
+        {l:'상하이종합', v:'3,707.48', c:'10/15 · −1.59%', s:false, key:'shcomp'},
         {l:'中 비제조업 PMI(NBS)', v:'49.5', c:'2026.2월 — 시점 오래됨', s:false, key:'cn_pmi'},
       ]},
     charts:null,
     table:{
       en:[
-        ['Hang Seng Index','24,704.75','~9/23 snapshot','mix','hsi'],
-        ['Shanghai Composite','3,949','4/1 close (dated)','mix','shcomp'],
+        ['Hang Seng Index','23,785.79','10/8 close, 3-month low (10/15 intraday about −1.3%)','down','hsi'],
+        ['Shanghai Composite','3,707.48','10/15 close, −1.59% (CSI 300 −1.23%)','down','shcomp'],
         ['NBS Non-Manufacturing PMI','49.5','Feb 2026 (dated) — below 50','down','cn_pmi'],
       ],
       ko:[
-        ['항셍지수','24,704.75','~9/23 스냅샷','mix','hsi'],
-        ['상하이종합지수','3,949','4/1 종가 (시점 오래됨)','mix','shcomp'],
+        ['항셍지수','23,785.79','10/8 종가, 3개월 저점 (10/15 장중 약 −1.3%)','down','hsi'],
+        ['상하이종합지수','3,707.48','10/15 종가, −1.59% (CSI 300 −1.23%)','down','shcomp'],
         ['中 비제조업 PMI(국가통계국)','49.5','2026.2월 (시점 오래됨) — 50 하회','down','cn_pmi'],
       ]},
-    banner:{en:'Limited data: the Shanghai Composite and PMI prints here are months older than the other tabs. A September China dataset (PMI, PBoC LPR, CSI 300) is the next thing to add.', ko:'데이터 제한: 상하이종합과 PMI는 다른 탭보다 몇 달 오래된 수치입니다. 9월 기준 중국 데이터(PMI, LPR, CSI300) 보강이 다음 과제입니다.'}
+    banner:{en:'The Shanghai Composite closed at 3,707.48 on 10/15 (−1.59%) on US rate-hike worries and AI-stock corrections. The latest confirmed Hang Seng close here is 10/8 (23,785.79, a 3-month low). The PMI print is still dated.',
+            ko:'상하이종합지수는 10/15 美 금리 인상 우려와 AI 관련주 조정으로 3,707.48(−1.59%)에 마감했습니다. 항셍지수는 확인된 최근 종가가 10/8(23,785.79, 3개월 저점)입니다. PMI는 여전히 오래된 값입니다.'}
   }
 };
 
