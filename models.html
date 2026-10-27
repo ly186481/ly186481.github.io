@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>모델 한입 — 경제모델 돌리는 법, 읽는 법</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
-<meta name="description" content="생존분석, 패널회귀, VAR, 연관규칙. 모델이 풀려는 질문, 돌리는 순서, 결과 해석법을 한 페이지씩.">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Gowun+Dodum&amp;display=swap" rel="stylesheet"/>
+<meta content="생존분석, 패널회귀, VAR, 연관규칙. 모델이 풀려는 질문, 돌리는 순서, 결과 해석법을 한 페이지씩." name="description"/>
 <style>
 :root{--cream:#FBF6EC;--paper:#FFFFFF;--ink:#2B1B2E;--sub:#6B5B6E;--honey:#E8A33D;--honey-deep:#C97F1E;--sage:#6B8F71;--rust:#C4604A;--line:#E9DCC8;--tint:#FFF3DC;--r:18px}
 *{box-sizing:border-box}
@@ -62,40 +63,40 @@ svg text{fill:var(--sub);font-size:12px;font-family:inherit}
 .toc{display:flex;flex-wrap:wrap;gap:8px;font-size:14px;padding:6px 0 4px}
 .toc a{padding:5px 12px;border:1px solid var(--line);border-radius:30px;background:var(--paper);text-decoration:none;color:var(--sub)}
 footer{margin-top:56px;text-align:center;font-size:12px;color:var(--sub);line-height:1.8}
+
+.wrap{position:relative}
+#langBtn{position:absolute;top:22px;right:20px;font:inherit;font-size:13.5px;padding:6px 14px;border:1px solid var(--line);border-radius:30px;background:var(--paper);color:var(--sub);cursor:pointer}
+#langBtn:focus-visible{outline:3px solid var(--honey-deep);outline-offset:2px}
 </style>
 </head>
 <body>
 <div class="wrap">
-<a class="back" href="index.html">← 포트폴리오로</a>
-<div class="mark" aria-hidden="true">🧮</div>
-<h1>모델 한입</h1>
-<p class="lede">모델은 결과 표보다 <b>무슨 질문에 답하는 도구인지</b>를 아는 게 먼저입니다. 다섯 가지 모델을 질문 → 돌리는 순서 → 읽는 법 순서로 정리했습니다.</p>
-
-<nav class="tabs" role="tablist" aria-label="모델 선택">
-<button role="tab" aria-selected="true" data-t="surv">생존분석</button>
-<button role="tab" aria-selected="false" data-t="panel">패널회귀</button>
-<button role="tab" aria-selected="false" data-t="var">VAR</button>
-<button role="tab" aria-selected="false" data-t="assoc">연관규칙</button>
-<button role="tab" aria-selected="false" data-t="fraud">카드 사기 탐지</button>
+<a class="back" data-en="← Back to portfolio" href="index.html">← 포트폴리오로</a>
+<div aria-hidden="true" class="mark">🧮</div>
+<h1 data-en="Model Bites">모델 한입</h1>
+<p class="lede" data-en="Knowing &lt;b&gt;what question a model answers&lt;/b&gt; matters more than the results table. Here are five models, organized as: question → how to run it → how to read it.">모델은 결과 표보다 <b>무슨 질문에 답하는 도구인지</b>를 아는 게 먼저입니다. 다섯 가지 모델을 질문 → 돌리는 순서 → 읽는 법 순서로 정리했습니다.</p>
+<nav aria-label="모델 선택" class="tabs" role="tablist">
+<button aria-selected="true" data-en="Survival analysis" data-t="surv" role="tab">생존분석</button>
+<button aria-selected="false" data-en="Panel regression" data-t="panel" role="tab">패널회귀</button>
+<button aria-selected="false" data-t="var" role="tab">VAR</button>
+<button aria-selected="false" data-en="Association rules" data-t="assoc" role="tab">연관규칙</button>
+<button aria-selected="false" data-en="Card fraud detection" data-t="fraud" role="tab">카드 사기 탐지</button>
 </nav>
-
 <!-- 생존분석 -->
 <section class="panel on" id="surv">
-<h2>생존분석 (Kaplan–Meier, Cox)</h2>
-<p class="tag">“얼마나 오래 걸리는가, 그리고 무엇이 그 속도를 바꾸는가”</p>
-<div class="box"><b>내 석사 논문으로 보는 상세 해설</b> — 실업 기간과 정신건강 연구를 단계별로 풀어 쓴 페이지입니다. <a href="survival.html">논문 기반 해설 보기 →</a></div>
-
-<h3>이 모델이 묻는 것</h3>
-<p>실업 기간, 고객 이탈까지의 시간처럼 <b>사건이 일어날 때까지의 시간</b>을 다룹니다. 평균만 보면 아직 사건이 안 일어난 사람(중도절단)을 버리게 되는데, 생존분석은 이들을 “지금까지는 버텼다”는 정보로 활용합니다.</p>
-<div class="box"><b>핵심 개념</b><br>생존함수 S(t): t 시점까지 사건이 안 일어났을 확률<br>위험함수 h(t): t 시점까지 버틴 사람이 바로 그다음 순간 사건을 겪을 위험</div>
-
-<h3>돌리는 순서</h3>
+<h2 data-en="Survival analysis (Kaplan–Meier, Cox)">생존분석 (Kaplan–Meier, Cox)</h2>
+<p class="tag" data-en="“How long does it take, and what changes the speed?”">“얼마나 오래 걸리는가, 그리고 무엇이 그 속도를 바꾸는가”</p>
+<div class="box" data-en="&lt;b&gt;In-depth walkthrough of my master's thesis&lt;/b&gt; — a step-by-step page on unemployment duration and mental health. &lt;a href=&quot;survival.html&quot;&gt;Read the thesis walkthrough →&lt;/a&gt;"><b>내 석사 논문으로 보는 상세 해설</b> — 실업 기간과 정신건강 연구를 단계별로 풀어 쓴 페이지입니다. <a href="survival.html">논문 기반 해설 보기 →</a></div>
+<h3 data-en="What this model asks">이 모델이 묻는 것</h3>
+<p data-en="It handles &lt;b&gt;time until an event occurs&lt;/b&gt;, such as unemployment duration or time until a customer churns. Averages throw away people whose event has not happened yet (censored cases); survival analysis uses them as the information “they have held out so far.”">실업 기간, 고객 이탈까지의 시간처럼 <b>사건이 일어날 때까지의 시간</b>을 다룹니다. 평균만 보면 아직 사건이 안 일어난 사람(중도절단)을 버리게 되는데, 생존분석은 이들을 “지금까지는 버텼다”는 정보로 활용합니다.</p>
+<div class="box" data-en="&lt;b&gt;Key concepts&lt;/b&gt;&lt;br/&gt;Survival function S(t): probability the event has not occurred by time t&lt;br/&gt;Hazard function h(t): risk of the event in the next instant for someone who has lasted until t"><b>핵심 개념</b><br/>생존함수 S(t): t 시점까지 사건이 안 일어났을 확률<br/>위험함수 h(t): t 시점까지 버틴 사람이 바로 그다음 순간 사건을 겪을 위험</div>
+<h3 data-en="How to run it">돌리는 순서</h3>
 <ol>
-<li>데이터를 <code>기간(time)</code>, <code>사건 여부(event: 1=발생, 0=중도절단)</code>, 설명변수로 정리</li>
-<li>Kaplan–Meier로 집단별 생존곡선을 먼저 그려 모양 확인 (S(t)=∏(1−dᵢ/nᵢ))</li>
-<li>Log-rank 검정으로 집단 차이 확인</li>
-<li>Cox 비례위험모형으로 변수를 통제한 효과 추정: h(t|x)=h₀(t)·exp(βx)</li>
-<li>비례위험 가정 점검 후 해석</li>
+<li data-en="Organize the data into &lt;code&gt;duration (time)&lt;/code&gt;, &lt;code&gt;event (1 = occurred, 0 = censored)&lt;/code&gt;, and covariates">데이터를 <code>기간(time)</code>, <code>사건 여부(event: 1=발생, 0=중도절단)</code>, 설명변수로 정리</li>
+<li data-en="Draw Kaplan–Meier survival curves by group first to check their shape (S(t)=∏(1−dᵢ/nᵢ))">Kaplan–Meier로 집단별 생존곡선을 먼저 그려 모양 확인 (S(t)=∏(1−dᵢ/nᵢ))</li>
+<li data-en="Check group differences with a log-rank test">Log-rank 검정으로 집단 차이 확인</li>
+<li data-en="Estimate covariate-adjusted effects with a Cox proportional hazards model: h(t|x)=h₀(t)·exp(βx)">Cox 비례위험모형으로 변수를 통제한 효과 추정: h(t|x)=h₀(t)·exp(βx)</li>
+<li data-en="Check the proportional hazards assumption, then interpret">비례위험 가정 점검 후 해석</li>
 </ol>
 <pre><code>library(survival)
 km  &lt;- survfit(Surv(dur, event) ~ group, data = df)
@@ -104,75 +105,66 @@ plot(km); survdiff(Surv(dur, event) ~ group, data = df)
 cox &lt;- coxph(Surv(dur, event) ~ mh + age + edu, data = df)
 summary(cox)     # exp(coef) = 위험비(HR)
 cox.zph(cox)     # 비례위험 가정 검정</code></pre>
-
 <figure>
-<svg viewBox="0 0 480 230" width="100%" role="img" aria-label="두 집단의 Kaplan-Meier 생존곡선 예시: 집단 A는 빠르게 하락, 집단 B는 완만하게 하락">
-<line x1="50" y1="20" x2="50" y2="190" stroke="currentColor" opacity=".4"/>
-<line x1="50" y1="190" x2="450" y2="190" stroke="currentColor" opacity=".4"/>
+<svg aria-label="두 집단의 Kaplan-Meier 생존곡선 예시: 집단 A는 빠르게 하락, 집단 B는 완만하게 하락" role="img" viewbox="0 0 480 230" width="100%">
+<line opacity=".4" stroke="currentColor" x1="50" x2="50" y1="20" y2="190"></line>
+<line opacity=".4" stroke="currentColor" x1="50" x2="450" y1="190" y2="190"></line>
 <text x="14" y="26">1.0</text><text x="14" y="195">0</text>
-<text x="230" y="215">경과 시간</text><text x="4" y="110" transform="rotate(-90 12 110)">생존확률 S(t)</text>
-<path d="M50,24 H110 V50 H160 V84 H215 V118 H275 V148 H345 V172 H440" fill="none" stroke="#6B8F71" stroke-width="2.5"/>
-<path d="M50,24 H140 V36 H210 V58 H290 V82 H360 V104 H440" fill="none" stroke="#C4604A" stroke-width="2.5"/>
-<text x="400" y="168" style="fill:#6B8F71">집단 A</text><text x="400" y="100" style="fill:#C4604A">집단 B</text>
+<text data-en="Elapsed time" x="230" y="215">경과 시간</text><text data-en="Survival probability S(t)" transform="rotate(-90 12 110)" x="4" y="110">생존확률 S(t)</text>
+<path d="M50,24 H110 V50 H160 V84 H215 V118 H275 V148 H345 V172 H440" fill="none" stroke="#6B8F71" stroke-width="2.5"></path>
+<path d="M50,24 H140 V36 H210 V58 H290 V82 H360 V104 H440" fill="none" stroke="#C4604A" stroke-width="2.5"></path>
+<text data-en="Group A" style="fill:#6B8F71" x="400" y="168">집단 A</text><text data-en="Group B" style="fill:#C4604A" x="400" y="100">집단 B</text>
 </svg>
-<figcaption>가상 데이터 예시. 곡선이 더 빨리 내려가는 쪽(A)이 사건이 더 빨리 일어납니다.</figcaption>
+<figcaption data-en="Illustrative data. The group whose curve falls faster (A) has the event sooner.">가상 데이터 예시. 곡선이 더 빨리 내려가는 쪽(A)이 사건이 더 빨리 일어납니다.</figcaption>
 </figure>
-
-<h3>읽는 법</h3>
+<h3 data-en="How to read it">읽는 법</h3>
 <table><tbody>
-<tr><th>HR &gt; 1</th><td>그 변수가 클수록 사건 위험이 <b>높다</b> (사건이 더 빨리 일어남)</td></tr>
-<tr><th>HR &lt; 1</th><td>사건 위험이 낮다 (사건이 늦게 일어남)</td></tr>
-<tr><th>HR = 1.30</th><td>다른 조건이 같을 때 위험이 약 30% 높다</td></tr>
-<tr><th>신뢰구간</th><td>1을 포함하면 통계적으로 구분하기 어렵다</td></tr>
+<tr><th>HR &gt; 1</th><td data-en="The larger the variable, the &lt;b&gt;higher&lt;/b&gt; the event risk (the event happens sooner)">그 변수가 클수록 사건 위험이 <b>높다</b> (사건이 더 빨리 일어남)</td></tr>
+<tr><th>HR &lt; 1</th><td data-en="Lower event risk (the event happens later)">사건 위험이 낮다 (사건이 늦게 일어남)</td></tr>
+<tr><th>HR = 1.30</th><td data-en="Risk is about 30% higher, other things equal">다른 조건이 같을 때 위험이 약 30% 높다</td></tr>
+<tr><th data-en="Confidence interval">신뢰구간</th><td data-en="If it contains 1, the effect is statistically hard to distinguish from no effect">1을 포함하면 통계적으로 구분하기 어렵다</td></tr>
 </tbody></table>
-<div class="warn"><b>가장 흔한 실수</b> — <b>무슨 사건을 정의했는지</b>를 먼저 확인하세요. 사건이 “실업 탈출(취업)”이면 HR&gt;1은 <b>좋은 신호</b>(빨리 탈출)이고, 사건이 “이탈”이면 HR&gt;1은 <b>나쁜 신호</b>입니다. 또 HR은 인과가 아니라 연관입니다.</div>
+<div class="warn" data-en="&lt;b&gt;Most common mistake&lt;/b&gt; — First check &lt;b&gt;which event you defined&lt;/b&gt;. If the event is “exit from unemployment (getting a job),” HR&amp;gt;1 is a &lt;b&gt;good sign&lt;/b&gt; (faster exit); if the event is “churn,” HR&amp;gt;1 is a &lt;b&gt;bad sign&lt;/b&gt;. Also, HR is association, not causation."><b>가장 흔한 실수</b> — <b>무슨 사건을 정의했는지</b>를 먼저 확인하세요. 사건이 “실업 탈출(취업)”이면 HR&gt;1은 <b>좋은 신호</b>(빨리 탈출)이고, 사건이 “이탈”이면 HR&gt;1은 <b>나쁜 신호</b>입니다. 또 HR은 인과가 아니라 연관입니다.</div>
 </section>
-
 <!-- 패널회귀 -->
 <section class="panel" id="panel">
-<h2>패널회귀 (고정효과)</h2>
-<p class="tag">“같은 대상을 시간에 따라 관찰하면, 눈에 안 보이는 차이를 걷어낼 수 있다”</p>
-
-<h3>이 모델이 묻는 것</h3>
-<p>은행, 국가, 기업처럼 같은 개체를 여러 시점에 관찰한 데이터에서 변수 사이의 관계를 봅니다. 단면 회귀와 달리 <b>개체마다 고유한 성격(경영 문화, 지역 특성 등 관측되지 않는 요인)</b>을 통제할 수 있습니다.</p>
-
-<h3>돌리는 순서</h3>
+<h2 data-en="Panel regression (fixed effects)">패널회귀 (고정효과)</h2>
+<p class="tag" data-en="“Observe the same units over time, and you can strip out differences you cannot see.”">“같은 대상을 시간에 따라 관찰하면, 눈에 안 보이는 차이를 걷어낼 수 있다”</p>
+<h3 data-en="What this model asks">이 모델이 묻는 것</h3>
+<p data-en="It examines relationships between variables in data where the same units (banks, countries, firms) are observed at multiple points in time. Unlike cross-sectional regression, it can control for &lt;b&gt;each unit's unobserved character (management culture, regional traits, etc.)&lt;/b&gt;.">은행, 국가, 기업처럼 같은 개체를 여러 시점에 관찰한 데이터에서 변수 사이의 관계를 봅니다. 단면 회귀와 달리 <b>개체마다 고유한 성격(경영 문화, 지역 특성 등 관측되지 않는 요인)</b>을 통제할 수 있습니다.</p>
+<h3 data-en="How to run it">돌리는 순서</h3>
 <ol>
-<li>개체×시점 형태(long format)로 데이터를 정리하고 결측·불균형 확인</li>
-<li>Pooled OLS, 고정효과(FE), 확률효과(RE)를 각각 추정</li>
-<li>Hausman 검정으로 FE와 RE 중 선택</li>
-<li>개체 단위 군집 표준오차로 추론 (개체 수가 적으면 주의)</li>
+<li data-en="Arrange the data as unit × time (long format) and check for missing values and imbalance">개체×시점 형태(long format)로 데이터를 정리하고 결측·불균형 확인</li>
+<li data-en="Estimate pooled OLS, fixed effects (FE), and random effects (RE)">Pooled OLS, 고정효과(FE), 확률효과(RE)를 각각 추정</li>
+<li data-en="Choose between FE and RE with the Hausman test">Hausman 검정으로 FE와 RE 중 선택</li>
+<li data-en="Infer with unit-clustered standard errors (be careful when units are few)">개체 단위 군집 표준오차로 추론 (개체 수가 적으면 주의)</li>
 </ol>
 <pre><code>library(plm); library(lmtest)
 fe &lt;- plm(y ~ x1 + x2, data = pdata, model = "within")
 re &lt;- plm(y ~ x1 + x2, data = pdata, model = "random")
 phtest(fe, re)                              # Hausman
 coeftest(fe, vcov = vcovHC(fe, cluster = "group"))</code></pre>
-
-<h3>읽는 법</h3>
+<h3 data-en="How to read it">읽는 법</h3>
 <ul>
-<li><b>계수는 “개체 내 변화”의 효과</b>입니다. x1이 1 늘어난 <u>같은 은행</u>의 y가 평균 β만큼 변한다고 읽습니다. 은행 간 비교가 아닙니다.</li>
-<li>시간에 변하지 않는 변수(설립 연도 등)는 FE에서 식별되지 않아 사라집니다.</li>
-<li>Hausman 검정에서 p값이 작으면 RE 가정이 깨졌다는 뜻이므로 FE를 씁니다.</li>
-<li>표준오차는 반드시 군집 보정을 확인하세요. 이것만 달라져도 유의성이 바뀝니다.</li>
+<li data-en="&lt;b&gt;Coefficients are effects of “within-unit change.”&lt;/b&gt; Read it as: when x1 rises by 1 for the &lt;u&gt;same bank&lt;/u&gt;, y changes by β on average. It is not a comparison across banks."><b>계수는 “개체 내 변화”의 효과</b>입니다. x1이 1 늘어난 <u>같은 은행</u>의 y가 평균 β만큼 변한다고 읽습니다. 은행 간 비교가 아닙니다.</li>
+<li data-en="Time-invariant variables (e.g., founding year) are not identified in FE and drop out.">시간에 변하지 않는 변수(설립 연도 등)는 FE에서 식별되지 않아 사라집니다.</li>
+<li data-en="A small p-value in the Hausman test means the RE assumption fails, so use FE.">Hausman 검정에서 p값이 작으면 RE 가정이 깨졌다는 뜻이므로 FE를 씁니다.</li>
+<li data-en="Always check for clustered standard errors. They alone can change significance.">표준오차는 반드시 군집 보정을 확인하세요. 이것만 달라져도 유의성이 바뀝니다.</li>
 </ul>
-<div class="warn"><b>주의</b> — FE는 “고정된 차이”만 통제합니다. 시간에 따라 변하면서 y와 x에 동시에 영향을 주는 요인(역인과, 동시 충격)은 남아 있어 인과 해석에는 추가 근거가 필요합니다.</div>
+<div class="warn" data-en="&lt;b&gt;Caution&lt;/b&gt; — FE controls only “fixed differences.” Factors that vary over time and affect both y and x (reverse causality, simultaneous shocks) remain, so causal interpretation needs extra support."><b>주의</b> — FE는 “고정된 차이”만 통제합니다. 시간에 따라 변하면서 y와 x에 동시에 영향을 주는 요인(역인과, 동시 충격)은 남아 있어 인과 해석에는 추가 근거가 필요합니다.</div>
 </section>
-
 <!-- VAR -->
 <section class="panel" id="var">
-<h2>VAR (벡터자기회귀)</h2>
-<p class="tag">“한 변수에 충격이 오면 다른 변수는 언제, 얼마나 반응하는가”</p>
-
-<h3>이 모델이 묻는 것</h3>
-<p>금리, 환율, 물가, 수출처럼 서로 영향을 주고받는 변수들을 <b>모두 내생변수로</b> 놓고, 각 변수를 모든 변수의 과거값으로 설명합니다. 계수 자체보다 <b>충격반응함수(IRF)</b>와 <b>분산분해(FEVD)</b>로 읽는 모형입니다.</p>
-
-<h3>돌리는 순서</h3>
+<h2 data-en="VAR (vector autoregression)">VAR (벡터자기회귀)</h2>
+<p class="tag" data-en="“When one variable is shocked, when and how much do the others respond?”">“한 변수에 충격이 오면 다른 변수는 언제, 얼마나 반응하는가”</p>
+<h3 data-en="What this model asks">이 모델이 묻는 것</h3>
+<p data-en="It treats variables that influence each other, such as interest rates, exchange rates, prices, and exports, &lt;b&gt;all as endogenous&lt;/b&gt;, explaining each by the past values of all variables. It is read through &lt;b&gt;impulse response functions (IRF)&lt;/b&gt; and &lt;b&gt;variance decomposition (FEVD)&lt;/b&gt; rather than through coefficients.">금리, 환율, 물가, 수출처럼 서로 영향을 주고받는 변수들을 <b>모두 내생변수로</b> 놓고, 각 변수를 모든 변수의 과거값으로 설명합니다. 계수 자체보다 <b>충격반응함수(IRF)</b>와 <b>분산분해(FEVD)</b>로 읽는 모형입니다.</p>
+<h3 data-en="How to run it">돌리는 순서</h3>
 <ol>
-<li>각 변수의 단위근 검정(ADF)으로 정상성 확인, 필요하면 차분이나 로그차분</li>
-<li>정보기준(AIC/BIC)으로 시차 선택</li>
-<li>VAR 추정 후 안정성(특성근 절댓값이 1 미만) 확인</li>
-<li>그레인저 인과, IRF, FEVD 계산</li>
+<li data-en="Check stationarity with a unit root test (ADF) for each variable; difference or log-difference if needed">각 변수의 단위근 검정(ADF)으로 정상성 확인, 필요하면 차분이나 로그차분</li>
+<li data-en="Select the lag length with information criteria (AIC/BIC)">정보기준(AIC/BIC)으로 시차 선택</li>
+<li data-en="Estimate the VAR and check stability (all characteristic roots below 1 in absolute value)">VAR 추정 후 안정성(특성근 절댓값이 1 미만) 확인</li>
+<li data-en="Compute Granger causality, IRF, and FEVD">그레인저 인과, IRF, FEVD 계산</li>
 </ol>
 <pre><code>library(vars)
 VARselect(dat, lag.max = 8, type = "const")
@@ -182,86 +174,72 @@ causality(m, cause = "rate")                 # 그레인저
 ir  &lt;- irf(m, impulse = "rate", response = "gdp", n.ahead = 12, boot = TRUE)
 plot(ir)
 fevd(m, n.ahead = 12)</code></pre>
-
-<h3>읽는 법</h3>
+<h3 data-en="How to read it">읽는 법</h3>
 <table><tbody>
-<tr><th>IRF</th><td>한 변수에 표준편차 1만큼 충격을 줬을 때 다른 변수가 시간에 따라 어떻게 움직이는지. <b>신뢰구간이 0을 포함하는 구간은 반응이 있다고 말하기 어렵다.</b></td></tr>
-<tr><th>FEVD</th><td>예측오차 변동 중 각 충격이 설명하는 비중. 정책 충격이 얼마나 중요한지 가늠</td></tr>
-<tr><th>그레인저 인과</th><td>X의 과거값이 Y의 예측에 추가 정보를 주는가. 진짜 인과가 아니라 <b>선행성</b></td></tr>
-<tr><th>개별 계수</th><td>변수 간 다중공선성 때문에 직접 해석하지 않는 게 일반적</td></tr>
+<tr><th>IRF</th><td data-en="How other variables move over time after a one-standard-deviation shock to one variable. &lt;b&gt;Where the confidence band includes 0, you cannot say there is a response.&lt;/b&gt;">한 변수에 표준편차 1만큼 충격을 줬을 때 다른 변수가 시간에 따라 어떻게 움직이는지. <b>신뢰구간이 0을 포함하는 구간은 반응이 있다고 말하기 어렵다.</b></td></tr>
+<tr><th>FEVD</th><td data-en="The share of forecast error variance explained by each shock; a gauge of how important a policy shock is">예측오차 변동 중 각 충격이 설명하는 비중. 정책 충격이 얼마나 중요한지 가늠</td></tr>
+<tr><th data-en="Granger causality">그레인저 인과</th><td data-en="Does the past of X add information for predicting Y? It is &lt;b&gt;precedence&lt;/b&gt;, not true causation">X의 과거값이 Y의 예측에 추가 정보를 주는가. 진짜 인과가 아니라 <b>선행성</b></td></tr>
+<tr><th data-en="Individual coefficients">개별 계수</th><td data-en="Generally not interpreted directly because of multicollinearity among variables">변수 간 다중공선성 때문에 직접 해석하지 않는 게 일반적</td></tr>
 </tbody></table>
-<div class="warn"><b>주의</b> — Cholesky 분해를 쓰면 <b>변수 순서가 결과에 영향</b>을 줍니다. 앞에 놓은 변수는 같은 시점에 뒤 변수에 영향을 주지만 반대는 아니라고 가정하기 때문입니다. 순서를 바꿔 결과가 유지되는지 확인하세요.</div>
+<div class="warn" data-en="&lt;b&gt;Caution&lt;/b&gt; — With a Cholesky decomposition, &lt;b&gt;variable ordering affects the results&lt;/b&gt;. A variable placed earlier affects later variables in the same period, but not the reverse. Reorder and check that the results hold."><b>주의</b> — Cholesky 분해를 쓰면 <b>변수 순서가 결과에 영향</b>을 줍니다. 앞에 놓은 변수는 같은 시점에 뒤 변수에 영향을 주지만 반대는 아니라고 가정하기 때문입니다. 순서를 바꿔 결과가 유지되는지 확인하세요.</div>
 </section>
-
 <!-- 연관규칙 -->
 <section class="panel" id="assoc">
-<h2>연관규칙 (Apriori)</h2>
-<p class="tag">“A를 가진 사람은 B도 함께 가지는가”</p>
-
-<h3>이 모델이 묻는 것</h3>
-<p>장바구니 분석에서 시작된 방법으로, 항목들이 <b>우연보다 자주 같이 나타나는 조합</b>을 찾습니다. 예측 모델이 아니라 패턴 탐색 도구입니다.</p>
-
-<h3>세 가지 지표</h3>
+<h2 data-en="Association rules (Apriori)">연관규칙 (Apriori)</h2>
+<p class="tag" data-en="“Do people who have A also tend to have B?”">“A를 가진 사람은 B도 함께 가지는가”</p>
+<h3 data-en="What this model asks">이 모델이 묻는 것</h3>
+<p data-en="Born from market-basket analysis, it finds &lt;b&gt;combinations that appear together more often than chance&lt;/b&gt;. It is a pattern-discovery tool, not a prediction model.">장바구니 분석에서 시작된 방법으로, 항목들이 <b>우연보다 자주 같이 나타나는 조합</b>을 찾습니다. 예측 모델이 아니라 패턴 탐색 도구입니다.</p>
+<h3 data-en="Three metrics">세 가지 지표</h3>
 <table><tbody>
-<tr><th>지지도 (support)</th><td>전체 중 A와 B가 함께 나타난 비율</td></tr>
-<tr><th>신뢰도 (confidence)</th><td>A가 있는 경우 중 B도 있는 비율</td></tr>
-<tr><th>향상도 (lift)</th><td>신뢰도 ÷ B의 전체 비율. 1보다 크면 우연보다 자주 함께 나타남</td></tr>
+<tr><th data-en="Support">지지도 (support)</th><td data-en="Share of all cases in which A and B appear together">전체 중 A와 B가 함께 나타난 비율</td></tr>
+<tr><th data-en="Confidence">신뢰도 (confidence)</th><td data-en="Among cases with A, the share that also have B">A가 있는 경우 중 B도 있는 비율</td></tr>
+<tr><th data-en="Lift">향상도 (lift)</th><td data-en="Confidence ÷ overall share of B. Above 1 means they appear together more than by chance">신뢰도 ÷ B의 전체 비율. 1보다 크면 우연보다 자주 함께 나타남</td></tr>
 </tbody></table>
-
-<h3>직접 계산해 보기</h3>
+<h3 data-en="Try it yourself">직접 계산해 보기</h3>
 <div class="calc">
-<div><label for="n">전체 건수</label><input id="n" type="number" min="1" value="1000"></div>
-<div><label for="na">A 건수</label><input id="na" type="number" min="0" value="200"></div>
-<div><label for="nb">B 건수</label><input id="nb" type="number" min="0" value="500"></div>
-<div><label for="nab">A와 B 동시</label><input id="nab" type="number" min="0" value="120"></div>
+<div><label data-en="Total cases" for="n">전체 건수</label><input id="n" min="1" type="number" value="1000"/></div>
+<div><label data-en="Cases with A" for="na">A 건수</label><input id="na" min="0" type="number" value="200"/></div>
+<div><label data-en="Cases with B" for="nb">B 건수</label><input id="nb" min="0" type="number" value="500"/></div>
+<div><label data-en="Both A and B" for="nab">A와 B 동시</label><input id="nab" min="0" type="number" value="120"/></div>
 </div>
-<p id="calcOut" aria-live="polite"></p>
-
-<h3>돌리는 순서</h3>
+<p aria-live="polite" id="calcOut"></p>
+<h3 data-en="How to run it">돌리는 순서</h3>
 <pre><code>library(arules); library(arulesViz)
 trans &lt;- as(split(df$item, df$id), "transactions")
 rules &lt;- apriori(trans, parameter = list(supp = 0.01, conf = 0.5, minlen = 2))
 rules &lt;- sort(rules, by = "lift", decreasing = TRUE)
 inspect(head(rules, 10))
 plot(rules, method = "graph")</code></pre>
-
-<h3>읽는 법</h3>
+<h3 data-en="How to read it">읽는 법</h3>
 <ul>
-<li>신뢰도만 보면 속습니다. B가 원래 너무 흔하면 어떤 A에서도 신뢰도가 높게 나오므로 <b>향상도를 함께</b> 보세요.</li>
-<li>지지도가 너무 낮은 규칙은 우연일 가능성이 큽니다. 최소 지지도를 현실적으로 설정하세요.</li>
-<li>규칙 방향(A→B)은 인과가 아니라 동시 출현의 방향일 뿐입니다.</li>
+<li data-en="Confidence alone misleads. If B is very common to begin with, confidence looks high for any A, so look at &lt;b&gt;lift as well&lt;/b&gt;.">신뢰도만 보면 속습니다. B가 원래 너무 흔하면 어떤 A에서도 신뢰도가 높게 나오므로 <b>향상도를 함께</b> 보세요.</li>
+<li data-en="Rules with very low support are likely chance. Set the minimum support realistically.">지지도가 너무 낮은 규칙은 우연일 가능성이 큽니다. 최소 지지도를 현실적으로 설정하세요.</li>
+<li data-en="The direction of a rule (A→B) is only the direction of co-occurrence, not causation.">규칙 방향(A→B)은 인과가 아니라 동시 출현의 방향일 뿐입니다.</li>
 </ul>
 </section>
-
 <!-- 카드 사기 탐지 -->
 <section class="panel" id="fraud">
-<h2>카드 사기 탐지 (예측 모델)</h2>
-<p class="tag">“수백 건 중 하나뿐인 나쁜 거래를, 정상 고객을 괴롭히지 않고 잡아낼 수 있나”</p>
-<div class="box"><b>상세 해설 페이지</b> — 모델 선택, 불균형 처리, 평가, 임계값 설정까지 단계별로 풀어 쓴 페이지입니다. <a href="fraud.html">카드 사기 탐지 해설 보기 →</a></div>
-
-<h3>이 모델이 묻는 것</h3>
-<p>거래 하나하나가 사기일 확률을 예측합니다. 사기가 전체의 0.1~0.2%뿐이라 <b>정확도가 의미 없는</b> 대표적인 문제입니다.</p>
-
-<h3>돌리는 순서</h3>
+<h2 data-en="Card fraud detection (predictive models)">카드 사기 탐지 (예측 모델)</h2>
+<p class="tag" data-en="“Can we catch the one bad transaction in hundreds without bothering legitimate customers?”">“수백 건 중 하나뿐인 나쁜 거래를, 정상 고객을 괴롭히지 않고 잡아낼 수 있나”</p>
+<div class="box" data-en='&lt;b&gt;In-depth walkthrough&lt;/b&gt; — a step-by-step page covering model selection, imbalance handling, evaluation, and threshold setting. &lt;a href="fraud.html"&gt;Read the fraud detection walkthrough →&lt;/a&gt;'><b>상세 해설 페이지</b> — 모델 선택, 불균형 처리, 평가, 임계값 설정까지 단계별로 풀어 쓴 페이지입니다. <a href="fraud.html">카드 사기 탐지 해설 보기 →</a></div>
+<h3 data-en="What this model asks">이 모델이 묻는 것</h3>
+<p data-en="It predicts the probability that each transaction is fraud. With fraud only 0.1–0.2% of all transactions, it is a classic problem where &lt;b&gt;accuracy is meaningless&lt;/b&gt;.">거래 하나하나가 사기일 확률을 예측합니다. 사기가 전체의 0.1~0.2%뿐이라 <b>정확도가 의미 없는</b> 대표적인 문제입니다.</p>
+<h3 data-en="How to run it">돌리는 순서</h3>
 <ol>
-<li>카드별 과거 행동과 비교한 변수 만들기 (최근 거래 횟수, 평소 대비 금액 등)</li>
-<li>시간 순서로 학습·검증 데이터 분할 후, 학습 데이터에만 불균형 처리(클래스 가중치, SMOTE)</li>
-<li>로지스틱 회귀 기준선과 부스팅 모델 비교</li>
-<li>PR-AUC로 평가하고, 비용을 따져 경보 기준선 결정</li>
+<li data-en="Build features that compare against each card's past behavior (recent transaction counts, amount relative to normal, etc.)">카드별 과거 행동과 비교한 변수 만들기 (최근 거래 횟수, 평소 대비 금액 등)</li>
+<li data-en="Split training and validation data in time order, then handle imbalance (class weights, SMOTE) on the training data only">시간 순서로 학습·검증 데이터 분할 후, 학습 데이터에만 불균형 처리(클래스 가중치, SMOTE)</li>
+<li data-en="Compare a logistic regression baseline with boosting models">로지스틱 회귀 기준선과 부스팅 모델 비교</li>
+<li data-en="Evaluate with PR-AUC and set the alert threshold by weighing costs">PR-AUC로 평가하고, 비용을 따져 경보 기준선 결정</li>
 </ol>
-
-<h3>읽는 법</h3>
+<h3 data-en="How to read it">읽는 법</h3>
 <ul>
-<li>사기를 얼마나 잡았나는 <b>탐지율</b>, 울린 경보가 얼마나 맞나는 <b>적중률</b>로 봅니다.</li>
-<li>오탐률이 낮아 보여도 사기가 드물면 경보 대부분이 오탐이 될 수 있습니다.</li>
+<li data-en="Read how much fraud you caught as &lt;b&gt;recall&lt;/b&gt;, and how many alerts were right as &lt;b&gt;precision&lt;/b&gt;.">사기를 얼마나 잡았나는 <b>탐지율</b>, 울린 경보가 얼마나 맞나는 <b>적중률</b>로 봅니다.</li>
+<li data-en="Even with a low false-positive rate, if fraud is rare most alerts can still be false alarms.">오탐률이 낮아 보여도 사기가 드물면 경보 대부분이 오탐이 될 수 있습니다.</li>
 </ul>
-<div class="warn"><b>흔한 실수</b> — 샘플링을 데이터 분할 전에 하면 검증 성능이 부풀려집니다.</div>
+<div class="warn" data-en="&lt;b&gt;Common mistake&lt;/b&gt; — Sampling before splitting the data inflates validation performance."><b>흔한 실수</b> — 샘플링을 데이터 분할 전에 하면 검증 성능이 부풀려집니다.</div>
 </section>
-
-
-<footer>이 페이지는 학습·정보 제공 목적이며 투자 권유가 아닙니다. 그림은 설명을 위한 가상 데이터입니다.</footer>
+<footer data-en="For learning and information only; not investment advice. Figures are illustrative data.">이 페이지는 학습·정보 제공 목적이며 투자 권유가 아닙니다. 그림은 설명을 위한 가상 데이터입니다.</footer>
 </div>
-
 <script>
 (function(){
   var tabs=document.querySelectorAll('nav.tabs button'),panels=document.querySelectorAll('section.panel');
@@ -278,13 +256,35 @@ plot(rules, method = "graph")</code></pre>
   function calc(){
     var v=ids.map(function(i){return parseFloat(document.getElementById(i).value)});
     var N=v[0],A=v[1],B=v[2],AB=v[3];
-    if(!(N>0)||!(A>0)||!(B>0)||isNaN(AB)||AB>A||AB>B||A>N||B>N){out.textContent='입력값을 확인하세요. (동시 건수는 A, B보다 클 수 없습니다)';return}
+    if(!(N>0)||!(A>0)||!(B>0)||isNaN(AB)||AB>A||AB>B||A>N||B>N){out.textContent=document.documentElement.lang==='en'?'Please check the inputs. (Joint cases cannot exceed A or B)':'입력값을 확인하세요. (동시 건수는 A, B보다 클 수 없습니다)';return}
     var s=AB/N,c=AB/A,l=c/(B/N);
-    var msg=l>1.05?'우연보다 함께 나타나는 경향이 있습니다.':(l<0.95?'오히려 함께 나타나기 어려운 조합입니다.':'우연 수준과 비슷합니다.');
-    out.textContent='지지도 '+(s*100).toFixed(1)+'% · 신뢰도 '+(c*100).toFixed(1)+'% · 향상도 '+l.toFixed(2)+' — '+msg;
+    var en=document.documentElement.lang==='en';var msg=l>1.05?(en?'They appear together more often than chance.':'우연보다 함께 나타나는 경향이 있습니다.'):(l<0.95?(en?'They tend to appear together less often than chance.':'오히려 함께 나타나기 어려운 조합입니다.'):(en?'Close to chance level.':'우연 수준과 비슷합니다.'));
+    out.textContent=en?'Support '+(s*100).toFixed(1)+'% · Confidence '+(c*100).toFixed(1)+'% · Lift '+l.toFixed(2)+' — '+msg:'지지도 '+(s*100).toFixed(1)+'% · 신뢰도 '+(c*100).toFixed(1)+'% · 향상도 '+l.toFixed(2)+' — '+msg;
   }
   ids.forEach(function(i){document.getElementById(i).addEventListener('input',calc)});
   calc();
+})();
+</script>
+<script>
+(function(){
+  var KEY='dashLang',TT={ko:['모델 한입 — 경제모델 돌리는 법, 읽는 법','생존분석, 패널회귀, VAR, 연관규칙, 카드 사기 탐지. 모델이 풀려는 질문, 돌리는 순서, 결과 해석법.'],en:['Model Bites — How to run and read economic models','Survival analysis, panel regression, VAR, association rules, and fraud detection: the question each model answers, how to run it, and how to read the results.']};
+  var els=[].slice.call(document.querySelectorAll('[data-en]'));
+  els.forEach(function(e){e.setAttribute('data-ko',e.innerHTML)});
+  var wrap=document.querySelector('.wrap'),btn=document.createElement('button');
+  btn.id='langBtn';btn.type='button';wrap.insertBefore(btn,wrap.firstChild);
+  function get(){try{return localStorage.getItem(KEY)==='ko'?'ko':'en'}catch(e){return 'en'}}
+  function apply(l){
+    document.documentElement.lang=l;
+    els.forEach(function(e){e.innerHTML=e.getAttribute(l==='en'?'data-en':'data-ko')});
+    document.title=TT[l][0];
+    var m=document.querySelector('meta[name=description]');if(m)m.setAttribute('content',TT[l][1]);
+    btn.textContent=l==='en'?'한국어':'English';
+    btn.setAttribute('aria-label',l==='en'?'Switch to Korean':'Switch to English');
+    try{localStorage.setItem(KEY,l)}catch(e){}
+    [].forEach.call(document.querySelectorAll('.calc input,.calc select'),function(i){i.dispatchEvent(new Event('input'))});
+  }
+  btn.addEventListener('click',function(){apply(document.documentElement.lang==='en'?'ko':'en')});
+  apply(get());
 })();
 </script>
 </body>
